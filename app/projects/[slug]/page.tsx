@@ -3,7 +3,7 @@ import { loadAllProjects, getProjectBySlug } from "@/lib/projects";
 import { findSimilarProjects } from "@/lib/similar";
 import { ProjectDetail } from "@/components/ProjectDetail";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { ArrowLeft } from "lucide-react";
+import { Github, FileCode, Map } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import fs from "fs";
@@ -114,14 +114,33 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span className="font-medium">Back to Projects</span>
+            <Link href="/" className="block">
+              <h1 className="text-4xl font-logo text-gray-900 dark:text-gray-100 tracking-wider">
+                FOSSRadar.in
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm">
+                Discover Open Source Projects from India
+              </p>
             </Link>
-            <ThemeToggle />
+            <div className="flex items-center gap-3">
+              <Link
+                href="/radar"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors"
+              >
+                <Map className="h-4 w-4" />
+                Radar
+              </Link>
+              <Link
+                href="https://github.com/wbfoss/fossradar#-for-project-owners-get-listed"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
+              >
+                <FileCode className="h-4 w-4" />
+                Submit Project
+              </Link>
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>
@@ -130,6 +149,47 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <main className="container mx-auto px-4 py-12">
         <ProjectDetail project={project} cache={cache} similarProjects={similarProjects} />
       </main>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-200 dark:border-gray-800 mt-16">
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="text-center md:text-left">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                &copy; 2025 FOSSRadar.in. Open source directory.
+              </p>
+              <p className="text-sm text-gray-500 dark:text-gray-500 mt-1">
+                An initiative by{" "}
+                <Link
+                  href="https://wbfoss.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  wbfoss
+                </Link>
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <Link
+                href="https://github.com/wbfoss/fossradar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+              >
+                <Github className="h-4 w-4" />
+                GitHub
+              </Link>
+              <Link
+                href="/about"
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+              >
+                About
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
 
       {/* JSON-LD Structured Data */}
       <script

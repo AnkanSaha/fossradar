@@ -1,6 +1,6 @@
 import { loadAllProjects } from "@/lib/projects";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Github, MapPin, Package, TrendingUp, Building2, Star, ArrowUpRight } from "lucide-react";
+import { Github, MapPin, Package, TrendingUp, Building2, Star, ArrowUpRight, FileCode, Map } from "lucide-react";
 import Link from "next/link";
 
 export const revalidate = 3600; // Revalidate every hour
@@ -51,15 +51,31 @@ export default function RadarPage() {
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
-            <div>
-              <Link href="/" className="text-4xl font-logo font-normal text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors tracking-wider">
+            <Link href="/" className="block">
+              <h1 className="text-4xl font-logo text-gray-900 dark:text-gray-100 tracking-wider">
                 FOSSRadar.in
-              </Link>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">
-                Geographic Distribution
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm">
+                Discover Open Source Projects from India
               </p>
-            </div>
+            </Link>
             <div className="flex items-center gap-3">
+              <Link
+                href="/radar"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors"
+              >
+                <Map className="h-4 w-4" />
+                Radar
+              </Link>
+              <Link
+                href="https://github.com/wbfoss/fossradar#-for-project-owners-get-listed"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
+              >
+                <FileCode className="h-4 w-4" />
+                Submit Project
+              </Link>
               <ThemeToggle />
             </div>
           </div>
