@@ -1,5 +1,5 @@
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Github, FileCode, Map, Radar, Heart, Globe, Users, Code, Target, Zap } from "lucide-react";
+import { Github, FileCode, Map, Radar, Heart, Globe, Users, Code, Target, Zap, Plus } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -77,7 +77,7 @@ export default function AboutPage() {
                 className="sm:hidden p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
                 aria-label="Submit Project"
               >
-                <FileCode className="h-4 w-4" />
+                <Plus className="h-5 w-5" />
               </Link>
               <ThemeToggle />
             </div>
