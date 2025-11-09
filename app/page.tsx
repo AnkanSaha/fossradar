@@ -35,7 +35,7 @@ export default function Home() {
                 FOSSRadar.in
               </h1>
               <p className="text-gray-600 dark:text-gray-400 mt-1">
-                India&apos;s Open Source Directory
+                Discover Open Source Projects
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -62,14 +62,11 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-12">
-        <div className="mb-8">
-          <h2 className="text-2xl font-heading font-normal text-gray-900 dark:text-gray-100 mb-2 tracking-wide">
-            Discover Open Source Projects
+      <main className="container mx-auto px-4 py-8">
+        <div className="mb-6">
+          <h2 className="text-2xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
+            Discover Open Source Projects <span className="text-gray-600 dark:text-gray-400">From India</span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-400">
-            From India
-          </p>
         </div>
 
         {/* Search and Filters */}

@@ -106,29 +106,26 @@ export function ProjectGrid({ initialProjects }: ProjectGridProps) {
   }, [initialProjects, debouncedQuery, filters, fuse]);
 
   return (
-    <div className="space-y-6">
-      {/* Search */}
-      <SearchBar value={searchQuery} onChange={setSearchQuery} />
-
-      {/* Filters */}
-      <Filters availableTags={availableTags} filters={filters} onChange={setFilters} />
-
-      {/* Results count */}
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-600 dark:text-gray-400" aria-live="polite">
-          Showing {filteredProjects.length} {filteredProjects.length === 1 ? "project" : "projects"}
-        </p>
+    <div className="space-y-4">
+      {/* Search and Filters - Single Row */}
+      <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
+        <div className="w-full md:w-96">
+          <SearchBar value={searchQuery} onChange={setSearchQuery} />
+        </div>
+        <div className="w-full md:flex-1">
+          <Filters availableTags={availableTags} filters={filters} onChange={setFilters} />
+        </div>
       </div>
 
       {/* Project Grid */}
       {filteredProjects.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredProjects.map((project) => (
             <ProjectCard key={project.slug} project={project as unknown as Project} />
           ))}
         </div>
       ) : (
-        <div className="text-center py-16">
+        <div className="text-center py-12">
           <p className="text-gray-500 dark:text-gray-400 text-lg mb-2">
             No projects found
           </p>
