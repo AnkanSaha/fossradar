@@ -85,13 +85,19 @@ export function loadAllProjects(): ProjectWithFilename[] {
     }
   }
 
-  return projects;
+  // Filter out example/reference projects from public display
+  return projects.filter(project => project.slug !== "example-reference");
 }
 
 /**
  * Get a single project by slug
  */
 export function getProjectBySlug(slug: string): Project | null {
+  // Block access to example/reference projects
+  if (slug === "example-reference") {
+    return null;
+  }
+
   const filename = `${slug}.toml`;
   const filePath = path.join(PROJECTS_DIR, filename);
 

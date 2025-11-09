@@ -70,7 +70,9 @@ Click the "Fork" button at the top of this page
 
 **Step 3: Create your project TOML file**
 
-Create a file `data/projects/your-project-slug.toml` (replace `your-project-slug` with your actual project slug):
+Create a file `data/projects/your-project-slug.toml` (replace `your-project-slug` with your actual project slug).
+
+📝 **Reference Template**: Check `data/projects/example-reference.toml` for a complete reference with all available fields and inline documentation.
 
 ```toml
 # Example structure - replace with your actual project details
