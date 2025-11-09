@@ -31,15 +31,52 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     };
   }
 
+  const ogImageUrl = `https://fossradar.in${project.logo}`;
+  const pageUrl = `https://fossradar.in/projects/${slug}`;
+
   return {
     title: `${project.name} - FOSSRadar.in`,
     description: project.short_desc,
-    keywords: [...project.tags, "open source", "fossradar", "india"],
+    keywords: [...project.tags, "open source", "fossradar", "india", project.primary_lang.toLowerCase()],
+    authors: [{ name: "FOSSRadar.in" }],
+    creator: "wbfoss",
+    publisher: "wbfoss",
+    alternates: {
+      canonical: pageUrl,
+    },
     openGraph: {
-      title: project.name,
+      title: `${project.name} - Open Source Project from India`,
       description: project.short_desc,
       type: "website",
-      url: `https://fossradar.in/projects/${slug}`,
+      url: pageUrl,
+      siteName: "FOSSRadar.in",
+      locale: "en_IN",
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${project.name} logo`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.name} - FOSSRadar.in`,
+      description: project.short_desc,
+      images: [ogImageUrl],
+      creator: "@wbfoss",
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
   };
 }
