@@ -11,6 +11,7 @@ import {
   getContributors,
   detectInstallation,
   findDocumentation,
+  getLanguageBreakdown,
 } from "../lib/github";
 
 interface ProjectCache {
@@ -29,6 +30,19 @@ interface ProjectCache {
     docs_url?: string;
     changelog_url?: string;
   };
+  stats?: {
+    forks: number;
+    watchers: number;
+    open_issues: number;
+    size: number;
+    created_at: string;
+    updated_at: string;
+    pushed_at: string;
+    has_wiki: boolean;
+    has_pages: boolean;
+    has_discussions: boolean;
+  };
+  languages?: Record<string, number>;
   updated_at: string;
 }
 
@@ -93,6 +107,13 @@ async function enrichProjects() {
           console.log(`  📚 Found documentation links`);
         }
 
+        // Get language breakdown
+        const languages = await getLanguageBreakdown(project.repo);
+        const languageCount = Object.keys(languages).length;
+        if (languageCount > 0) {
+          console.log(`  💻 Found ${languageCount} languages`);
+        }
+
         // Update TOML file
         const filePath = path.join(process.cwd(), "data", "projects", `${project.slug}.toml`);
         let content = fs.readFileSync(filePath, "utf-8");
@@ -117,6 +138,19 @@ async function enrichProjects() {
           contributors,
           installation: installation || undefined,
           documentation,
+          stats: {
+            forks: metadata.forks,
+            watchers: metadata.watchers,
+            open_issues: metadata.open_issues,
+            size: metadata.size,
+            created_at: metadata.created_at,
+            updated_at: metadata.updated_at,
+            pushed_at: metadata.pushed_at,
+            has_wiki: metadata.has_wiki,
+            has_pages: metadata.has_pages,
+            has_discussions: metadata.has_discussions,
+          },
+          languages: Object.keys(languages).length > 0 ? languages : undefined,
           updated_at: new Date().toISOString(),
         };
 

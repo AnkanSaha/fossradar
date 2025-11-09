@@ -6,7 +6,7 @@ import { InstallationGuide } from "./InstallationGuide";
 import { DocumentationLinks } from "./DocumentationLinks";
 import { SimilarProjects } from "./SimilarProjects";
 import { PageHitTracker } from "./PageHitTracker";
-import { ExternalLink, Github, Star, GitBranch, Calendar, Scale } from "lucide-react";
+import { ExternalLink, Github, Star, GitBranch, Calendar, Scale, GitFork, Eye, AlertCircle, Clock, Code2, FileText } from "lucide-react";
 import { formatNumber, formatRelativeTime } from "@/lib/utils";
 import Link from "next/link";
 
@@ -25,6 +25,19 @@ interface ProjectCache {
     docs_url?: string;
     changelog_url?: string;
   };
+  stats?: {
+    forks: number;
+    watchers: number;
+    open_issues: number;
+    size: number;
+    created_at: string;
+    updated_at: string;
+    pushed_at: string;
+    has_wiki: boolean;
+    has_pages: boolean;
+    has_discussions: boolean;
+  };
+  languages?: Record<string, number>;
 }
 
 interface ProjectDetailProps {
@@ -85,42 +98,126 @@ export function ProjectDetail({ project, cache, similarProjects }: ProjectDetail
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-          <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-            <Star className="h-4 w-4" />
-            Stars
+      <div className="mb-8">
+        <h2 className="text-base font-heading font-normal text-gray-700 dark:text-gray-300 tracking-wider mb-3">
+          Repository Stats
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+            <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
+              <Star className="h-4 w-4" />
+              Stars
+            </div>
+            <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              {formatNumber(project.stars || 0)}
+            </div>
           </div>
-          <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-            {formatNumber(project.stars || 0)}
-          </div>
-        </div>
-        <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-          <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-            <Scale className="h-4 w-4" />
-            License
-          </div>
-          <div className="text-lg font-semibold text-gray-900 dark:text-gray-100 truncate">
-            {project.license}
-          </div>
-        </div>
-        <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-          <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-            <GitBranch className="h-4 w-4" />
-            Issues
-          </div>
-          <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-            {project.good_first_issues || 0}
-          </div>
-        </div>
-        <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-          <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-            <Calendar className="h-4 w-4" />
-            Added
-          </div>
-          <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-            {formatRelativeTime(project.added_at)}
-          </div>
+
+          {cache?.stats && (
+            <>
+              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
+                  <GitFork className="h-4 w-4" />
+                  Forks
+                </div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  {formatNumber(cache.stats.forks)}
+                </div>
+              </div>
+
+              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
+                  <Eye className="h-4 w-4" />
+                  Watchers
+                </div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  {formatNumber(cache.stats.watchers)}
+                </div>
+              </div>
+
+              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
+                  <AlertCircle className="h-4 w-4" />
+                  Open Issues
+                </div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  {formatNumber(cache.stats.open_issues)}
+                </div>
+              </div>
+
+              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
+                  <GitBranch className="h-4 w-4" />
+                  Good First Issues
+                </div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  {project.good_first_issues || 0}
+                </div>
+              </div>
+
+              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
+                  <Clock className="h-4 w-4" />
+                  Last Updated
+                </div>
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  {formatRelativeTime(cache.stats.pushed_at)}
+                </div>
+              </div>
+
+              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
+                  <Calendar className="h-4 w-4" />
+                  Created
+                </div>
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  {formatRelativeTime(cache.stats.created_at)}
+                </div>
+              </div>
+
+              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
+                  <Scale className="h-4 w-4" />
+                  License
+                </div>
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
+                  {project.license}
+                </div>
+              </div>
+            </>
+          )}
+
+          {!cache?.stats && (
+            <>
+              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
+                  <Scale className="h-4 w-4" />
+                  License
+                </div>
+                <div className="text-lg font-semibold text-gray-900 dark:text-gray-100 truncate">
+                  {project.license}
+                </div>
+              </div>
+              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
+                  <GitBranch className="h-4 w-4" />
+                  Good First Issues
+                </div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  {project.good_first_issues || 0}
+                </div>
+              </div>
+              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
+                  <Calendar className="h-4 w-4" />
+                  Added
+                </div>
+                <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                  {formatRelativeTime(project.added_at)}
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -152,6 +249,46 @@ export function ProjectDetail({ project, cache, similarProjects }: ProjectDetail
           ))}
         </div>
       </div>
+
+      {/* Language Breakdown */}
+      {cache?.languages && Object.keys(cache.languages).length > 0 && (
+        <div className="mb-8">
+          <h2 className="text-base font-heading font-normal text-gray-700 dark:text-gray-300 tracking-wider mb-3">
+            Language Breakdown
+          </h2>
+          <div className="space-y-3">
+            {(() => {
+              const total = Object.values(cache.languages).reduce((sum, bytes) => sum + bytes, 0);
+              const sorted = Object.entries(cache.languages).sort((a, b) => b[1] - a[1]);
+
+              return sorted.map(([language, bytes]) => {
+                const percentage = ((bytes / total) * 100).toFixed(1);
+                return (
+                  <div key={language}>
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center gap-2">
+                        <Code2 className="h-4 w-4 text-gray-500 dark:text-gray-400" />
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                          {language}
+                        </span>
+                      </div>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                        {percentage}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-2">
+                      <div
+                        className="bg-blue-600 dark:bg-blue-400 h-2 rounded-full transition-all"
+                        style={{ width: `${percentage}%` }}
+                      />
+                    </div>
+                  </div>
+                );
+              });
+            })()}
+          </div>
+        </div>
+      )}
 
       {/* Looking for Contributors */}
       {project.looking_for_contributors && (

@@ -75,6 +75,19 @@ export async function getRepoMetadata(repoUrl: string) {
       description: data.description,
       homepage: data.homepage,
       license: data.license?.spdx_id,
+      forks: data.forks_count,
+      watchers: data.subscribers_count,
+      open_issues: data.open_issues_count,
+      size: data.size, // in KB
+      default_branch: data.default_branch,
+      created_at: data.created_at,
+      updated_at: data.updated_at,
+      pushed_at: data.pushed_at,
+      topics: data.topics || [],
+      has_wiki: data.has_wiki,
+      has_pages: data.has_pages,
+      has_discussions: data.has_discussions,
+      archived: data.archived,
     };
   } catch (error) {
     console.error("Error fetching repo metadata:", error);
@@ -270,6 +283,30 @@ export async function detectInstallation(repoUrl: string): Promise<{
       type: "git",
       command: `git clone ${repoUrl}`,
     };
+  }
+}
+
+/**
+ * Get repository language breakdown
+ */
+export async function getLanguageBreakdown(repoUrl: string): Promise<Record<string, number>> {
+  try {
+    const url = new URL(repoUrl);
+    const [owner, repo] = url.pathname.replace(/^\/+/, "").replace(/\/+$/, "").split("/");
+
+    if (!owner || !repo) {
+      return {};
+    }
+
+    const { data } = await octokit.rest.repos.listLanguages({
+      owner,
+      repo,
+    });
+
+    return data;
+  } catch (error) {
+    console.error("Error fetching language breakdown:", error);
+    return {};
   }
 }
 
