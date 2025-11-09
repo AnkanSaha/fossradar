@@ -6,7 +6,12 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/*", "/submit"],
+        disallow: ["/api/*"],
+      },
+      {
+        userAgent: "Googlebot",
+        allow: "/",
+        disallow: ["/api/*"],
       },
     ],
     sitemap: "https://fossradar.in/sitemap.xml",

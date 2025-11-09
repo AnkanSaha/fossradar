@@ -1,5 +1,6 @@
 import { loadAllProjects } from "@/lib/projects";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
 import { Github, MapPin, Package, TrendingUp, Building2, Star, ArrowUpRight, FileCode, Map, Radar, Plus } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -7,8 +8,8 @@ import type { Metadata } from "next";
 export const revalidate = 3600; // Revalidate every hour
 
 export const metadata: Metadata = {
-  title: "Geographic Radar - Explore Projects by Location",
-  description: "Explore open source projects across India by state and city. Interactive analytics dashboard showing project distribution, top states, verified projects, and geographic insights.",
+  title: "Geographic Radar - Explore Indian Open Source Projects by Location",
+  description: "Interactive map of India's open source ecosystem. View projects by state, city & region. Discover tech hubs in Bangalore, Mumbai, Delhi, Hyderabad, Pune & Kolkata with real-time statistics.",
   keywords: [
     "open source india map",
     "projects by state",
@@ -73,6 +74,12 @@ export default function RadarPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://fossradar.in" },
+          { name: "Geographic Radar", url: "https://fossradar.in/radar" },
+        ]}
+      />
       {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4 py-4 sm:py-6">

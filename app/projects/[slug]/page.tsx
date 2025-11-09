@@ -3,6 +3,7 @@ import { loadAllProjects, getProjectBySlug } from "@/lib/projects";
 import { findSimilarProjects } from "@/lib/similar";
 import { ProjectDetail } from "@/components/ProjectDetail";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
 import { Github, FileCode, Map, Radar, Plus } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -110,6 +111,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://fossradar.in" },
+          { name: "Projects", url: "https://fossradar.in" },
+          { name: project.name, url: `https://fossradar.in/projects/${slug}` },
+        ]}
+      />
       {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4 py-4 sm:py-6">

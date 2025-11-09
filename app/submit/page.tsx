@@ -1,11 +1,12 @@
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
 import { Github, FileCode, Map, Radar, Plus, CheckCircle2, GitPullRequest, FileText, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Submit Your Project - FOSSRadar.in",
-  description: "Learn how to submit your open source project to FOSSRadar.in. Step-by-step guide for getting your project listed in India's premier FOSS directory.",
+  title: "Submit Your Open Source Project - FOSSRadar.in",
+  description: "Add your project to India's leading FOSS directory. Step-by-step guide with TOML examples, validation scripts & PR workflow. Get discovered by 1000s of developers across India.",
   keywords: [
     "submit project",
     "add project fossradar",
@@ -27,8 +28,57 @@ export const metadata: Metadata = {
 };
 
 export default function SubmitPage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I submit my project to FOSSRadar.in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fork the FOSSRadar GitHub repository, create a TOML file in data/projects/ with your project details, validate it using 'npm run validate', and submit a pull request. Our team will review and merge it within 2-3 business days."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my project eligible for FOSSRadar.in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your project is eligible if it meets any one of these criteria: Founded in India, has core contributors from India, maintained by Indian organizations, or serves the Indian community."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get the verified badge?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Add 'fossradar' as a GitHub topic to your repository and include the FOSSRadar badge in your README. Once we verify this, your project will receive the verified status."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does the review process take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our maintainers typically review submissions within 2-3 business days. If changes are needed, we'll comment on your pull request with specific feedback."
+        }
+      }
+    ]
+  };
+
+  const breadcrumbItems = [
+    { name: "Home", url: "https://fossradar.in" },
+    { name: "Submit Project", url: "https://fossradar.in/submit" },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black">
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4 py-4 sm:py-6">

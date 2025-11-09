@@ -1,11 +1,12 @@
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
 import { Github, FileCode, Map, Radar, Heart, Globe, Users, Code, Target, Zap, Plus } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About - FOSSRadar.in",
-  description: "Learn about FOSSRadar.in, India's comprehensive directory celebrating FOSS projects through their founders, creators, contributors, and community impact. Built by wbfoss for the Indian open source community.",
+  title: "About FOSSRadar.in - India's Premier Open Source Directory",
+  description: "FOSSRadar.in is a Git-based, community-driven platform showcasing India's FOSS ecosystem. Built by wbfoss, we celebrate Indian developers, organizations & open source contributions worldwide.",
   keywords: [
     "about fossradar",
     "foss india",
@@ -31,6 +32,12 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://fossradar.in" },
+          { name: "About", url: "https://fossradar.in/about" },
+        ]}
+      />
       {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4 py-4 sm:py-6">

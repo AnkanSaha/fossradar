@@ -108,8 +108,62 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "FOSSRadar.in",
+    "url": "https://fossradar.in",
+    "logo": "https://fossradar.in/logos/fossradar/logo.png",
+    "description": "India's comprehensive directory for discovering and exploring open source projects from Indian founders, creators, and contributors.",
+    "foundingDate": "2025",
+    "foundingLocation": {
+      "@type": "Country",
+      "name": "India"
+    },
+    "sameAs": [
+      "https://github.com/wbfoss/fossradar",
+      "https://twitter.com/wbfoss"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Support",
+      "url": "https://github.com/wbfoss/fossradar/issues"
+    }
+  };
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "FOSSRadar.in",
+    "url": "https://fossradar.in",
+    "description": "Discover and explore open source projects from India",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://fossradar.in/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "wbfoss",
+      "url": "https://wbfoss.org"
+    }
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body className={`${inter.variable} ${vt323.variable} ${shareTech.variable} antialiased font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}

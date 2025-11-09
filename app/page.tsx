@@ -1,6 +1,7 @@
 import { loadAllProjects } from "@/lib/projects";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
 import { Github, FileCode, Map, Radar, Plus } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -9,7 +10,7 @@ export const revalidate = 3600; // Revalidate every hour
 
 export const metadata: Metadata = {
   title: "FOSSRadar.in - Discover Open Source Projects from India",
-  description: "Explore India's vibrant open source ecosystem. Search, filter, and discover FOSS projects by Indian founders, organizations, and contributors. Find projects by location, technology, and domain.",
+  description: "India's leading directory of open source projects. Discover 100+ FOSS projects from Indian developers across Bangalore, Mumbai, Delhi, Kolkata & more. Search by tech stack, location & tags.",
   keywords: [
     "open source india",
     "foss projects",
@@ -51,6 +52,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://fossradar.in" },
+        ]}
+      />
       {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4 py-4 sm:py-6">
