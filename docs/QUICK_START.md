@@ -72,22 +72,33 @@ pnpm enrich           # Update project metadata (requires GITHUB_TOKEN)
 ```
 fossradar/
 ├── app/
-│   ├── page.tsx              # Homepage
-│   ├── radar/page.tsx        # Geographic visualization
-│   ├── projects/[slug]/      # Project detail pages
-│   └── api/                  # API routes
-├── components/               # React components
-├── lib/                      # Utilities
+│   ├── page.tsx                    # Homepage
+│   ├── about/page.tsx              # About page
+│   ├── radar/page.tsx              # Geographic visualization dashboard
+│   ├── projects/[slug]/page.tsx    # Enhanced project detail pages
+│   └── api/                        # API routes
+├── components/
+│   ├── ContributorAvatars.tsx      # Display top contributors
+│   ├── InstallationGuide.tsx       # Quick copy install commands
+│   ├── DocumentationLinks.tsx      # Auto-detected docs
+│   ├── SimilarProjects.tsx         # Recommended similar projects
+│   └── ...                         # Other components
+├── lib/
+│   ├── github.ts                   # Enhanced GitHub API functions
+│   ├── similar.ts                  # Similar project algorithm
+│   └── ...                         # Other utilities
 ├── scripts/
-│   ├── validate.ts           # TOML validation
-│   ├── enrich.ts             # Update metadata
-│   └── build-index.ts        # Generate search index
+│   ├── validate.ts                 # TOML validation
+│   ├── enrich.ts                   # Update metadata + contributors
+│   └── build-index.ts              # Generate search index
 ├── data/
-│   ├── projects/             # Project TOML files
-│   ├── tags.toml             # Allowed tags
-│   └── licenses-osi.json     # OSI licenses
+│   ├── projects/                   # Project TOML files
+│   ├── tags.toml                   # Allowed tags
+│   └── licenses-osi.json           # OSI licenses
 └── public/
-    └── logos/                # Project logos
+    ├── logos/                      # Project logos
+    ├── cache/                      # Cached contributor data (*.json)
+    └── index.json                  # Search index
 ```
 
 ---
@@ -114,11 +125,14 @@ git push -u origin main
    - Framework Preset: **Next.js**
    - Build Command: `pnpm build`
    - Output Directory: `.next`
+   - Node.js Version: **20.x** (required for Next.js 16)
 4. Add environment variables (optional):
    ```
    SITE_URL=https://fossradar.in
    ```
 5. Deploy!
+
+**Note**: Next.js 16 requires Node.js 20 or higher.
 
 **Step 3: Add Custom Domain**
 - Go to Project Settings → Domains
@@ -169,6 +183,10 @@ docker run -p 3000:3000 fossradar
    - Updates star counts
    - Updates good first issues count
    - Updates verification status
+   - Fetches contributor data (top 10 with avatars)
+   - Detects installation methods (npm, pip, cargo, go)
+   - Discovers documentation links
+   - Caches metadata in public/cache/*.json
 
 3. **`ci.yml`** - Runs on push/PR
    - Builds the project

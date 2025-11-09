@@ -3,8 +3,9 @@
 > **Discover and showcase open source projects from India**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
-[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8)](https://tailwindcss.com/)
 
 FOSSRadar.in is India's comprehensive directory celebrating FOSS (Free and Open Source Software) projects - whether through their **founders**, **creators**, **core contributors**, **organizational base**, or **project objectives** that serve the Indian community.
 
@@ -189,7 +190,11 @@ See **[CONTRIBUTING.md](./CONTRIBUTING.md)** for detailed guidelines and **[docs
 
 - 🔍 **Smart Search**: Fuzzy search across project names, descriptions, and tags
 - 🏷️ **Category Filtering**: Browse by technology, domain, or project type
-- 🗺️ **Geographic Radar**: Explore projects by state and city across India
+- 🗺️ **Geographic Radar**: Explore projects by state and city across India with interactive analytics
+- 👥 **Contributor Insights**: See top contributors for each project with profile links
+- 📦 **Quick Install**: One-click copy for installation commands (auto-detected for npm, pip, cargo, go)
+- 🔗 **Similar Projects**: Discover related projects based on tags, tech stack, and location
+- 📚 **Documentation Links**: Direct access to docs, changelogs, and issues
 - ⭐ **Featured Projects**: Curated showcase of exceptional projects
 - 🌙 **Dark Mode**: Easy on the eyes, system-aware theme
 - 📱 **Responsive**: Perfect experience on mobile, tablet, and desktop
@@ -197,7 +202,11 @@ See **[CONTRIBUTING.md](./CONTRIBUTING.md)** for detailed guidelines and **[docs
 ### For Project Owners
 
 - ✅ **Verified Status**: Auto-verification for project affiliates
-- 📊 **Auto-Updated Stats**: Stars, language, and contributor info updated nightly
+- 📊 **Auto-Updated Stats**: Stars, contributors, good first issues, and metadata updated nightly
+- 👥 **Contributor Showcase**: Top 10 contributors displayed with avatars on your project page
+- 📦 **Smart Installation**: Auto-detected installation commands for npm, pip, cargo, go packages
+- 📚 **Auto-Detected Docs**: Automatic discovery of documentation, changelog, and resources
+- 🔗 **Similar Projects**: Your project recommended to users viewing related projects
 - 🎯 **Looking for Contributors**: Flag projects actively seeking help
 - 🗺️ **Location Tracking**: Show your project's geographic presence
 - 🏆 **Featured Listings**: Opportunity to be highlighted
@@ -216,13 +225,15 @@ See **[CONTRIBUTING.md](./CONTRIBUTING.md)** for detailed guidelines and **[docs
 
 Built with modern, performant technologies:
 
-- **Framework**: Next.js 15 (App Router, TypeScript)
-- **Styling**: Tailwind CSS
-- **Fonts**: VT323 (logo), Share Tech (headings), Inter (body)
+- **Framework**: Next.js 16 (App Router, React 19, TypeScript 5.6)
+- **Styling**: Tailwind CSS 4 (latest major version with new CSS architecture)
+- **Fonts**: VT323 (logo), Share Tech (headings), Inter (body) - via Next.js Google Fonts
 - **Search**: Fuse.js (client-side fuzzy search)
-- **Validation**: Zod schemas
+- **Validation**: Zod 4.1.12 schemas
+- **Icons**: Lucide React
 - **Deployment**: Vercel (recommended)
 - **Data**: TOML files in Git
+- **Caching**: Public JSON cache for contributor data and metadata
 
 ---
 
@@ -232,18 +243,30 @@ Built with modern, performant technologies:
 fossradar/
 ├── app/                    # Next.js pages and routes
 │   ├── page.tsx           # Homepage with search/filter
-│   ├── radar/             # Geographic visualization
-│   ├── projects/[slug]/   # Individual project pages
+│   ├── about/             # About page
+│   ├── radar/             # Geographic visualization dashboard
+│   ├── projects/[slug]/   # Individual project pages (enhanced)
 │   └── api/               # API endpoints
 ├── components/            # React components
+│   ├── ContributorAvatars.tsx     # Contributor display
+│   ├── InstallationGuide.tsx      # Quick install commands
+│   ├── DocumentationLinks.tsx     # Auto-detected docs
+│   ├── SimilarProjects.tsx        # Related project recommendations
+│   └── ...                        # Other components
 ├── data/
 │   ├── projects/          # Project TOML files
 │   ├── tags.toml          # Allowed tags
 │   └── licenses-osi.json  # OSI-approved licenses
 ├── lib/                   # Utilities and helpers
+│   ├── github.ts          # GitHub API functions (enhanced)
+│   ├── similar.ts         # Similar project matching algorithm
+│   └── ...
 ├── scripts/               # Build and validation scripts
+│   ├── enrich.ts          # Enrichment with contributor data
+│   └── ...
 └── public/
     ├── logos/             # Project logos
+    ├── cache/             # Cached contributor & metadata (*.json)
     └── index.json         # Generated search index
 ```
 
@@ -353,14 +376,26 @@ Found a security vulnerability? Please review our [Security Policy](./SECURITY.m
 - ✅ Core directory functionality
 - ✅ Automated validation and CI
 - ✅ Search and filtering
-- ✅ Geographic radar visualization
-- ✅ Supabase-inspired UI/UX
+- ✅ Geographic radar visualization dashboard
+- ✅ Professional UI/UX with modern design
+- ✅ Enhanced project pages (Phase 1 complete):
+  - ✅ Contributor avatars and profiles
+  - ✅ Auto-detected installation commands
+  - ✅ Documentation and resource links
+  - ✅ Similar project recommendations
+- ✅ About page with comprehensive information
+- ✅ Nightly enrichment with contributor data
 - 🚧 Growing the project database
 
-### Future Plans
+### Future Plans (Phase 2+)
+- 📊 Repository Health Metrics (activity timeline, PR stats, issue response time)
+- 📝 Good First Issues Widget (show actual issues on project pages)
+- 💬 GitHub Discussions Integration (community comments)
+- 📈 Download/Installation Stats (npm, PyPI, crates.io)
+- 🔒 Security & Dependency Info
+- 📸 Project Screenshots Gallery
 - 📱 Mobile app
 - 🌐 Multi-language support (Bengali, Hindi)
-- 📊 Analytics dashboard for project owners
 - 🎥 Video demos and project spotlights
 - 🏅 Gamification and contributor recognition
 - 📰 Newsletter and RSS feeds
