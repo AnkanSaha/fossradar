@@ -5,6 +5,7 @@ import { ContributorAvatars } from "./ContributorAvatars";
 import { InstallationGuide } from "./InstallationGuide";
 import { DocumentationLinks } from "./DocumentationLinks";
 import { SimilarProjects } from "./SimilarProjects";
+import { PageHitTracker } from "./PageHitTracker";
 import { ExternalLink, Github, Star, GitBranch, Calendar, Scale } from "lucide-react";
 import { formatNumber, formatRelativeTime } from "@/lib/utils";
 import Link from "next/link";
@@ -58,7 +59,7 @@ export function ProjectDetail({ project, cache, similarProjects }: ProjectDetail
         </p>
 
         {/* Quick Links */}
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <a
             href={project.repo}
             target="_blank"
@@ -79,6 +80,7 @@ export function ProjectDetail({ project, cache, similarProjects }: ProjectDetail
               Website
             </a>
           )}
+          <PageHitTracker slug={project.slug} />
         </div>
       </div>
 
