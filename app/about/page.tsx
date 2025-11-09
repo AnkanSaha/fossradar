@@ -33,35 +33,51 @@ export default function AboutPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-black">
       {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-start gap-3">
-              <Radar className="h-10 w-10 text-gray-900 dark:text-gray-100 flex-shrink-0 mt-1" />
-              <div>
-                <h1 className="text-4xl text-gray-900 dark:text-gray-100 tracking-wider" style={{ fontFamily: 'var(--font-vt323)' }}>
+        <div className="container mx-auto px-4 py-4 sm:py-6">
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" className="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
+              <Radar className="h-8 w-8 sm:h-10 sm:w-10 text-gray-900 dark:text-gray-100 flex-shrink-0 mt-1" />
+              <div className="min-w-0">
+                <h1 className="text-3xl sm:text-4xl text-gray-900 dark:text-gray-100 tracking-wider truncate" style={{ fontFamily: 'var(--font-vt323)' }}>
                   fossradar
                 </h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm">
+                <p className="text-gray-600 dark:text-gray-400 mt-1 text-xs sm:text-sm truncate">
                   Discover Open Source Projects from India
                 </p>
               </div>
             </Link>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
               <Link
                 href="/radar"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors"
+                className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors"
               >
                 <Map className="h-4 w-4" />
                 Radar
               </Link>
               <Link
+                href="/radar"
+                className="sm:hidden p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
+                aria-label="Radar"
+              >
+                <Map className="h-4 w-4" />
+              </Link>
+              <Link
                 href="https://github.com/wbfoss/fossradar#-for-project-owners-get-listed"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
+                className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
               >
                 <FileCode className="h-4 w-4" />
                 Submit Project
+              </Link>
+              <Link
+                href="https://github.com/wbfoss/fossradar#-for-project-owners-get-listed"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sm:hidden p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                aria-label="Submit Project"
+              >
+                <FileCode className="h-4 w-4" />
               </Link>
               <ThemeToggle />
             </div>
@@ -74,10 +90,10 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto">
           {/* Hero Section */}
           <div className="mb-12">
-            <h1 className="text-5xl font-heading font-normal text-gray-900 dark:text-gray-100 mb-4 tracking-wide">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-normal text-gray-900 dark:text-gray-100 mb-4 tracking-wide">
               About FOSSRadar.in
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
               India's comprehensive directory celebrating Free and Open Source Software (FOSS) projects through their founders, creators, core contributors, and community impact.
             </p>
           </div>
@@ -85,15 +101,15 @@ export default function AboutPage() {
           {/* Mission Section */}
           <div className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <Target className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-              <h2 className="text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
+              <Target className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 dark:text-blue-400" />
+              <h2 className="text-2xl sm:text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
                 Our Mission
               </h2>
             </div>
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               FOSSRadar.in exists to shine a spotlight on India's vibrant open source ecosystem. We believe that open source innovation from India deserves recognition, celebration, and a central platform where developers, organizations, and enthusiasts can discover and connect with incredible projects.
             </p>
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
               Our mission is to build a comprehensive, Git-based directory that showcases the diversity and depth of FOSS contributions from India—whether through their founders, creators, core contributors, organizational base, or projects that serve the Indian community.
             </p>
           </div>
@@ -101,15 +117,15 @@ export default function AboutPage() {
           {/* What We Are Section */}
           <div className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <Globe className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-              <h2 className="text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
+              <Globe className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 dark:text-blue-400" />
+              <h2 className="text-2xl sm:text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
                 What is FOSSRadar.in?
               </h2>
             </div>
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
               FOSSRadar.in is a <strong>Git-based, community-driven directory</strong> that highlights open source projects with connections to India. We showcase projects where:
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               <div className="p-6 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
                 <div className="flex items-start gap-3">
                   <Users className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-1" />
@@ -152,8 +168,8 @@ export default function AboutPage() {
           {/* Why FOSSRadar Section */}
           <div className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <Radar className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-              <h2 className="text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
+              <Radar className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 dark:text-blue-400" />
+              <h2 className="text-2xl sm:text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
                 Why FOSSRadar?
               </h2>
             </div>
@@ -188,12 +204,12 @@ export default function AboutPage() {
           {/* How It Works Section */}
           <div className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <FileCode className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-              <h2 className="text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
+              <FileCode className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 dark:text-blue-400" />
+              <h2 className="text-2xl sm:text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
                 How It Works
               </h2>
             </div>
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
               FOSSRadar.in operates on a simple, transparent, Git-based workflow:
             </p>
             <ol className="space-y-4 text-gray-700 dark:text-gray-300">
@@ -231,32 +247,32 @@ export default function AboutPage() {
           {/* Behind FOSSRadar Section */}
           <div className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <Users className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-              <h2 className="text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
+              <Users className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 dark:text-blue-400" />
+              <h2 className="text-2xl sm:text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
                 Behind FOSSRadar
               </h2>
             </div>
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               FOSSRadar.in is built and maintained by <Link href="https://wbfoss.org" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold">wbfoss</Link>, a community-driven initiative dedicated to promoting Free and Open Source Software in India.
             </p>
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               We believe in the power of open source to drive innovation, collaboration, and positive change. FOSSRadar is our contribution to making India's FOSS ecosystem more visible, connected, and vibrant.
             </p>
-            <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
               The platform itself is <strong>100% open source</strong>, built with Next.js 16, TypeScript, and Tailwind CSS 4. Every line of code, every design decision, and every feature is publicly available on GitHub for anyone to inspect, contribute to, or fork.
             </p>
           </div>
 
           {/* Get Involved Section */}
           <div className="mb-12">
-            <div className="p-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white">
-              <h2 className="text-3xl font-heading font-normal mb-4 tracking-wide">
+            <div className="p-6 sm:p-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+              <h2 className="text-2xl sm:text-3xl font-heading font-normal mb-4 tracking-wide">
                 Get Involved
               </h2>
-              <p className="text-lg mb-6 text-blue-50">
+              <p className="text-base sm:text-lg mb-6 text-blue-50">
                 FOSSRadar is a community project, and we welcome contributions from everyone. Whether you're submitting a project, fixing a bug, or suggesting improvements, your participation makes FOSSRadar better for everyone.
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
                 <Link
                   href="https://github.com/wbfoss/fossradar#-for-project-owners-get-listed"
                   target="_blank"
@@ -282,12 +298,12 @@ export default function AboutPage() {
           {/* Values Section */}
           <div className="mb-12">
             <div className="flex items-center gap-3 mb-4">
-              <Heart className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-              <h2 className="text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
+              <Heart className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600 dark:text-blue-400" />
+              <h2 className="text-2xl sm:text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
                 Our Values
               </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="text-center">
                 <div className="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mx-auto mb-4">
                   <Globe className="h-8 w-8 text-blue-600 dark:text-blue-400" />

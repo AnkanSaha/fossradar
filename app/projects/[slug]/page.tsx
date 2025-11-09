@@ -112,35 +112,51 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <div className="min-h-screen bg-gray-50 dark:bg-black">
       {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-start gap-3">
-              <Radar className="h-10 w-10 text-gray-900 dark:text-gray-100 flex-shrink-0 mt-1" />
-              <div>
-                <h1 className="text-4xl text-gray-900 dark:text-gray-100 tracking-wider" style={{ fontFamily: 'var(--font-vt323)' }}>
+        <div className="container mx-auto px-4 py-4 sm:py-6">
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" className="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
+              <Radar className="h-8 w-8 sm:h-10 sm:w-10 text-gray-900 dark:text-gray-100 flex-shrink-0 mt-1" />
+              <div className="min-w-0">
+                <h1 className="text-3xl sm:text-4xl text-gray-900 dark:text-gray-100 tracking-wider truncate" style={{ fontFamily: 'var(--font-vt323)' }}>
                   fossradar
                 </h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm">
+                <p className="text-gray-600 dark:text-gray-400 mt-1 text-xs sm:text-sm truncate">
                   Discover Open Source Projects from India
                 </p>
               </div>
             </Link>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
               <Link
                 href="/radar"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors"
+                className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors"
               >
                 <Map className="h-4 w-4" />
                 Radar
               </Link>
               <Link
+                href="/radar"
+                className="sm:hidden p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
+                aria-label="Radar"
+              >
+                <Map className="h-4 w-4" />
+              </Link>
+              <Link
                 href="https://github.com/wbfoss/fossradar#-for-project-owners-get-listed"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
+                className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
               >
                 <FileCode className="h-4 w-4" />
                 Submit Project
+              </Link>
+              <Link
+                href="https://github.com/wbfoss/fossradar#-for-project-owners-get-listed"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sm:hidden p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                aria-label="Submit Project"
+              >
+                <FileCode className="h-4 w-4" />
               </Link>
               <ThemeToggle />
             </div>

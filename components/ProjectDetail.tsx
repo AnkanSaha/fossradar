@@ -54,40 +54,43 @@ export function ProjectDetail({ project, cache, similarProjects }: ProjectDetail
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-start justify-between gap-4 mb-4">
-          <div className="flex-1">
-            <h1 className="text-5xl font-heading font-normal text-gray-900 dark:text-gray-100 mb-2 tracking-wide">
+          <div className="flex-1 min-w-0">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-normal text-gray-900 dark:text-gray-100 mb-2 tracking-wide break-words">
               {project.name}
             </h1>
             {project.primary_lang && (
-              <p className="text-lg text-gray-500 dark:text-gray-400">
+              <p className="text-base sm:text-lg text-gray-500 dark:text-gray-400">
                 {project.primary_lang}
               </p>
             )}
           </div>
-          <VerifiedPill verified={project.verified || false} />
+          <div className="flex-shrink-0">
+            <VerifiedPill verified={project.verified || false} />
+          </div>
         </div>
 
-        <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
+        <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
           {project.short_desc}
         </p>
 
         {/* Quick Links */}
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <a
             href={project.repo}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors text-sm sm:text-base"
           >
             <Github className="h-4 w-4" />
-            View on GitHub
+            <span className="hidden xs:inline">View on GitHub</span>
+            <span className="xs:hidden">GitHub</span>
           </a>
           {project.website && (
             <a
               href={project.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-sm sm:text-base"
             >
               <ExternalLink className="h-4 w-4" />
               Website
@@ -102,86 +105,76 @@ export function ProjectDetail({ project, cache, similarProjects }: ProjectDetail
           Repository Stats
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {/* Page Views */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-3">
+          {/* Total Views */}
           <PageViewsStat slug={project.slug} />
 
           {/* Stars */}
-          <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-            <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-              <Star className="h-4 w-4" />
+          <div className="p-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+            <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-xs mb-1">
+              <Star className="h-3.5 w-3.5" />
               Stars
             </div>
-            <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+            <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
               {formatNumber(project.stars || 0)}
             </div>
           </div>
 
           {cache?.stats && (
             <>
-              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-                  <GitFork className="h-4 w-4" />
+              <div className="p-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-xs mb-1">
+                  <GitFork className="h-3.5 w-3.5" />
                   Forks
                 </div>
-                <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
                   {formatNumber(cache.stats.forks)}
                 </div>
               </div>
 
-              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-                  <Eye className="h-4 w-4" />
+              <div className="p-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-xs mb-1">
+                  <Eye className="h-3.5 w-3.5" />
                   Watchers
                 </div>
-                <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
                   {formatNumber(cache.stats.watchers)}
                 </div>
               </div>
 
-              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-                  <AlertCircle className="h-4 w-4" />
-                  Open Issues
+              <div className="p-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-xs mb-1">
+                  <AlertCircle className="h-3.5 w-3.5" />
+                  Issues
                 </div>
-                <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
                   {formatNumber(cache.stats.open_issues)}
                 </div>
               </div>
 
-              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-                  <GitBranch className="h-4 w-4" />
-                  Good First Issues
+              <div className="p-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-xs mb-1">
+                  <GitBranch className="h-3.5 w-3.5" />
+                  Good First
                 </div>
-                <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
                   {project.good_first_issues || 0}
                 </div>
               </div>
 
-              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-                  <Clock className="h-4 w-4" />
-                  Last Updated
+              <div className="p-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-xs mb-1">
+                  <Clock className="h-3.5 w-3.5" />
+                  Updated
                 </div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
                   {formatRelativeTime(cache.stats.pushed_at)}
                 </div>
               </div>
 
-              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-                  <Calendar className="h-4 w-4" />
-                  Created
-                </div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                  {formatRelativeTime(cache.stats.created_at)}
-                </div>
-              </div>
-
-              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-                  <Scale className="h-4 w-4" />
+              <div className="p-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-xs mb-1">
+                  <Scale className="h-3.5 w-3.5" />
                   License
                 </div>
                 <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
@@ -193,31 +186,22 @@ export function ProjectDetail({ project, cache, similarProjects }: ProjectDetail
 
           {!cache?.stats && (
             <>
-              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-                  <Scale className="h-4 w-4" />
-                  License
+              <div className="p-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-xs mb-1">
+                  <GitBranch className="h-3.5 w-3.5" />
+                  Good First
                 </div>
-                <div className="text-lg font-semibold text-gray-900 dark:text-gray-100 truncate">
-                  {project.license}
-                </div>
-              </div>
-              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-                  <GitBranch className="h-4 w-4" />
-                  Good First Issues
-                </div>
-                <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
                   {project.good_first_issues || 0}
                 </div>
               </div>
-              <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-                  <Calendar className="h-4 w-4" />
-                  Added
+              <div className="p-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+                <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-xs mb-1">
+                  <Scale className="h-3.5 w-3.5" />
+                  License
                 </div>
-                <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                  {formatRelativeTime(project.added_at)}
+                <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
+                  {project.license}
                 </div>
               </div>
             </>

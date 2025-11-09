@@ -75,35 +75,51 @@ export default function RadarPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-black">
       {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-start gap-3">
-              <Radar className="h-10 w-10 text-gray-900 dark:text-gray-100 flex-shrink-0 mt-1" />
-              <div>
-                <h1 className="text-4xl text-gray-900 dark:text-gray-100 tracking-wider" style={{ fontFamily: 'var(--font-vt323)' }}>
+        <div className="container mx-auto px-4 py-4 sm:py-6">
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" className="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
+              <Radar className="h-8 w-8 sm:h-10 sm:w-10 text-gray-900 dark:text-gray-100 flex-shrink-0 mt-1" />
+              <div className="min-w-0">
+                <h1 className="text-3xl sm:text-4xl text-gray-900 dark:text-gray-100 tracking-wider truncate" style={{ fontFamily: 'var(--font-vt323)' }}>
                   fossradar
                 </h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm">
+                <p className="text-gray-600 dark:text-gray-400 mt-1 text-xs sm:text-sm truncate">
                   Discover Open Source Projects from India
                 </p>
               </div>
             </Link>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
               <Link
                 href="/radar"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors"
+                className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors"
               >
                 <Map className="h-4 w-4" />
                 Radar
               </Link>
               <Link
+                href="/radar"
+                className="sm:hidden p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
+                aria-label="Radar"
+              >
+                <Map className="h-4 w-4" />
+              </Link>
+              <Link
                 href="https://github.com/wbfoss/fossradar#-for-project-owners-get-listed"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
+                className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
               >
                 <FileCode className="h-4 w-4" />
                 Submit Project
+              </Link>
+              <Link
+                href="https://github.com/wbfoss/fossradar#-for-project-owners-get-listed"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sm:hidden p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                aria-label="Submit Project"
+              >
+                <FileCode className="h-4 w-4" />
               </Link>
               <ThemeToggle />
             </div>
@@ -115,18 +131,18 @@ export default function RadarPage() {
       <main className="container mx-auto px-4 py-12">
         {/* Hero Section */}
         <div className="mb-12">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
-              <h1 className="text-5xl font-heading font-normal text-gray-900 dark:text-gray-100 mb-3 tracking-wide">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-normal text-gray-900 dark:text-gray-100 mb-2 sm:mb-3 tracking-wide">
                 Geographic Radar
               </h1>
-              <p className="text-lg text-gray-600 dark:text-gray-400">
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400">
                 Real-time analytics of India&apos;s open source landscape
               </p>
             </div>
             <Link
               href="/"
-              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-all hover:scale-105"
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-all hover:scale-105 flex-shrink-0"
             >
               <Package className="h-4 w-4" />
               All Projects
@@ -135,69 +151,69 @@ export default function RadarPage() {
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mb-8">
             {/* Total Projects */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 rounded-xl p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
+            <div className="relative overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 rounded-xl p-4 sm:p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8"></div>
               <div className="relative">
                 <div className="flex items-center gap-2 mb-2">
-                  <Package className="h-5 w-5 opacity-90" />
-                  <p className="text-sm font-medium opacity-90">Projects</p>
+                  <Package className="h-4 w-4 sm:h-5 sm:w-5 opacity-90" />
+                  <p className="text-xs sm:text-sm font-medium opacity-90">Projects</p>
                 </div>
-                <p className="text-4xl font-bold mb-1">{totalProjects}</p>
-                <p className="text-xs opacity-75">Total repositories</p>
+                <p className="text-2xl sm:text-4xl font-bold mb-1">{totalProjects}</p>
+                <p className="text-xs opacity-75 hidden sm:block">Total repositories</p>
               </div>
             </div>
 
             {/* Total Stars */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-amber-500 to-orange-600 dark:from-amber-600 dark:to-orange-700 rounded-xl p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
+            <div className="relative overflow-hidden bg-gradient-to-br from-amber-500 to-orange-600 dark:from-amber-600 dark:to-orange-700 rounded-xl p-4 sm:p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8"></div>
               <div className="relative">
                 <div className="flex items-center gap-2 mb-2">
-                  <Star className="h-5 w-5 opacity-90" />
-                  <p className="text-sm font-medium opacity-90">Stars</p>
+                  <Star className="h-4 w-4 sm:h-5 sm:w-5 opacity-90" />
+                  <p className="text-xs sm:text-sm font-medium opacity-90">Stars</p>
                 </div>
-                <p className="text-4xl font-bold mb-1">{totalStars}</p>
-                <p className="text-xs opacity-75">GitHub stars earned</p>
+                <p className="text-2xl sm:text-4xl font-bold mb-1">{totalStars}</p>
+                <p className="text-xs opacity-75 hidden sm:block">GitHub stars earned</p>
               </div>
             </div>
 
             {/* States */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-green-500 to-emerald-600 dark:from-green-600 dark:to-emerald-700 rounded-xl p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
+            <div className="relative overflow-hidden bg-gradient-to-br from-green-500 to-emerald-600 dark:from-green-600 dark:to-emerald-700 rounded-xl p-4 sm:p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8"></div>
               <div className="relative">
                 <div className="flex items-center gap-2 mb-2">
-                  <MapPin className="h-5 w-5 opacity-90" />
-                  <p className="text-sm font-medium opacity-90">States</p>
+                  <MapPin className="h-4 w-4 sm:h-5 sm:w-5 opacity-90" />
+                  <p className="text-xs sm:text-sm font-medium opacity-90">States</p>
                 </div>
-                <p className="text-4xl font-bold mb-1">{totalStates}</p>
-                <p className="text-xs opacity-75">Across India</p>
+                <p className="text-2xl sm:text-4xl font-bold mb-1">{totalStates}</p>
+                <p className="text-xs opacity-75 hidden sm:block">Across India</p>
               </div>
             </div>
 
             {/* Cities */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-purple-500 to-violet-600 dark:from-purple-600 dark:to-violet-700 rounded-xl p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
+            <div className="relative overflow-hidden bg-gradient-to-br from-purple-500 to-violet-600 dark:from-purple-600 dark:to-violet-700 rounded-xl p-4 sm:p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8"></div>
               <div className="relative">
                 <div className="flex items-center gap-2 mb-2">
-                  <Building2 className="h-5 w-5 opacity-90" />
-                  <p className="text-sm font-medium opacity-90">Cities</p>
+                  <Building2 className="h-4 w-4 sm:h-5 sm:w-5 opacity-90" />
+                  <p className="text-xs sm:text-sm font-medium opacity-90">Cities</p>
                 </div>
-                <p className="text-4xl font-bold mb-1">{totalCities}</p>
-                <p className="text-xs opacity-75">Urban centers</p>
+                <p className="text-2xl sm:text-4xl font-bold mb-1">{totalCities}</p>
+                <p className="text-xs opacity-75 hidden sm:block">Urban centers</p>
               </div>
             </div>
 
             {/* Verified */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-cyan-500 to-blue-600 dark:from-cyan-600 dark:to-blue-700 rounded-xl p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
+            <div className="relative overflow-hidden bg-gradient-to-br from-cyan-500 to-blue-600 dark:from-cyan-600 dark:to-blue-700 rounded-xl p-4 sm:p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8"></div>
               <div className="relative">
                 <div className="flex items-center gap-2 mb-2">
-                  <TrendingUp className="h-5 w-5 opacity-90" />
-                  <p className="text-sm font-medium opacity-90">Verified</p>
+                  <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 opacity-90" />
+                  <p className="text-xs sm:text-sm font-medium opacity-90">Verified</p>
                 </div>
-                <p className="text-4xl font-bold mb-1">{verifiedProjects}</p>
-                <p className="text-xs opacity-75">{Math.round((verifiedProjects/totalProjects)*100)}% of total</p>
+                <p className="text-2xl sm:text-4xl font-bold mb-1">{verifiedProjects}</p>
+                <p className="text-xs opacity-75 hidden sm:block">{Math.round((verifiedProjects/totalProjects)*100)}% of total</p>
               </div>
             </div>
           </div>
@@ -205,15 +221,13 @@ export default function RadarPage() {
 
         {/* State-wise Breakdown */}
         <div className="space-y-5">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h2 className="text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
-                State Distribution
-              </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                Project density across Indian states and cities
-              </p>
-            </div>
+          <div className="mb-6">
+            <h2 className="text-2xl sm:text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
+              State Distribution
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              Project density across Indian states and cities
+            </p>
           </div>
 
           {sortedStates.map(([state, data], index) => {
@@ -226,27 +240,27 @@ export default function RadarPage() {
             return (
               <div
                 key={state}
-                className="group relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 hover:shadow-xl transition-all duration-300 hover:border-blue-300 dark:hover:border-blue-700"
+                className="group relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-4 sm:p-6 hover:shadow-xl transition-all duration-300 hover:border-blue-300 dark:hover:border-blue-700"
               >
                 {/* State Header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold text-lg">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-6">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 text-white font-bold text-base sm:text-lg flex-shrink-0">
                       #{index + 1}
                     </div>
-                    <div>
-                      <h3 className="text-2xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
+                    <div className="min-w-0">
+                      <h3 className="text-xl sm:text-2xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide break-words">
                         {state}
                       </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5">
+                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-0.5 break-words">
                         {data.count} {data.count === 1 ? 'project' : 'projects'} · {sortedCities.length} {sortedCities.length === 1 ? 'city' : 'cities'} · {statePercentage}% of total
                       </p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
-                      <Package className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                      <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                  <div className="flex justify-end sm:text-right">
+                    <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
+                      <Package className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 dark:text-blue-400" />
+                      <span className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400">
                         {data.count}
                       </span>
                     </div>

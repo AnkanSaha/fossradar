@@ -13,7 +13,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
     <Link
       href={`/projects/${project.slug}`}
       className={cn(
-        "group block p-6 rounded-xl border transition-all duration-300",
+        "group block p-4 sm:p-6 rounded-xl border transition-all duration-300",
         "border-gray-200 dark:border-gray-800",
         "hover:border-blue-300 dark:hover:border-blue-700",
         "hover:shadow-xl hover:shadow-blue-100 dark:hover:shadow-blue-900/20",
@@ -26,9 +26,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/50 dark:from-blue-950/20 dark:via-transparent dark:to-purple-950/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
       <div className="relative">
-        <div className="flex items-start justify-between gap-4 mb-3">
+        <div className="flex items-start justify-between gap-3 sm:gap-4 mb-3">
           <div className="flex-1 min-w-0">
-            <h3 className="text-xl font-heading font-normal text-gray-900 dark:text-gray-100 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-wide">
+            <h3 className="text-lg sm:text-xl font-heading font-normal text-gray-900 dark:text-gray-100 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-wide">
               {project.name}
             </h3>
             <div className="flex items-center gap-2 mt-1.5">
@@ -80,7 +80,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
           {project.looking_for_contributors && (
             <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium">
               <GitBranch className="h-4 w-4" />
-              <span className="text-xs">Looking for contributors</span>
+              <span className="text-xs hidden sm:inline">Looking for contributors</span>
+              <span className="text-xs sm:hidden">Contributors wanted</span>
             </span>
           )}
           {project.website && (

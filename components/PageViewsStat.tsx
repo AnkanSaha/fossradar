@@ -34,25 +34,25 @@ export function PageViewsStat({ slug }: PageViewsStatProps) {
 
   if (views === null) {
     return (
-      <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-        <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-          <TrendingUp className="h-4 w-4" />
-          Page Views
+      <div className="p-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+        <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-xs mb-1">
+          <TrendingUp className="h-3.5 w-3.5" />
+          Total Views
         </div>
-        <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-          <div className="animate-pulse bg-gray-200 dark:bg-gray-800 h-8 w-16 rounded"></div>
+        <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
+          <div className="animate-pulse bg-gray-200 dark:bg-gray-800 h-7 w-14 rounded"></div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-      <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-sm mb-1">
-        <TrendingUp className="h-4 w-4" />
-        Page Views
+    <div className="p-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+      <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 text-xs mb-1">
+        <TrendingUp className="h-3.5 w-3.5" />
+        Total Views
       </div>
-      <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+      <div className="text-xl font-bold text-gray-900 dark:text-gray-100">
         {formatNumber(views)}
       </div>
     </div>
