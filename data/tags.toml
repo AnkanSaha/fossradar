@@ -1,0 +1,76 @@
+# Canonical tags allowlist for Radar
+# Projects can only use tags from this list
+
+tags = [
+  # Development & Tools
+  "cli",
+  "devtools",
+  "ide",
+  "editor",
+  "automation",
+  "testing",
+  "debugging",
+  "monitoring",
+
+  # Web & Mobile
+  "web",
+  "frontend",
+  "backend",
+  "fullstack",
+  "mobile",
+  "react",
+  "nextjs",
+  "vue",
+  "angular",
+  "nodejs",
+  "api",
+
+  # Data & ML
+  "data",
+  "ml",
+  "ai",
+  "analytics",
+  "dataviz",
+  "database",
+
+  # Infrastructure
+  "cloud",
+  "devops",
+  "kubernetes",
+  "docker",
+  "cicd",
+  "infrastructure",
+
+  # Domain Specific
+  "security",
+  "observability",
+  "video",
+  "audio",
+  "graphics",
+  "blockchain",
+  "iot",
+  "game",
+
+  # Content & Communication
+  "docs",
+  "education",
+  "cms",
+  "blog",
+  "social",
+
+  # Languages
+  "python",
+  "javascript",
+  "typescript",
+  "go",
+  "rust",
+  "java",
+  "cpp",
+
+  # Other
+  "library",
+  "framework",
+  "plugin",
+  "template",
+  "boilerplate",
+]

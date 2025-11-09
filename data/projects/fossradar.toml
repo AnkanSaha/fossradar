@@ -1,0 +1,22 @@
+slug = "fossradar"
+name = "FOSSRadar.in"
+short_desc = "India's comprehensive Git-based directory of open source projects, built with Next.js 15"
+website = "https://fossradar.in"
+repo = "https://github.com/wbfoss/fossradar"
+license = "MIT"
+logo = "/logos/fossradar.svg"
+added_at = "2025-11-09"
+
+primary_lang = "TypeScript"
+tags = ["web", "nextjs", "typescript", "cms", "frontend"]
+looking_for_contributors = true
+location_city = "Kolkata"
+location_indian_state = "West Bengal"
+
+good_first_issues = 0
+stars = 0
+verified = true
+
+# India Connection
+india_connection = "organization"
+india_connection_details = "Built by the Indian FOSS community to showcase and promote open source projects from India"

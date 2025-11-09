@@ -1,0 +1,19 @@
+# Code owners for Radar
+# These users will be automatically requested for review when PRs are opened
+
+# Default owners for everything in the repo
+* @wbfoss-org/maintainers
+
+# Project data requires careful review
+/data/projects/** @wbfoss-org/curators @wbfoss-org/maintainers
+
+# Configuration files
+/data/tags.toml @wbfoss-org/maintainers
+/data/licenses-osi.json @wbfoss-org/maintainers
+
+# GitHub workflows
+/.github/workflows/** @wbfoss-org/maintainers
+
+# Documentation
+/*.md @wbfoss-org/maintainers
+/docs/** @wbfoss-org/maintainers

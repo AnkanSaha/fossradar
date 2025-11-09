@@ -1,0 +1,42 @@
+{
+  "name": "fossradar",
+  "version": "0.1.0",
+  "description": "India's comprehensive directory of open source projects",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "pnpm run build:index && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "validate": "tsx scripts/validate.ts",
+    "build:index": "tsx scripts/build-index.ts",
+    "enrich": "tsx scripts/enrich.ts"
+  },
+  "dependencies": {
+    "@octokit/rest": "^21.0.2",
+    "clsx": "^2.1.1",
+    "fuse.js": "^7.0.0",
+    "lucide-react": "^0.454.0",
+    "next": "^15.0.3",
+    "next-themes": "^0.4.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.5.5",
+    "toml": "^3.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@types/node": "^22.9.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.14.0",
+    "eslint-config-next": "^15.0.3",
+    "next-sitemap": "^4.2.3",
+    "postcss": "^8.4.48",
+    "tailwindcss": "^3.4.14",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

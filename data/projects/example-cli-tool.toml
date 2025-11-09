@@ -1,0 +1,22 @@
+slug = "example-cli-tool"
+name = "Example CLI Tool"
+short_desc = "A sample command-line tool for demonstrating the FOSSRadar directory structure and validation"
+website = "https://example-cli-tool.dev"
+repo = "https://github.com/example/cli-tool"
+license = "Apache-2.0"
+logo = "/logos/example-cli-tool.svg"
+added_at = "2025-11-09"
+
+primary_lang = "Python"
+tags = ["cli", "devtools", "python"]
+looking_for_contributors = false
+location_city = "Kolkata"
+location_indian_state = "West Bengal"
+
+good_first_issues = 0
+stars = 42
+verified = false
+
+# India Connection
+india_connection = "founder"
+india_connection_details = "Created by developers from India to solve local development workflow challenges"

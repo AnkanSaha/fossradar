@@ -1,0 +1,76 @@
+name: Suggest a New Project
+description: Suggest an open source project to be added to Radar
+title: "[Project]: "
+labels: ["new-project"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a project! Please fill out the information below.
+
+        **Note:** You can also use the [submission form](/submit) for a more streamlined experience.
+
+  - type: input
+    id: name
+    attributes:
+      label: Project Name
+      description: The display name of the project
+      placeholder: "e.g., OpenQoE"
+    validations:
+      required: true
+
+  - type: input
+    id: repo
+    attributes:
+      label: GitHub Repository URL
+      description: Must be a public GitHub repository
+      placeholder: "https://github.com/owner/repo"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Short Description
+      description: Brief description of the project (10-160 characters)
+      placeholder: "A concise description of what this project does"
+    validations:
+      required: true
+
+  - type: input
+    id: website
+    attributes:
+      label: Website URL (Optional)
+      placeholder: "https://example.com"
+
+  - type: input
+    id: license
+    attributes:
+      label: License
+      description: Must be an OSI-approved SPDX identifier
+      placeholder: "e.g., MIT, Apache-2.0, GPL-3.0"
+    validations:
+      required: true
+
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Comma-separated list of tags (must be from the allowlist)
+      placeholder: "web, typescript, nextjs"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: The repository has the topic `wbfoss`
+          required: true
+        - label: The repository is publicly accessible
+          required: true
+        - label: The license is OSI-approved
+          required: true
+        - label: I am the maintainer or have permission to submit this project
+          required: false

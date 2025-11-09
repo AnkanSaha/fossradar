@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+dist
+build
+coverage
+*.log
+pnpm-lock.yaml
+.env
+.env.local
+public/index.json

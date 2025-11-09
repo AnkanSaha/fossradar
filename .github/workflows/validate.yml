@@ -1,0 +1,140 @@
+name: Validate Projects
+
+on:
+  pull_request:
+    paths:
+      - "data/projects/**"
+      - "data/tags.toml"
+      - "data/licenses-osi.json"
+      - "lib/**"
+      - "scripts/validate.ts"
+  push:
+    branches:
+      - main
+    paths:
+      - "data/projects/**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run validation
+        id: validate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pnpm run validate 2>&1 | tee validation-output.txt
+          echo "validation_output<<EOF" >> $GITHUB_OUTPUT
+          cat validation-output.txt >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Build search index
+        run: pnpm run build:index
+
+      - name: Comment on PR with validation results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const output = `${{ steps.validate.outputs.validation_output }}`;
+            const outcome = '${{ steps.validate.outcome }}';
+
+            let body;
+            if (outcome === 'failure') {
+              body = `## ❌ TOML Validation Failed\n\n\`\`\`\n${output}\n\`\`\`\n\n### Common Issues:\n\n- **Invalid tags**: Ensure all tags are from the allowlist in \`data/tags.toml\`\n- **Invalid license**: Use an OSI-approved SPDX identifier\n- **Missing mandatory fields**: All fields (website, logo, primary_lang, tags, looking_for_contributors, location_city, location_indian_state) are required\n- **Logo file not found**: Place your logo in \`public/logos/\`\n- **Repository not accessible**: Ensure the repository URL is correct and public\n\nPlease fix the issues and push your changes.`;
+            } else {
+              body = `## ✅ TOML Validation Passed\n\nAll project files are valid! The changes will be reviewed by maintainers.`;
+            }
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+
+      - name: Fail if validation failed
+        if: steps.validate.outcome == 'failure'
+        run: exit 1
+
+      - name: Verify PR author affiliation
+        if: github.event_name == 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get changed TOML files
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep "^data/projects/.*\.toml$" || true)
+
+          if [ -n "$CHANGED_FILES" ]; then
+            echo "Changed project files:"
+            echo "$CHANGED_FILES"
+
+            PR_AUTHOR="${{ github.event.pull_request.user.login }}"
+            echo "PR Author: $PR_AUTHOR"
+
+            for file in $CHANGED_FILES; do
+              SLUG=$(basename "$file" .toml)
+              echo "Verifying affiliation for: $SLUG"
+              tsx scripts/verify-pr-author.ts "$PR_AUTHOR" "$SLUG" || echo "⚠️  Not affiliated - project will be unverified"
+            done
+          else
+            echo "No project files changed"
+          fi
+
+      - name: Commit verification updates
+        if: github.event_name == 'pull_request'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/projects/*.toml
+          git diff --staged --quiet || git commit -m "chore: update verification status" || true
+
+      - name: Check formatting
+        run: npx prettier --check "data/**/*.toml"
+        continue-on-error: true
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run ESLint
+        run: pnpm run lint
+        continue-on-error: true

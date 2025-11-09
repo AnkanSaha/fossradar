@@ -1,0 +1,22 @@
+slug = "example-web-app"
+name = "Example Web App"
+short_desc = "A full-stack web application showcasing modern development practices and open source collaboration"
+website = "https://example-web-app.dev"
+repo = "https://github.com/example/web-app"
+license = "GPL-3.0"
+logo = "/logos/example-web-app.svg"
+added_at = "2025-11-09"
+
+primary_lang = "JavaScript"
+tags = ["web", "fullstack", "nodejs", "react", "api"]
+looking_for_contributors = true
+location_city = "Mumbai"
+location_indian_state = "Maharashtra"
+
+good_first_issues = 5
+stars = 128
+verified = true
+
+# India Connection
+india_connection = "community"
+india_connection_details = "Developed to serve educational institutions across India with modern web infrastructure"

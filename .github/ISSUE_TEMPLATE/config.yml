@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a Question
+    url: https://github.com/wbfoss/fossradar/discussions
+    about: Ask questions and discuss with the community
+  - name: wbfoss.org Community
+    url: https://wbfoss.org
+    about: Visit the West Bengal FOSS community website
