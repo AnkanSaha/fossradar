@@ -31,11 +31,11 @@ export default function Home() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-logo font-normal text-gray-900 dark:text-gray-100 tracking-wider">
+              <h1 className="text-4xl font-logo text-gray-900 dark:text-gray-100 tracking-wider">
                 FOSSRadar.in
               </h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">
-                Discover Open Source Projects
+              <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm">
+                Discover Open Source Projects from India
               </p>
             </div>
             <div className="flex items-center gap-3">
