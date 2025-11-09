@@ -82,18 +82,14 @@ export default function Home() {
                 <Map className="h-4 w-4" />
               </Link>
               <Link
-                href="https://github.com/wbfoss/fossradar#-for-project-owners-get-listed"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/submit"
                 className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
               >
-                <FileCode className="h-4 w-4" />
+                <Plus className="h-4 w-4" />
                 Submit Project
               </Link>
               <Link
-                href="https://github.com/wbfoss/fossradar#-for-project-owners-get-listed"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/submit"
                 className="sm:hidden p-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
                 aria-label="Submit Project"
               >
@@ -116,13 +112,11 @@ export default function Home() {
               No projects yet. Be the first to add one!
             </p>
             <Link
-              href="https://github.com/wbfoss/fossradar#-for-project-owners-get-listed"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/submit"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
             >
-              <FileCode className="h-4 w-4" />
-              Submit via Pull Request
+              <Plus className="h-4 w-4" />
+              Submit Your Project
             </Link>
           </div>
         )}
