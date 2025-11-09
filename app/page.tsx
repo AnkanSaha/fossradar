@@ -1,7 +1,7 @@
 import { loadAllProjects } from "@/lib/projects";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Github, FileCode, Map } from "lucide-react";
+import { Github, FileCode, Map, Radar } from "lucide-react";
 import Link from "next/link";
 
 export const revalidate = 3600; // Revalidate every hour
@@ -31,9 +31,12 @@ export default function Home() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl text-gray-900 dark:text-gray-100 tracking-wider" style={{ fontFamily: 'var(--font-vt323)' }}>
-                FOSSRadar.in
-              </h1>
+              <div className="flex items-center gap-3">
+                <Radar className="h-10 w-10 text-gray-900 dark:text-gray-100" />
+                <h1 className="text-4xl text-gray-900 dark:text-gray-100 tracking-wider" style={{ fontFamily: 'var(--font-vt323)' }}>
+                  fossradar
+                </h1>
+              </div>
               <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm">
                 Discover Open Source Projects from India
               </p>

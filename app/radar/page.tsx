@@ -1,6 +1,6 @@
 import { loadAllProjects } from "@/lib/projects";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Github, MapPin, Package, TrendingUp, Building2, Star, ArrowUpRight, FileCode, Map } from "lucide-react";
+import { Github, MapPin, Package, TrendingUp, Building2, Star, ArrowUpRight, FileCode, Map, Radar } from "lucide-react";
 import Link from "next/link";
 
 export const revalidate = 3600; // Revalidate every hour
@@ -51,13 +51,16 @@ export default function RadarPage() {
       <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
-            <Link href="/" className="block">
-              <h1 className="text-4xl text-gray-900 dark:text-gray-100 tracking-wider" style={{ fontFamily: 'var(--font-vt323)' }}>
-                FOSSRadar.in
-              </h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm">
-                Discover Open Source Projects from India
-              </p>
+            <Link href="/" className="flex items-start gap-3">
+              <Radar className="h-10 w-10 text-gray-900 dark:text-gray-100 flex-shrink-0 mt-1" />
+              <div>
+                <h1 className="text-4xl text-gray-900 dark:text-gray-100 tracking-wider" style={{ fontFamily: 'var(--font-vt323)' }}>
+                  fossradar
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm">
+                  Discover Open Source Projects from India
+                </p>
+              </div>
             </Link>
             <div className="flex items-center gap-3">
               <Link
