@@ -1,14 +1,5 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: var(--font-inter), system-ui, sans-serif;
-  --font-logo: var(--font-vt323), monospace;
-  --font-heading: var(--font-share-tech), sans-serif;
-
-  --color-background: #ffffff;
-  --color-foreground: #0a0a0a;
-}
-
 :root {
   --background: #ffffff;
   --foreground: #0a0a0a;
@@ -19,12 +10,6 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 @utility text-balance {
