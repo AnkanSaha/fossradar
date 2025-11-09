@@ -1,6 +1,9 @@
 import { MetadataRoute } from "next";
 import { loadAllProjects } from "@/lib/projects";
 
+// Revalidate sitemap every hour to ensure new projects appear
+export const revalidate = 3600;
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://fossradar.in";
   const projects = loadAllProjects();

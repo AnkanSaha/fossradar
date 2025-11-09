@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidateTag } from "next/cache";
+import { revalidateTag, revalidatePath } from "next/cache";
 import crypto from "crypto";
 
 interface GitHubCommit {
@@ -20,6 +20,26 @@ function verifySignature(payload: string, signature: string, secret: string): bo
   const hmac = crypto.createHmac("sha256", secret);
   const digest = `sha256=${hmac.update(payload).digest("hex")}`;
   return crypto.timingSafeEqual(Buffer.from(digest), Buffer.from(signature));
+}
+
+async function pingSitemapToSearchEngines() {
+  const sitemapUrl = "https://fossradar.in/sitemap.xml";
+
+  // Ping Google
+  try {
+    await fetch(`https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`);
+    console.log("Pinged Google about sitemap update");
+  } catch (error) {
+    console.error("Failed to ping Google:", error);
+  }
+
+  // Ping Bing
+  try {
+    await fetch(`https://www.bing.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`);
+    console.log("Pinged Bing about sitemap update");
+  } catch (error) {
+    console.error("Failed to ping Bing:", error);
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -60,7 +80,11 @@ export async function POST(request: NextRequest) {
 
       if (touchedProjects) {
         revalidateTag("projects", "/");
-        console.log("Revalidated projects tag");
+        revalidatePath("/sitemap.xml");
+        console.log("Revalidated projects tag and sitemap");
+
+        // Ping search engines about sitemap update
+        pingSitemapToSearchEngines();
       }
     }
 

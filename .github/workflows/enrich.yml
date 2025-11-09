@@ -49,3 +49,10 @@ jobs:
           git diff --staged --quiet || git commit -m "chore: update project metadata and stars"
           git push
         continue-on-error: true
+
+      - name: Ping sitemap to search engines
+        run: |
+          curl -X POST https://fossradar.in/api/ping-sitemap \
+            -H "Content-Type: application/json" \
+            -H "x-api-key: ${{ secrets.ADMIN_API_KEY }}" || true
+        continue-on-error: true

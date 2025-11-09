@@ -237,6 +237,43 @@ Built with modern, performant technologies:
 
 ---
 
+## 🔄 Automatic Sitemap Updates
+
+FOSSRadar.in automatically keeps the sitemap up-to-date and notifies search engines when new projects are added:
+
+### How It Works
+
+1. **Dynamic Sitemap Generation**
+   - Sitemap regenerates every hour with all current projects
+   - Uses project's `added_at` date for accurate `lastModified` timestamps
+   - Properly prioritizes: Homepage (1.0) > Radar (0.9) > Projects (0.8) > About (0.7)
+
+2. **Automatic Updates on New Projects**
+   - When a PR is merged adding new projects, GitHub webhook triggers:
+     - Sitemap revalidation
+     - Automatic ping to Google and Bing search engines
+   - No manual intervention required
+
+3. **Daily Enrichment Updates**
+   - Nightly workflow updates project metadata and stars
+   - After updates, sitemap is pinged to search engines
+   - Ensures search engines always have latest project data
+
+4. **Manual Trigger** (if needed)
+   - API endpoint available: `POST /api/ping-sitemap`
+   - Requires `ADMIN_API_KEY` header for security
+   - Useful for testing or forcing immediate updates
+
+### Search Engine Integration
+
+The system automatically notifies:
+- **Google**: via `https://www.google.com/ping?sitemap=...`
+- **Bing**: via `https://www.bing.com/ping?sitemap=...`
+
+This ensures new projects appear in search results within hours, not days.
+
+---
+
 ## 📁 Project Structure
 
 ```
