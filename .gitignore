@@ -43,3 +43,6 @@ next-env.d.ts
 # Generated files
 /public/index.json
 /public/index-*.json
+
+# Hit tracking data (stored in-memory on edge)
+data/hits.json

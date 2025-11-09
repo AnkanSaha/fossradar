@@ -26,18 +26,30 @@ export function PageViewsCard({ slug }: PageViewsCardProps) {
         if (response.ok) {
           const data = await response.json();
           setHits(data.hits);
+        } else {
+          // If POST fails, try GET
+          const getResponse = await fetch(`/api/hits?slug=${slug}`, {
+            cache: "no-store",
+          });
+          if (getResponse.ok) {
+            const data = await getResponse.json();
+            setHits(data.hits);
+          }
         }
       } catch (error) {
         console.error("Error tracking hit:", error);
         // Fallback: try to get current hits without incrementing
         try {
-          const response = await fetch(`/api/hits?slug=${slug}`);
+          const response = await fetch(`/api/hits?slug=${slug}`, {
+            cache: "no-store",
+          });
           if (response.ok) {
             const data = await response.json();
             setHits(data.hits);
           }
         } catch {
-          // Silent fail
+          // Silent fail - set to 0 to show something
+          setHits(0);
         }
       } finally {
         setLoading(false);
