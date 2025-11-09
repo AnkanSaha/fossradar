@@ -52,7 +52,7 @@ export default function RadarPage() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <Link href="/" className="block">
-              <h1 className="text-4xl font-logo text-gray-900 dark:text-gray-100 tracking-wider">
+              <h1 className="text-4xl text-gray-900 dark:text-gray-100 tracking-wider" style={{ fontFamily: 'var(--font-vt323)' }}>
                 FOSSRadar.in
               </h1>
               <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm">
