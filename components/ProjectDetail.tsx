@@ -89,7 +89,7 @@ export function ProjectDetail({ project, cache, similarProjects }: ProjectDetail
             <a
               href={project.website}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-sm sm:text-base"
             >
               <ExternalLink className="h-4 w-4" />
