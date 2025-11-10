@@ -4,7 +4,8 @@ import { findSimilarProjects } from "@/lib/similar";
 import { ProjectDetail } from "@/components/ProjectDetail";
 import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
 import { TricolorRadar } from "@/components/TricolorRadar";
-import { Github, Map, Plus, Users } from "lucide-react";
+import { MeetupIcon } from "@/components/MeetupIcon";
+import { Github, Map, Plus } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import fs from "fs";
@@ -178,7 +179,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
                 aria-label="Meetup Group"
               >
-                <Users className="h-4 w-4" />
+                <MeetupIcon className="h-4 w-4" />
               </Link>
             </div>
           </div>

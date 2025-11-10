@@ -1,5 +1,6 @@
 import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
 import { TricolorRadar } from "@/components/TricolorRadar";
+import { MeetupIcon } from "@/components/MeetupIcon";
 import { Github, Map, Heart, Globe, Users, Code, Target, Zap, Plus, Radar, FileCode } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -98,7 +99,7 @@ export default function AboutPage() {
                 className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
                 aria-label="Meetup Group"
               >
-                <Users className="h-4 w-4" />
+                <MeetupIcon className="h-4 w-4" />
               </Link>
             </div>
           </div>
