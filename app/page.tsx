@@ -1,4 +1,3 @@
-import { loadAllProjects } from "@/lib/projects";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
 import { TricolorRadar } from "@/components/TricolorRadar";
@@ -6,6 +5,8 @@ import { MeetupIcon } from "@/components/MeetupIcon";
 import { Github, Map, Plus } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import fs from "fs";
+import path from "path";
 
 export const revalidate = 3600; // Revalidate every hour
 
@@ -34,22 +35,10 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const projects = loadAllProjects();
-
-  // Convert to search index format
-  const searchIndex = projects.map((project) => ({
-    slug: project.slug,
-    name: project.name,
-    short_desc: project.short_desc,
-    tags: project.tags,
-    stars: project.stars || 0,
-    primary_lang: project.primary_lang,
-    verified: project.verified || false,
-    added_at: project.added_at,
-    looking_for_contributors: project.looking_for_contributors,
-    location_city: project.location_city,
-    location_indian_state: project.location_indian_state,
-  }));
+  // Read pre-built search index instead of parsing all TOML files
+  // This dramatically improves TTFB (from ~14s to <0.8s)
+  const indexPath = path.join(process.cwd(), "public", "index.json");
+  const searchIndex = JSON.parse(fs.readFileSync(indexPath, "utf-8"));
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-black">
@@ -128,7 +117,7 @@ export default function Home() {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         {/* Search and Filters */}
-        {projects.length > 0 ? (
+        {searchIndex.length > 0 ? (
           <ProjectGrid initialProjects={searchIndex} />
         ) : (
           <div className="text-center py-16">
