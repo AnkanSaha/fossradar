@@ -38,14 +38,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
               {/* Status Badges */}
               <div className="flex items-center gap-1.5 flex-shrink-0">
                 {project.verified && (
-                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-medium">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-medium">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                     Verified
                   </span>
                 )}
                 {project.looking_for_contributors && (
-                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 text-xs font-medium">
-                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-medium">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                     <span className="hidden sm:inline">Contributors</span>
                     <span className="sm:hidden">Help</span>
                   </span>

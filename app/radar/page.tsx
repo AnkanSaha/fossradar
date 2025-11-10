@@ -3,7 +3,7 @@ import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
 import { TricolorRadar } from "@/components/TricolorRadar";
 import { MeetupIcon } from "@/components/MeetupIcon";
 import { RadarChart } from "@/components/RadarChart";
-import { Github, MapPin, Package, TrendingUp, Building2, Star, ArrowUpRight, Map, Plus } from "lucide-react";
+import { Github, MapPin, Package, TrendingUp, Building2, Star, ArrowUpRight, Radar, Plus } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -102,7 +102,7 @@ export default function RadarPage() {
                 href="/radar"
                 className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors"
               >
-                <Map className="h-4 w-4" />
+                <Radar className="h-4 w-4" />
                 Radar
               </Link>
               <Link
@@ -110,7 +110,7 @@ export default function RadarPage() {
                 className="sm:hidden p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
                 aria-label="Radar"
               >
-                <Map className="h-4 w-4" />
+                <Radar className="h-4 w-4" />
               </Link>
               <Link
                 href="/submit"
@@ -394,8 +394,8 @@ export default function RadarPage() {
                                 </p>
                                 <div className="flex items-center gap-2 mt-1">
                                   {project.verified && (
-                                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-medium">
-                                      <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-medium">
+                                      <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
                                       Verified
                                     </span>
                                   )}

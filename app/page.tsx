@@ -2,7 +2,7 @@ import { ProjectGrid } from "@/components/ProjectGrid";
 import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
 import { TricolorRadar } from "@/components/TricolorRadar";
 import { MeetupIcon } from "@/components/MeetupIcon";
-import { Github, Map, Plus } from "lucide-react";
+import { Github, Radar, Plus } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import fs from "fs";
@@ -67,7 +67,7 @@ export default function Home() {
                 href="/radar"
                 className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium transition-colors"
               >
-                <Map className="h-4 w-4" />
+                <Radar className="h-4 w-4" />
                 Radar
               </Link>
               <Link
@@ -75,7 +75,7 @@ export default function Home() {
                 className="sm:hidden p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
                 aria-label="Radar"
               >
-                <Map className="h-4 w-4" />
+                <Radar className="h-4 w-4" />
               </Link>
               <Link
                 href="/submit"
