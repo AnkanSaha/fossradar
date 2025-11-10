@@ -1,7 +1,6 @@
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
 import { TricolorRadar } from "@/components/TricolorRadar";
-import { Github, FileCode, Map, Plus, CheckCircle2, GitPullRequest, FileText, ExternalLink } from "lucide-react";
+import { Github, Map, Plus, CheckCircle2, GitPullRequest, FileText, ExternalLink, Users } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -124,7 +123,24 @@ export default function SubmitPage() {
               >
                 <Plus className="h-5 w-5" />
               </Link>
-              <ThemeToggle />
+              <Link
+                href="https://github.com/wbfoss/fossradar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
+                aria-label="GitHub Repository"
+              >
+                <Github className="h-4 w-4" />
+              </Link>
+              <Link
+                href="https://www.meetup.com/wbfoss/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
+                aria-label="Meetup Group"
+              >
+                <Users className="h-4 w-4" />
+              </Link>
             </div>
           </div>
         </div>
