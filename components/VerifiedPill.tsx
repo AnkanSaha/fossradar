@@ -19,7 +19,7 @@ export function VerifiedPill({ verified, className }: VerifiedPillProps) {
         "shadow-sm",
         className
       )}
-      title="Verified by wbfoss"
+      title="Verified by fossradar"
     >
       <CheckCircle2 className="h-4 w-4 fill-blue-500 dark:fill-blue-400 text-white" />
       Verified
