@@ -174,67 +174,67 @@ export default function RadarPage() {
           {/* Stats Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mb-8">
             {/* Total Projects */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 rounded-xl p-4 sm:p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
+            <div className="relative overflow-hidden bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 rounded-xl p-4 sm:p-6 text-white shadow-xl shadow-blue-500/30 dark:shadow-blue-950/50 hover:shadow-2xl hover:shadow-blue-500/40 dark:hover:shadow-blue-950/60 transition-all duration-300 hover:scale-105 hover:-translate-y-1 cursor-default backdrop-blur-sm">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8"></div>
               <div className="relative">
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-center gap-2 mb-3">
                   <Package className="h-4 w-4 sm:h-5 sm:w-5 opacity-90" />
-                  <p className="text-xs sm:text-sm font-medium opacity-90">Projects</p>
+                  <p className="text-xs sm:text-sm font-semibold opacity-90 tracking-wide">PROJECTS</p>
                 </div>
-                <p className="text-2xl sm:text-4xl font-bold mb-1">{totalProjects}</p>
-                <p className="text-xs opacity-75 hidden sm:block">Total repositories</p>
+                <p className="text-3xl sm:text-5xl font-bold mb-1 tracking-tight">{totalProjects}</p>
+                <p className="text-xs opacity-80 hidden sm:block">Total repositories</p>
               </div>
             </div>
 
             {/* Total Stars */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-amber-500 to-orange-600 dark:from-amber-600 dark:to-orange-700 rounded-xl p-4 sm:p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
+            <div className="relative overflow-hidden bg-gradient-to-br from-amber-500 to-orange-600 dark:from-amber-600 dark:to-orange-700 rounded-xl p-4 sm:p-6 text-white shadow-xl shadow-amber-500/30 dark:shadow-amber-950/50 hover:shadow-2xl hover:shadow-amber-500/40 dark:hover:shadow-amber-950/60 transition-all duration-300 hover:scale-105 hover:-translate-y-1 cursor-default backdrop-blur-sm">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8"></div>
               <div className="relative">
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-center gap-2 mb-3">
                   <Star className="h-4 w-4 sm:h-5 sm:w-5 opacity-90" />
-                  <p className="text-xs sm:text-sm font-medium opacity-90">Stars</p>
+                  <p className="text-xs sm:text-sm font-semibold opacity-90 tracking-wide">STARS</p>
                 </div>
-                <p className="text-2xl sm:text-4xl font-bold mb-1">{totalStars}</p>
-                <p className="text-xs opacity-75 hidden sm:block">GitHub stars earned</p>
+                <p className="text-3xl sm:text-5xl font-bold mb-1 tracking-tight">{totalStars}</p>
+                <p className="text-xs opacity-80 hidden sm:block">GitHub stars earned</p>
               </div>
             </div>
 
             {/* States */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-green-500 to-emerald-600 dark:from-green-600 dark:to-emerald-700 rounded-xl p-4 sm:p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
+            <div className="relative overflow-hidden bg-gradient-to-br from-green-500 to-emerald-600 dark:from-green-600 dark:to-emerald-700 rounded-xl p-4 sm:p-6 text-white shadow-xl shadow-green-500/30 dark:shadow-green-950/50 hover:shadow-2xl hover:shadow-green-500/40 dark:hover:shadow-green-950/60 transition-all duration-300 hover:scale-105 hover:-translate-y-1 cursor-default backdrop-blur-sm">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8"></div>
               <div className="relative">
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-center gap-2 mb-3">
                   <MapPin className="h-4 w-4 sm:h-5 sm:w-5 opacity-90" />
-                  <p className="text-xs sm:text-sm font-medium opacity-90">States</p>
+                  <p className="text-xs sm:text-sm font-semibold opacity-90 tracking-wide">STATES</p>
                 </div>
-                <p className="text-2xl sm:text-4xl font-bold mb-1">{totalStates}</p>
-                <p className="text-xs opacity-75 hidden sm:block">Across India</p>
+                <p className="text-3xl sm:text-5xl font-bold mb-1 tracking-tight">{totalStates}</p>
+                <p className="text-xs opacity-80 hidden sm:block">Across India</p>
               </div>
             </div>
 
             {/* Cities */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-purple-500 to-violet-600 dark:from-purple-600 dark:to-violet-700 rounded-xl p-4 sm:p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
+            <div className="relative overflow-hidden bg-gradient-to-br from-purple-500 to-violet-600 dark:from-purple-600 dark:to-violet-700 rounded-xl p-4 sm:p-6 text-white shadow-xl shadow-purple-500/30 dark:shadow-purple-950/50 hover:shadow-2xl hover:shadow-purple-500/40 dark:hover:shadow-purple-950/60 transition-all duration-300 hover:scale-105 hover:-translate-y-1 cursor-default backdrop-blur-sm">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8"></div>
               <div className="relative">
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-center gap-2 mb-3">
                   <Building2 className="h-4 w-4 sm:h-5 sm:w-5 opacity-90" />
-                  <p className="text-xs sm:text-sm font-medium opacity-90">Cities</p>
+                  <p className="text-xs sm:text-sm font-semibold opacity-90 tracking-wide">CITIES</p>
                 </div>
-                <p className="text-2xl sm:text-4xl font-bold mb-1">{totalCities}</p>
-                <p className="text-xs opacity-75 hidden sm:block">Urban centers</p>
+                <p className="text-3xl sm:text-5xl font-bold mb-1 tracking-tight">{totalCities}</p>
+                <p className="text-xs opacity-80 hidden sm:block">Urban centers</p>
               </div>
             </div>
 
             {/* Verified */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-cyan-500 to-blue-600 dark:from-cyan-600 dark:to-blue-700 rounded-xl p-4 sm:p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-default">
+            <div className="relative overflow-hidden bg-gradient-to-br from-cyan-500 to-blue-600 dark:from-cyan-600 dark:to-blue-700 rounded-xl p-4 sm:p-6 text-white shadow-xl shadow-cyan-500/30 dark:shadow-cyan-950/50 hover:shadow-2xl hover:shadow-cyan-500/40 dark:hover:shadow-cyan-950/60 transition-all duration-300 hover:scale-105 hover:-translate-y-1 cursor-default backdrop-blur-sm">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8"></div>
               <div className="relative">
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-center gap-2 mb-3">
                   <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 opacity-90" />
-                  <p className="text-xs sm:text-sm font-medium opacity-90">Verified</p>
+                  <p className="text-xs sm:text-sm font-semibold opacity-90 tracking-wide">VERIFIED</p>
                 </div>
-                <p className="text-2xl sm:text-4xl font-bold mb-1">{verifiedProjects}</p>
-                <p className="text-xs opacity-75 hidden sm:block">{Math.round((verifiedProjects/totalProjects)*100)}% of total</p>
+                <p className="text-3xl sm:text-5xl font-bold mb-1 tracking-tight">{verifiedProjects}</p>
+                <p className="text-xs opacity-80 hidden sm:block">{Math.round((verifiedProjects/totalProjects)*100)}% of total</p>
               </div>
             </div>
           </div>
@@ -261,7 +261,7 @@ export default function RadarPage() {
             return (
               <div
                 key={state}
-                className="group relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-4 sm:p-6 hover:shadow-xl transition-all duration-300 hover:border-blue-300 dark:hover:border-blue-700"
+                className="group relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-200 dark:border-gray-800 rounded-xl p-4 sm:p-6 shadow-md shadow-gray-200/50 dark:shadow-gray-950/50 hover:shadow-2xl hover:shadow-blue-200/30 dark:hover:shadow-blue-950/40 transition-all duration-300 hover:border-blue-300 dark:hover:border-blue-700 hover:-translate-y-1"
               >
                 {/* State Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 mb-6">
@@ -312,14 +312,14 @@ export default function RadarPage() {
                                 <span className="font-semibold text-gray-900 dark:text-gray-100">
                                   {city}
                                 </span>
-                                <span className="text-xs text-gray-500 dark:text-gray-500">
+                                <span className="text-xs text-gray-500 dark:text-gray-500 font-medium">
                                   {cityData.count} {cityData.count === 1 ? 'project' : 'projects'} · {cityPercentage}%
                                 </span>
                               </div>
-                              {/* Progress Bar */}
-                              <div className="mt-2 w-full bg-gray-100 dark:bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                              {/* Enhanced Progress Bar */}
+                              <div className="mt-2 w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2 overflow-hidden shadow-inner">
                                 <div
-                                  className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-1.5 rounded-full transition-all duration-700 ease-out"
+                                  className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-2 rounded-full transition-all duration-700 ease-out shadow-sm"
                                   style={{ width: `${percentage}%` }}
                                 />
                               </div>
@@ -333,22 +333,22 @@ export default function RadarPage() {
                             <Link
                               key={project.slug}
                               href={`/projects/${project.slug}`}
-                              className="group/project flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-800/50 hover:bg-blue-50 dark:hover:bg-blue-900/20 border border-transparent hover:border-blue-200 dark:hover:border-blue-800 transition-all"
+                              className="group/project flex items-center gap-2 px-3 py-2.5 rounded-lg bg-gray-50/50 dark:bg-gray-800/30 hover:bg-blue-50 dark:hover:bg-blue-900/20 border border-gray-200/50 dark:border-gray-700/50 hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-200 shadow-sm hover:shadow-md"
                             >
                               <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate group-hover/project:text-blue-600 dark:group-hover/project:text-blue-400 transition-colors">
+                                <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate group-hover/project:text-blue-600 dark:group-hover/project:text-blue-400 transition-colors">
                                   {project.name}
                                 </p>
-                                <div className="flex items-center gap-2 mt-0.5">
+                                <div className="flex items-center gap-2 mt-1">
                                   {project.verified && (
-                                    <span className="inline-flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
-                                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-medium">
+                                      <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
                                       Verified
                                     </span>
                                   )}
                                   {project.stars > 0 && (
-                                    <span className="inline-flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
-                                      <Star className="h-3 w-3" />
+                                    <span className="inline-flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 font-medium">
+                                      <Star className="h-3 w-3 fill-yellow-500 text-yellow-500" />
                                       {project.stars}
                                     </span>
                                   )}

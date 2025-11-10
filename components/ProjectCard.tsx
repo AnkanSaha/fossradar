@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { Star, ExternalLink, GitBranch, MapPin } from "lucide-react";
+import { Star, ExternalLink, MapPin } from "lucide-react";
 import { Project } from "@/lib/schema";
-import { VerifiedPill } from "./VerifiedPill";
 import { cn, formatNumber } from "@/lib/utils";
 
 interface ProjectCardProps {
@@ -13,12 +12,16 @@ export function ProjectCard({ project }: ProjectCardProps) {
     <Link
       href={`/projects/${project.slug}`}
       className={cn(
-        "group block p-4 sm:p-6 rounded-xl border transition-all duration-300",
+        "group block p-4 sm:p-6 rounded-xl border transition-all duration-300 ease-out",
         "border-gray-200 dark:border-gray-800",
         "hover:border-blue-300 dark:hover:border-blue-700",
-        "hover:shadow-xl hover:shadow-blue-100 dark:hover:shadow-blue-900/20",
-        "hover:-translate-y-1",
-        "bg-white dark:bg-gray-900",
+        // Enhanced shadows for better elevation
+        "shadow-md shadow-gray-200/50 dark:shadow-gray-950/50",
+        "hover:shadow-2xl hover:shadow-blue-200/30 dark:hover:shadow-blue-950/40",
+        // Smooth hover animation with subtle scale
+        "hover:-translate-y-2 hover:scale-[1.02]",
+        // Glassmorphism effect
+        "bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm",
         "relative overflow-hidden"
       )}
     >
@@ -28,9 +31,27 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <div className="relative">
         <div className="flex items-start justify-between gap-3 sm:gap-4 mb-3">
           <div className="flex-1 min-w-0">
-            <h3 className="text-lg sm:text-xl font-heading font-normal text-gray-900 dark:text-gray-100 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-wide">
-              {project.name}
-            </h3>
+            <div className="flex items-start gap-2 mb-2">
+              <h3 className="text-xl sm:text-2xl font-heading font-semibold text-gray-900 dark:text-gray-100 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors tracking-wide flex-1">
+                {project.name}
+              </h3>
+              {/* Status Badges */}
+              <div className="flex items-center gap-1.5 flex-shrink-0">
+                {project.verified && (
+                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-medium">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    Verified
+                  </span>
+                )}
+                {project.looking_for_contributors && (
+                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-orange-500/10 border border-orange-500/20 text-orange-600 dark:text-orange-400 text-xs font-medium">
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+                    <span className="hidden sm:inline">Contributors</span>
+                    <span className="sm:hidden">Help</span>
+                  </span>
+                )}
+              </div>
+            </div>
             <div className="flex items-center gap-2 mt-1.5">
               {project.primary_lang && (
                 <span className="text-xs font-medium text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-md">
@@ -43,7 +64,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
               </span>
             </div>
           </div>
-          <VerifiedPill verified={project.verified || false} />
         </div>
 
         <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mb-4 leading-relaxed">
@@ -70,19 +90,15 @@ export function ProjectCard({ project }: ProjectCardProps) {
           )}
         </div>
 
-        <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+        <div className="flex items-center justify-between text-sm">
           {project.stars > 0 && (
-            <span className="flex items-center gap-1.5">
-              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <span className="font-medium">{formatNumber(project.stars)}</span>
-            </span>
-          )}
-          {project.looking_for_contributors && (
-            <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium">
-              <GitBranch className="h-4 w-4" />
-              <span className="text-xs hidden sm:inline">Looking for contributors</span>
-              <span className="text-xs sm:hidden">Contributors wanted</span>
-            </span>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-900/30">
+                <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
+                <span className="font-bold text-base text-gray-900 dark:text-gray-100">{formatNumber(project.stars)}</span>
+              </div>
+              <span className="text-xs text-gray-500 dark:text-gray-400">stars</span>
+            </div>
           )}
           {project.website && (
             <span className="flex items-center gap-1 ml-auto text-blue-600 dark:text-blue-400 group-hover:gap-2 transition-all">
