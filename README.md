@@ -62,6 +62,39 @@ Your project qualifies if it meets **ANY** of these:
 
 ### How to Submit Your Project
 
+We offer **two submission methods** - choose what works best for you:
+
+#### 🚀 Method 1: Quick Submission Form (Recommended)
+
+**The easiest way to submit your project** - no Git knowledge required!
+
+Visit [fossradar.in/submit/form](https://fossradar.in/submit/form) for a guided, interactive submission experience:
+
+**Features:**
+- ✨ **Auto-fetch project details** from your GitHub repository
+- ✅ **Real-time validation** with helpful guidance
+- 🔍 **Duplicate detection** prevents resubmissions
+- 🏷️ **Smart tag suggestions** from your GitHub topics
+- 🖼️ **Optional logo upload** (drag & drop)
+- 📝 **TOML preview** before submission
+- 🤖 **Automatic PR creation** - we create the pull request for you!
+
+**How it works:**
+1. Visit [fossradar.in/submit/form](https://fossradar.in/submit/form)
+2. Enter your GitHub repository URL
+3. Fill in the 5-step guided form (most fields auto-filled!)
+4. Review the generated TOML file
+5. Sign in with GitHub (required for automatic PR creation)
+6. Submit - we'll create the pull request automatically!
+
+**Note:** Requires GitHub authentication to create pull requests on your behalf.
+
+---
+
+#### 📝 Method 2: Manual Git Workflow (Traditional)
+
+For developers who prefer the traditional Git workflow:
+
 **Step 1: Add the `fossradar` topic to your GitHub repository**
 
 Go to your repo → About section → ⚙️ Settings → Add `fossradar` to topics
@@ -199,12 +232,20 @@ See **[CONTRIBUTING.md](./CONTRIBUTING.md)** for detailed guidelines and **[docs
 - 📦 **Quick Install**: One-click copy for installation commands (auto-detected for npm, pip, cargo, go)
 - 🔗 **Similar Projects**: Discover related projects based on tags, tech stack, and location
 - 📚 **Documentation Links**: Direct access to docs, changelogs, and issues
+- ⭐ **GitHub Star Button**: One-click starring with GitHub OAuth (shows star count when already starred)
+- 🔄 **Social Sharing**: Share projects on Twitter, LinkedIn, Facebook, and via email
 - ⭐ **Featured Projects**: Curated showcase of exceptional projects
 - 🌙 **Dark Mode**: Easy on the eyes, system-aware theme
 - 📱 **Responsive**: Perfect experience on mobile, tablet, and desktop
 
 ### For Project Owners
 
+- 🚀 **Quick Submission Form**: Interactive 5-step form with auto-fill and validation (no Git required!)
+- 🔍 **Duplicate Detection**: Prevents accidental resubmissions before you submit
+- 🏷️ **Smart Tag Suggestions**: Auto-suggests tags from your GitHub repository topics
+- 🖼️ **Logo Upload**: Drag-and-drop logo upload directly in the form
+- 📝 **TOML Preview**: See exactly what will be created before submitting
+- 🤖 **Auto PR Creation**: Form automatically creates pull request for you
 - ✅ **Verified Status**: Auto-verification for project affiliates
 - 📊 **Auto-Updated Stats**: Stars, contributors, good first issues, and metadata updated nightly
 - 👥 **Contributor Showcase**: Top 10 contributors displayed with avatars on your project page
@@ -341,6 +382,43 @@ Only needed if you want to test:
 - UI development
 - Building the project
 - Contributing to frontend
+
+### OAuth Configuration (For GitHub Authentication Features)
+
+Required for the following features to work:
+- **GitHub Star Button**: One-click repository starring
+- **Quick Submission Form**: Automatic PR creation
+
+**Steps:**
+
+1. **Create a GitHub OAuth App**
+   - Go to https://github.com/settings/developers
+   - Click "New OAuth App"
+   - Fill in the details:
+     - Application name: `FOSSRadar Local` (or your choice)
+     - Homepage URL: `http://localhost:3000` (for local dev) or your production URL
+     - Authorization callback URL: `http://localhost:3000/api/auth/callback/github` (for local) or `https://yourdomain.com/api/auth/callback/github` (for production)
+   - Click "Register application"
+   - Copy the **Client ID**
+   - Generate and copy the **Client Secret**
+
+2. **Add to your `.env` file:**
+   ```bash
+   # GitHub OAuth App credentials
+   GITHUB_CLIENT_ID=your_client_id_here
+   GITHUB_CLIENT_SECRET=your_client_secret_here
+
+   # NextAuth configuration
+   NEXTAUTH_SECRET=your_random_secret_here  # Generate with: openssl rand -base64 32
+   NEXTAUTH_URL=http://localhost:3000       # Use your production URL in production
+   ```
+
+3. **Generate NEXTAUTH_SECRET:**
+   ```bash
+   openssl rand -base64 32
+   ```
+
+**Note:** For production deployment on Vercel, add these as environment variables in your project settings.
 
 ---
 

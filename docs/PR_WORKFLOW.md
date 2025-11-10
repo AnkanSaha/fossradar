@@ -1,16 +1,21 @@
-# PR-Only Workflow with Auto-Verification
+# PR Workflow with Auto-Verification
 
 ## Overview
 
-FOSSRadar.in uses a **developer-only, PR-based submission workflow**. There is no web form - all project submissions are done through GitHub Pull Requests. This ensures quality, transparency, and allows community review.
+FOSSRadar.in offers **two submission methods** for project owners:
+
+1. **Quick Submission Form**: An interactive 5-step form that automatically creates pull requests (recommended for most users)
+2. **Manual PR Workflow**: Traditional Git workflow for developers who prefer direct control
+
+Both methods result in a GitHub Pull Request with automatic verification.
 
 ## Key Features
 
-### 🔒 Developer-Only Access
-- No web submission form
-- All submissions via GitHub PRs
+### 🚀 Two Submission Options
+- **Quick Form**: Guided submission with auto-fill and validation
+- **Manual PR**: Traditional Git workflow with full control
+- Both create GitHub PRs for community review
 - Full Git history and transparency
-- Community review process
 
 ### ✅ Auto-Verification
 When you submit a project via PR, our CI **automatically checks** if you're affiliated with the project repository:
@@ -26,7 +31,38 @@ If **any** of the above is true → **Verified ✓**
 
 ## How It Works
 
-### For Project Owners
+### Method 1: Quick Submission Form (Recommended)
+
+#### Overview
+Visit [fossradar.in/submit/form](https://fossradar.in/submit/form) for a guided submission experience.
+
+#### Features
+- ✨ Auto-fetch project details from GitHub
+- ✅ Real-time validation with helpful guidance
+- 🔍 Duplicate detection prevents resubmissions
+- 🏷️ Smart tag suggestions from GitHub topics
+- 🖼️ Optional logo upload (drag & drop)
+- 📝 TOML preview before submission
+- 🤖 Automatic PR creation
+
+#### Steps
+1. Visit [fossradar.in/submit/form](https://fossradar.in/submit/form)
+2. Enter your GitHub repository URL and validate
+3. Fill in the 5-step guided form (most fields auto-filled)
+4. Review the generated TOML file
+5. Sign in with GitHub
+6. Submit - we create the PR automatically!
+
+**Note**: Requires GitHub authentication to create pull requests on your behalf. The form uses GitHub OAuth to authenticate and create the PR using your GitHub account.
+
+#### Auto-Verification
+After form submission, the PR undergoes the same auto-verification process as manual PRs (see below).
+
+---
+
+### Method 2: Manual PR Workflow (Traditional)
+
+#### For Project Owners
 
 #### Step 1: Prepare Your Repository
 ```bash
@@ -300,11 +336,14 @@ No. The verification is automatic based on **PR author** affiliation with the **
 
 ## FAQ
 
-**Q: Why PR-only? Why no web form?**
-A: This ensures only developers submit projects, maintains quality, and provides full transparency through Git history.
+**Q: Should I use the Quick Form or Manual PR workflow?**
+A: Use the Quick Form for faster, guided submission with auto-fill. Use Manual PR workflow if you prefer direct Git control or want to batch multiple projects.
+
+**Q: Does the Quick Form still create a PR?**
+A: Yes! Both methods create GitHub Pull Requests for community review and transparency.
 
 **Q: What if I'm not a developer?**
-A: Ask the project maintainer to submit it, or create a GitHub issue suggesting the project.
+A: You can still use the Quick Form - it only requires a GitHub account. For manual workflow, ask the project maintainer to submit it.
 
 **Q: Can I submit a project I don't own?**
 A: Yes, but it won't be verified unless submitted by an affiliated member.
@@ -348,12 +387,23 @@ For typical PRs (1-2 projects), we're well within limits.
 
 ## Summary
 
-The PR-only workflow with auto-verification:
-- ✅ Ensures quality through community review
-- ✅ Automatically verifies project ownership
-- ✅ Maintains transparency
-- ✅ Requires no external authentication
-- ✅ Developer-friendly Git workflow
-- ✅ Scalable and secure
+FOSSRadar offers two submission methods with auto-verification:
 
-**No forms. No OAuth. Just Git and GitHub.**
+**Quick Submission Form:**
+- ✅ Guided 5-step process with auto-fill
+- ✅ Real-time validation and duplicate detection
+- ✅ Smart tag suggestions from GitHub topics
+- ✅ Automatic PR creation via GitHub OAuth
+- ✅ Perfect for quick, single-project submissions
+
+**Manual PR Workflow:**
+- ✅ Full Git control for developers
+- ✅ Batch multiple project submissions
+- ✅ Traditional workflow for Git users
+- ✅ No OAuth required
+
+**Both methods:**
+- ✅ Create GitHub Pull Requests for community review
+- ✅ Automatically verify project ownership
+- ✅ Maintain full transparency
+- ✅ Scalable and secure

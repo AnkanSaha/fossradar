@@ -10,15 +10,34 @@ This project adheres to the [Contributor Covenant Code of Conduct](./CODE_OF_CON
 
 ### 1. Add Your Project
 
-The primary way to contribute is by adding your open source project:
+There are **two ways** to add your open source project to FOSSRadar:
 
-#### Prerequisites
+#### Method 1: Quick Submission Form (Easiest)
+
+Visit [fossradar.in/submit/form](https://fossradar.in/submit/form) for a guided submission with:
+- Auto-fetch project details from GitHub
+- Real-time validation and duplicate detection
+- Smart tag suggestions from your GitHub topics
+- Optional logo upload
+- Automatic pull request creation
+
+**Prerequisites:**
+- Your project must be open source with an OSI-approved license
+- Repository must be publicly accessible on GitHub
+- GitHub authentication (required for automatic PR creation)
+- Project has a connection to India (founders, organization, community, or contributors)
+
+#### Method 2: Manual Git Workflow (Traditional)
+
+For developers who prefer the traditional Git workflow:
+
+**Prerequisites:**
 - Your project must be open source with an OSI-approved license
 - Repository must be publicly accessible on GitHub
 - Repository must have the topic `fossradar` (case-insensitive)
 - Project has a connection to India (founders, organization, community, or contributors)
 
-#### Steps
+**Steps:**
 1. Add the `fossradar` topic to your GitHub repository
 2. Fork this repository
 3. Create a TOML file in `data/projects/` with all required fields
@@ -170,7 +189,7 @@ looking_for_contributors = true # Boolean
 
 5. **Repository**:
    - Must be a public GitHub repository
-   - Must have `wbfoss` topic
+   - Must have `fossradar` topic
    - Must be accessible at time of validation
 
 ## Tag Policy

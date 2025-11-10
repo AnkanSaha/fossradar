@@ -39,6 +39,7 @@ next-env.d.ts
 # IDE
 .vscode
 .idea
+.claude
 
 # Generated files
 /public/index.json
