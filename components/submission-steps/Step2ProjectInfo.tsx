@@ -26,9 +26,25 @@ const COMMON_LICENSES = [
 export function Step2ProjectInfo({ form, onNext, onBack }: Step2Props) {
   const [tagInput, setTagInput] = useState("");
   const [filteredTags, setFilteredTags] = useState<string[]>([]);
+  const [suggestedTags, setSuggestedTags] = useState<string[]>([]);
 
   const projectName = form.watch("name");
   const selectedTags = form.watch("tags") || [];
+  const githubTopics = form.watch("_githubTopics") || [];
+
+  // Auto-suggest tags from GitHub topics
+  useEffect(() => {
+    if (githubTopics.length > 0) {
+      const validSuggestions = githubTopics
+        .filter((topic: string) =>
+          COMMON_TAGS.includes(topic.toLowerCase()) &&
+          !selectedTags.includes(topic.toLowerCase())
+        )
+        .map((topic: string) => topic.toLowerCase())
+        .slice(0, 5);
+      setSuggestedTags(validSuggestions);
+    }
+  }, [githubTopics, selectedTags]);
 
   // Auto-generate slug from project name
   useEffect(() => {
@@ -187,6 +203,27 @@ export function Step2ProjectInfo({ form, onNext, onBack }: Step2Props) {
           Tags <span className="text-red-500">*</span>
           <span className="text-xs text-gray-500 ml-2">(1-10 tags)</span>
         </label>
+
+        {/* Suggested tags from GitHub */}
+        {suggestedTags.length > 0 && (
+          <div className="mb-3 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
+            <p className="text-xs font-medium text-blue-900 dark:text-blue-100 mb-2">
+              Suggested from GitHub topics:
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {suggestedTags.map((tag) => (
+                <button
+                  key={tag}
+                  type="button"
+                  onClick={() => addTag(tag)}
+                  className="px-3 py-1 rounded-md bg-blue-600 hover:bg-blue-700 text-white text-sm transition-colors"
+                >
+                  + {tag}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="relative">
           <input

@@ -22,6 +22,23 @@ export function Step1RepositoryDetails({ form, onNext }: Step1Props) {
     setValidationResult(null);
 
     try {
+      // First, check if repo already exists
+      const duplicateResponse = await fetch(
+        `/api/check-duplicate?repoUrl=${encodeURIComponent(repoUrl)}`
+      );
+      const duplicateData = await duplicateResponse.json();
+
+      if (duplicateData.exists) {
+        setValidationResult({
+          error: `This repository is already listed on FOSSRadar as "${duplicateData.project.name}"`,
+          isDuplicate: true,
+          existingProject: duplicateData.project,
+        });
+        setIsValidating(false);
+        return;
+      }
+
+      // Then validate the repo
       const response = await fetch(
         `/api/validate-repo?repoUrl=${encodeURIComponent(repoUrl)}`
       );
@@ -47,6 +64,10 @@ export function Step1RepositoryDetails({ form, onNext }: Step1Props) {
         }
         if (data.metadata.homepage) {
           form.setValue("website", data.metadata.homepage);
+        }
+        // Store topics for use in Step 2
+        if (data.metadata.topics && data.metadata.topics.length > 0) {
+          form.setValue("_githubTopics", data.metadata.topics);
         }
       }
     } catch (error) {
@@ -113,20 +134,45 @@ export function Step1RepositoryDetails({ form, onNext }: Step1Props) {
         <div
           className={`p-4 rounded-lg border ${
             validationResult.error
-              ? "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800"
+              ? validationResult.isDuplicate
+                ? "bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800"
+                : "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800"
               : "bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800"
           }`}
         >
           {validationResult.error ? (
             <div className="flex items-start gap-3">
-              <AlertCircle className="h-5 w-5 text-red-600 dark:text-red-400 mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="text-sm font-medium text-red-900 dark:text-red-100">
-                  Validation Failed
+              <AlertCircle className={`h-5 w-5 mt-0.5 flex-shrink-0 ${
+                validationResult.isDuplicate
+                  ? "text-orange-600 dark:text-orange-400"
+                  : "text-red-600 dark:text-red-400"
+              }`} />
+              <div className="flex-1">
+                <p className={`text-sm font-medium ${
+                  validationResult.isDuplicate
+                    ? "text-orange-900 dark:text-orange-100"
+                    : "text-red-900 dark:text-red-100"
+                }`}>
+                  {validationResult.isDuplicate ? "Project Already Exists" : "Validation Failed"}
                 </p>
-                <p className="text-sm text-red-700 dark:text-red-300 mt-1">
+                <p className={`text-sm mt-1 ${
+                  validationResult.isDuplicate
+                    ? "text-orange-700 dark:text-orange-300"
+                    : "text-red-700 dark:text-red-300"
+                }`}>
                   {validationResult.error}
                 </p>
+                {validationResult.isDuplicate && validationResult.existingProject && (
+                  <a
+                    href={`/projects/${validationResult.existingProject.slug}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-lg bg-orange-600 hover:bg-orange-700 text-white text-sm font-medium transition-colors"
+                  >
+                    View Existing Project
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                )}
               </div>
             </div>
           ) : (
