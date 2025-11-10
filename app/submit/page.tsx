@@ -185,6 +185,9 @@ export default function SubmitPage() {
                     Automatic pull request creation
                   </li>
                 </ul>
+                <p className="mt-4 text-xs text-blue-100 opacity-90">
+                  Note: Requires GitHub authentication to create pull requests on your behalf
+                </p>
               </div>
               <div className="flex-shrink-0">
                 <Link
