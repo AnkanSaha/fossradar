@@ -7,6 +7,8 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8)](https://tailwindcss.com/)
 
+[![fossradar.in: Verified](https://img.shields.io/badge/fossradar.in-Verified-brightgreen?style=for-the-badge)](https://fossradar.in/projects/fossradar)
+
 FOSSRadar.in is India's comprehensive directory celebrating FOSS (Free and Open Source Software) projects - whether through their **founders**, **creators**, **core contributors**, **organizational base**, or **project objectives** that serve the Indian community.
 
 **Live Site**: [fossradar.in](https://fossradar.in)
