@@ -160,6 +160,52 @@ export default function SubmitPage() {
             </p>
           </div>
 
+          {/* Quick Form CTA */}
+          <div className="mb-12 p-6 sm:p-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex-1">
+                <h2 className="text-2xl sm:text-3xl font-heading font-normal mb-3 tracking-wide">
+                  New: Quick Submission Form
+                </h2>
+                <p className="text-base sm:text-lg text-blue-50 leading-relaxed">
+                  Skip the Git workflow! Use our interactive form to submit your project in minutes.
+                  We'll create the pull request automatically for you.
+                </p>
+                <ul className="mt-4 space-y-2 text-sm text-blue-50">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4" />
+                    Auto-fetch project details from GitHub
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4" />
+                    Real-time validation and guidance
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4" />
+                    Automatic pull request creation
+                  </li>
+                </ul>
+              </div>
+              <div className="flex-shrink-0">
+                <Link
+                  href="/submit/form"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-white text-blue-600 hover:bg-blue-50 font-semibold transition-colors shadow-lg text-lg"
+                >
+                  <Plus className="h-5 w-5" />
+                  Use Quick Form
+                  <ExternalLink className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="mb-12 flex items-center gap-4">
+            <div className="flex-1 h-px bg-gray-200 dark:bg-gray-800"></div>
+            <span className="text-sm text-gray-500 dark:text-gray-400">or use the traditional Git workflow</span>
+            <div className="flex-1 h-px bg-gray-200 dark:bg-gray-800"></div>
+          </div>
+
           {/* Eligibility Section */}
           <div className="mb-12">
             <div className="flex items-center gap-3 mb-4">

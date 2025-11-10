@@ -370,11 +370,21 @@ export async function createProjectPR(params: {
   slug: string;
   content: string;
   submitterName?: string;
+  userToken?: string;
+  logo?: {
+    content: string; // base64 encoded
+    filename: string; // e.g., "logo.png"
+  };
 }) {
   const owner = process.env.GITHUB_REPO_OWNER!;
   const repo = process.env.GITHUB_REPO_NAME!;
-  const branch = `add/${params.slug}`;
+  const branch = `add/${params.slug}-${Date.now()}`;
   const filePath = `data/projects/${params.slug}.toml`;
+
+  // Use user token if provided, otherwise use default token
+  const userOctokit = params.userToken
+    ? new Octokit({ auth: params.userToken })
+    : octokit;
 
   try {
     // Get default branch ref
@@ -386,15 +396,15 @@ export async function createProjectPR(params: {
     });
 
     // Create new branch
-    await octokit.rest.git.createRef({
+    await userOctokit.rest.git.createRef({
       owner,
       repo,
       ref: `refs/heads/${branch}`,
       sha: ref.object.sha,
     });
 
-    // Create file
-    await octokit.rest.repos.createOrUpdateFileContents({
+    // Create TOML file
+    await userOctokit.rest.repos.createOrUpdateFileContents({
       owner,
       repo,
       path: filePath,
@@ -403,22 +413,37 @@ export async function createProjectPR(params: {
       branch,
     });
 
+    // Create logo file if provided
+    if (params.logo) {
+      const logoPath = `public/logos/${params.slug}/${params.logo.filename}`;
+      await userOctokit.rest.repos.createOrUpdateFileContents({
+        owner,
+        repo,
+        path: logoPath,
+        message: `Add logo for project: ${params.slug}`,
+        content: params.logo.content, // Already base64 encoded
+        branch,
+      });
+    }
+
     // Create PR
     const prBody = `## New Project Submission
 
 **Slug:** ${params.slug}
-${params.submitterName ? `**Submitted by:** ${params.submitterName}\n` : ""}
+${params.submitterName ? `**Submitted by:** @${params.submitterName}\n` : ""}
+${params.logo ? `**Logo:** Included (${params.logo.filename})\n` : "**Logo:** Not provided\n"}
 
 ### Checklist
 - [ ] Repository has topic \`fossradar\`
 - [ ] README includes verified badge (recommended)
 - [ ] License is OSI-approved
 - [ ] All required fields are filled
+${params.logo ? "- [ ] Logo file is valid and optimized" : ""}
 
 ---
 *This PR was automatically generated via the FOSSRadar.in submission form.*`;
 
-    const { data: pr } = await octokit.rest.pulls.create({
+    const { data: pr } = await userOctokit.rest.pulls.create({
       owner,
       repo,
       title: `Add project: ${params.slug}`,
@@ -428,8 +453,12 @@ ${params.submitterName ? `**Submitted by:** ${params.submitterName}\n` : ""}
     });
 
     return { url: pr.html_url, number: pr.number };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error creating PR:", error);
+    // Provide more specific error messages
+    if (error.status === 422) {
+      throw new Error("A branch with this name already exists. Please try again.");
+    }
     throw error;
   }
 }
