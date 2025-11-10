@@ -1,0 +1,107 @@
+# ------------------------------------------------------------------------------------------------
+# REQUIRED FIELDS (All fields below are mandatory)
+# ------------------------------------------------------------------------------------------------
+
+# Unique identifier for your project (used in URLs)
+# Rules: lowercase letters, numbers, and hyphens only, 2-60 characters
+# Example: "my-awesome-project"
+slug = "video-subtitle-generator"
+
+# Display name of your project
+# Rules: 2-80 characters
+# Example: "My Awesome Project"
+name = "GenAI Enabled Video Subtitle Generator"
+
+# Brief description of what your project does
+# Rules: 10-160 characters (optimized for SEO and social sharing)
+# Tip: Make it clear, concise, and compelling
+short_desc = "A production-grade video subtitle generation system in English, Bengali, Hindi & other Indian languages powered by Google's Gemini AI. "
+
+# Public GitHub repository URL
+# Rules: Must be a valid GitHub URL format
+# Example: "https://github.com/username/project"
+# IMPORTANT: Replace with YOUR actual GitHub repository URL
+repo = "https://github.com/hoichoi-opensource/video-subtitle-generator"
+
+# Open source license (must be OSI-approved)
+# Common values: "MIT", "Apache-2.0", "GPL-3.0", "BSD-3-Clause", "ISC"
+# See: https://spdx.org/licenses/ for full list
+license = "MIT"
+
+# Date when project was added to FOSSRadar
+# Rules: YYYY-MM-DD format
+# Tip: Use today's date
+added_at = "2025-11-10"
+
+# Project website or homepage
+# Rules: Must be a valid URL
+# Tip: Can be same as repo URL if no separate website exists
+# IMPORTANT: Replace with YOUR actual project website
+website = "https://hoichoi.tech"
+
+# Logo file path (relative to public/ directory)
+# Rules: Must be in /logos/ directory, SVG or PNG format, max 200KB
+# Example: "/logos/my-project.svg"
+# Tip: SVG is preferred for scalability
+# IMPORTANT: Replace with YOUR actual logo file path
+logo = "/logos/example-reference.svg"
+
+# Primary programming language
+# Examples: "TypeScript", "Python", "JavaScript", "Go", "Rust", "Java", "C++", "Ruby", "PHP"
+# Tip: Use the language's official capitalization
+primary_lang = "Python"
+
+# Project tags/categories (1-10 tags required)
+# Rules: Must be from the allowed tags list in data/tags.toml
+# Common categories: "web", "cli", "mobile", "ai", "security", "devtools", "database", etc.
+# Tip: Choose tags that accurately describe your project's domain and tech stack
+tags = ["subtitle", "subtitle generator", "GeminiAI", "VetrexAI", "Video Tech"]
+
+# Whether your project is actively seeking contributors
+# Values: true or false
+# Tip: Set to true if you want to attract contributors
+looking_for_contributors = true
+
+# City where project originates or is primarily developed
+# Rules: 2-100 characters
+# Examples: "Kolkata", "Bangalore", "Mumbai", "Delhi", "Hyderabad", "Chennai", "Pune"
+location_city = "Kolkata"
+
+# Indian state where project is based
+# Rules: 2-100 characters
+# Examples: "West Bengal", "Karnataka", "Maharashtra", "Delhi", "Telangana", "Tamil Nadu"
+location_indian_state = "West Bengal"
+
+# ------------------------------------------------------------------------------------------------
+# OPTIONAL FIELDS (Automatically updated by FOSSRadar system)
+# ------------------------------------------------------------------------------------------------
+
+# GitHub star count (auto-updated nightly by enrichment script)
+# Note: You can provide an initial value, but it will be overwritten
+stars = 5
+
+# Count of issues labeled "good first issue" (auto-updated nightly)
+# Note: Automatically detected from GitHub
+good_first_issues = 0
+
+# Verification status (auto-set based on PR author affiliation)
+# Values: true or false
+# Note: Automatically verified if you own/contribute to the repo
+verified = true
+
+# ------------------------------------------------------------------------------------------------
+# OPTIONAL FIELDS (Manual - Provide if applicable)
+# ------------------------------------------------------------------------------------------------
+
+# Type of India connection (choose the most relevant)
+# Values: "founder", "organization", "community", "contributor"
+# - "founder": Founders/creators are from India
+# - "organization": Organization is based in India
+# - "community": Project serves Indian communities
+# - "contributor": Significant contributors from India
+india_connection = "founder"
+
+# Details about the India connection (max 500 characters)
+# Tip: Explain how your project connects to India
+india_connection_details = "Founded and maintained by developers from Kolkata, India. Built to celebrate and showcase the vibrant open source ecosystem from India."
+
