@@ -1,4 +1,4 @@
-import { BadgeCheck } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface VerifiedPillProps {
@@ -12,13 +12,16 @@ export function VerifiedPill({ verified, className }: VerifiedPillProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium",
-        "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400",
+        "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold",
+        "bg-gradient-to-r from-blue-100 to-green-100 dark:from-blue-900/40 dark:to-green-900/40",
+        "text-blue-700 dark:text-blue-300",
+        "border-2 border-blue-200 dark:border-blue-700/50",
+        "shadow-sm",
         className
       )}
-      title="Has wbfoss topic and verified badge"
+      title="Verified by wbfoss"
     >
-      <BadgeCheck className="h-3 w-3" />
+      <CheckCircle2 className="h-4 w-4 fill-blue-500 dark:fill-blue-400 text-white" />
       Verified
     </span>
   );
