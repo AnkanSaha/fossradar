@@ -2,6 +2,7 @@ import { loadAllProjects } from "@/lib/projects";
 import { BreadcrumbSchema } from "@/components/BreadcrumbSchema";
 import { TricolorRadar } from "@/components/TricolorRadar";
 import { MeetupIcon } from "@/components/MeetupIcon";
+import { RadarChart } from "@/components/RadarChart";
 import { Github, MapPin, Package, TrendingUp, Building2, Star, ArrowUpRight, Map, Plus } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -240,14 +241,66 @@ export default function RadarPage() {
           </div>
         </div>
 
+        {/* Radar Chart Visualization */}
+        <div className="mb-12">
+          <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border border-gray-200 dark:border-gray-800 rounded-xl p-6 sm:p-8 shadow-xl shadow-gray-200/50 dark:shadow-gray-950/50">
+            <div className="flex flex-col lg:flex-row gap-8 items-center">
+              <div className="flex-1 w-full">
+                <h2 className="text-2xl sm:text-3xl font-heading font-semibold text-gray-900 dark:text-gray-100 mb-2 tracking-wide">
+                  Top States Distribution
+                </h2>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                  Hexagonal visualization of project distribution across India&apos;s leading tech hubs
+                </p>
+                <div className="flex justify-center lg:justify-start">
+                  <RadarChart
+                    data={sortedStates.slice(0, 6).map(([state, data]) => ({
+                      label: state,
+                      value: data.count,
+                    }))}
+                    className="w-full max-w-md"
+                  />
+                </div>
+              </div>
+              <div className="w-full lg:w-auto">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-3">
+                  {sortedStates.slice(0, 6).map(([state, data], index) => (
+                    <div
+                      key={state}
+                      className="p-4 rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 border border-gray-200 dark:border-gray-700"
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">
+                          {index + 1}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs font-medium text-gray-500 dark:text-gray-400 truncate">
+                            {state}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                        {data.count}
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                        {data.count === 1 ? 'project' : 'projects'}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* State-wise Breakdown */}
         <div className="space-y-5">
           <div className="mb-6">
             <h2 className="text-2xl sm:text-3xl font-heading font-normal text-gray-900 dark:text-gray-100 tracking-wide">
-              State Distribution
+              Detailed State Breakdown
             </h2>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              Project density across Indian states and cities
+              Complete project listings by state and city
             </p>
           </div>
 
