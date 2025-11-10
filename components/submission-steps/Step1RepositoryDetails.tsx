@@ -100,18 +100,18 @@ export function Step1RepositoryDetails({ form, onNext }: Step1Props) {
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           GitHub Repository URL <span className="text-red-500">*</span>
         </label>
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-2">
           <input
             type="url"
             {...form.register("repo")}
             placeholder="https://github.com/username/project"
-            className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
           <button
             type="button"
             onClick={handleValidateRepo}
             disabled={!repoUrl || isValidating}
-            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[48px] whitespace-nowrap"
           >
             {isValidating ? (
               <>
@@ -221,7 +221,7 @@ export function Step1RepositoryDetails({ form, onNext }: Step1Props) {
           type="button"
           onClick={handleNext}
           disabled={!validationResult || !!validationResult.error}
-          className="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]"
         >
           Next Step
         </button>

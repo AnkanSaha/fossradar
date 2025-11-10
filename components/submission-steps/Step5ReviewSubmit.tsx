@@ -161,7 +161,7 @@ export function Step5ReviewSubmit({ form, onBack }: Step5Props) {
           <button
             type="button"
             onClick={() => signIn("github", { callbackUrl: window.location.href })}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200 text-sm font-medium transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200 text-sm font-medium transition-colors min-h-[48px]"
           >
             <Github className="h-4 w-4" />
             Sign in with GitHub
@@ -186,12 +186,12 @@ export function Step5ReviewSubmit({ form, onBack }: Step5Props) {
       )}
 
       {/* Actions */}
-      <div className="flex justify-between gap-3 pt-4">
+      <div className="flex flex-col sm:flex-row justify-between gap-3 pt-4">
         <button
           type="button"
           onClick={onBack}
           disabled={isSubmitting}
-          className="px-6 py-2 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50"
+          className="px-6 py-3 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 disabled:opacity-50 min-h-[48px]"
         >
           Back
         </button>
@@ -199,7 +199,7 @@ export function Step5ReviewSubmit({ form, onBack }: Step5Props) {
           type="button"
           onClick={handleSubmit}
           disabled={isSubmitting}
-          className="px-6 py-3 rounded-lg bg-green-600 hover:bg-green-700 text-white font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          className="px-6 py-3 rounded-lg bg-green-600 hover:bg-green-700 text-white font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[48px]"
         >
           {isSubmitting ? (
             <>

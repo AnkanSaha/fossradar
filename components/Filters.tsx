@@ -51,11 +51,13 @@ export function Filters({ availableTags, filters, onChange }: FiltersProps) {
           className={cn(
             "flex items-center gap-2 px-4 py-2 rounded-lg border transition-colors",
             "border-gray-200 dark:border-gray-700",
+            "bg-white dark:bg-gray-900",
+            "text-gray-700 dark:text-gray-300",
             "hover:bg-gray-100 dark:hover:bg-gray-800"
           )}
         >
-          <Filter className="h-4 w-4" />
-          <span>Filters</span>
+          <Filter className="h-4 w-4 text-gray-700 dark:text-gray-300" />
+          <span className="text-gray-700 dark:text-gray-300">Filters</span>
           {activeFilterCount > 0 && (
             <span className="ml-1 px-2 py-0.5 rounded-full bg-blue-600 text-white text-xs font-medium">
               {activeFilterCount}

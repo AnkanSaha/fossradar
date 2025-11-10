@@ -61,7 +61,7 @@ export function Step3LocationConnection({ form, onNext, onBack }: Step3Props) {
               setCityInput(e.target.value);
             }}
             placeholder="Bangalore"
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
 
           {filteredCities.length > 0 && !MAJOR_INDIAN_CITIES.includes(locationCity) && (
@@ -97,7 +97,7 @@ export function Step3LocationConnection({ form, onNext, onBack }: Step3Props) {
         </label>
         <select
           {...form.register("location_indian_state")}
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[48px]"
         >
           <option value="">Select a state</option>
           {INDIAN_STATES.map(state => (
@@ -148,7 +148,7 @@ export function Step3LocationConnection({ form, onNext, onBack }: Step3Props) {
             placeholder="Briefly describe your project's connection to India..."
             rows={3}
             maxLength={500}
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
             {form.watch("india_connection_details")?.length || 0} / 500 characters
@@ -179,14 +179,14 @@ export function Step3LocationConnection({ form, onNext, onBack }: Step3Props) {
         <button
           type="button"
           onClick={onBack}
-          className="px-6 py-2 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+          className="px-6 py-3 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 min-h-[48px]"
         >
           Back
         </button>
         <button
           type="button"
           onClick={handleNext}
-          className="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
+          className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors min-h-[48px]"
         >
           Next Step
         </button>

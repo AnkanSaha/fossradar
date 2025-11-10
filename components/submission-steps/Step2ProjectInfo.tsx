@@ -107,7 +107,7 @@ export function Step2ProjectInfo({ form, onNext, onBack }: Step2Props) {
           type="text"
           {...form.register("name")}
           placeholder="My Awesome Project"
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         {form.formState.errors.name && (
           <p className="text-sm text-red-600 dark:text-red-400 mt-1">
@@ -126,7 +126,7 @@ export function Step2ProjectInfo({ form, onNext, onBack }: Step2Props) {
           type="text"
           {...form.register("slug")}
           placeholder="my-awesome-project"
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         {form.formState.errors.slug && (
           <p className="text-sm text-red-600 dark:text-red-400 mt-1">
@@ -146,7 +146,7 @@ export function Step2ProjectInfo({ form, onNext, onBack }: Step2Props) {
           placeholder="A brief description of what your project does"
           rows={3}
           maxLength={160}
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           {form.watch("short_desc")?.length || 0} / 160 characters
@@ -167,7 +167,7 @@ export function Step2ProjectInfo({ form, onNext, onBack }: Step2Props) {
           type="text"
           {...form.register("primary_lang")}
           placeholder="TypeScript"
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         {form.formState.errors.primary_lang && (
           <p className="text-sm text-red-600 dark:text-red-400 mt-1">
@@ -183,7 +183,7 @@ export function Step2ProjectInfo({ form, onNext, onBack }: Step2Props) {
         </label>
         <select
           {...form.register("license")}
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[48px]"
         >
           <option value="">Select a license</option>
           {COMMON_LICENSES.map(license => (
@@ -237,7 +237,7 @@ export function Step2ProjectInfo({ form, onNext, onBack }: Step2Props) {
               }
             }}
             placeholder="Type to search tags..."
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
 
           {filteredTags.length > 0 && (
@@ -285,14 +285,14 @@ export function Step2ProjectInfo({ form, onNext, onBack }: Step2Props) {
         <button
           type="button"
           onClick={onBack}
-          className="px-6 py-2 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+          className="px-6 py-3 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 min-h-[48px]"
         >
           Back
         </button>
         <button
           type="button"
           onClick={handleNext}
-          className="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
+          className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors min-h-[48px]"
         >
           Next Step
         </button>

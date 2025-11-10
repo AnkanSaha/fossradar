@@ -78,28 +78,28 @@ export function ProjectDetail({ project, cache, similarProjects }: ProjectDetail
         {/* Star on GitHub - Prominent CTA */}
         <GitHubStarButton repoUrl={project.repo} projectName={project.name} stars={project.stars || 0} />
 
-        {/* Quick Links */}
+        {/* Quick Links - Mobile Optimized */}
         <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
           <a
             href={project.repo}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors text-sm sm:text-base"
+            className="inline-flex items-center gap-2 px-4 sm:px-5 py-3 sm:py-2.5 rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors text-sm sm:text-base min-h-[44px]"
           >
-            <Github className="h-4 w-4" />
-            <span className="hidden xs:inline">View on GitHub</span>
-            <span className="xs:hidden">GitHub</span>
+            <Github className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="hidden sm:inline">View on GitHub</span>
+            <span className="sm:hidden">GitHub</span>
           </a>
           {project.website && (
             <a
               href={project.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 text-white transition-colors text-sm sm:text-base"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-3 sm:py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 text-white transition-colors text-sm sm:text-base min-h-[44px]"
             >
-              <ExternalLink className="h-4 w-4" />
-              <span className="hidden xs:inline">Visit Website</span>
-              <span className="xs:hidden">Website</span>
+              <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5" />
+              <span className="hidden sm:inline">Visit Website</span>
+              <span className="sm:hidden">Website</span>
             </a>
           )}
         </div>

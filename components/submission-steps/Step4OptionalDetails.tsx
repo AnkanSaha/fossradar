@@ -83,7 +83,7 @@ export function Step4OptionalDetails({ form, onNext, onBack }: Step4Props) {
           type="url"
           {...form.register("website")}
           placeholder="https://your-project.com"
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         {form.formState.errors.website && (
           <p className="text-sm text-red-600 dark:text-red-400 mt-1">
@@ -157,7 +157,7 @@ export function Step4OptionalDetails({ form, onNext, onBack }: Step4Props) {
           placeholder="Any additional information for the maintainers..."
           rows={4}
           maxLength={500}
-          className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           {form.watch("submitter_notes")?.length || 0} / 500 characters
@@ -168,14 +168,14 @@ export function Step4OptionalDetails({ form, onNext, onBack }: Step4Props) {
         <button
           type="button"
           onClick={onBack}
-          className="px-6 py-2 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+          className="px-6 py-3 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 min-h-[48px]"
         >
           Back
         </button>
         <button
           type="button"
           onClick={onNext}
-          className="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
+          className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors min-h-[48px]"
         >
           Review & Submit
         </button>
