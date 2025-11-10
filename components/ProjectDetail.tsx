@@ -76,7 +76,7 @@ export function ProjectDetail({ project, cache, similarProjects }: ProjectDetail
         </p>
 
         {/* Star on GitHub - Prominent CTA */}
-        <GitHubStarButton repoUrl={project.repo} projectName={project.name} />
+        <GitHubStarButton repoUrl={project.repo} projectName={project.name} stars={project.stars || 0} />
 
         {/* Quick Links */}
         <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">

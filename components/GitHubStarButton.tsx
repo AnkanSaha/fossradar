@@ -7,9 +7,10 @@ import { signIn, useSession } from "next-auth/react";
 interface GitHubStarButtonProps {
   repoUrl: string;
   projectName: string;
+  stars?: number;
 }
 
-export function GitHubStarButton({ repoUrl, projectName }: GitHubStarButtonProps) {
+export function GitHubStarButton({ repoUrl, projectName, stars = 0 }: GitHubStarButtonProps) {
   const { data: session, status } = useSession();
   const [isStarring, setIsStarring] = useState(false);
   const [isStarred, setIsStarred] = useState(false);
@@ -94,7 +95,7 @@ export function GitHubStarButton({ repoUrl, projectName }: GitHubStarButtonProps
           </h3>
           <p className="text-sm text-yellow-700 dark:text-yellow-300">
             {isStarred
-              ? "Thank you for your support! Click to view on GitHub."
+              ? "Thank you for your support!"
               : session
               ? "Click to automatically star this repository"
               : "Sign in with GitHub to star this repository automatically"}
@@ -105,20 +106,28 @@ export function GitHubStarButton({ repoUrl, projectName }: GitHubStarButtonProps
             </p>
           )}
         </div>
-        <button
-          onClick={handleStarClick}
-          disabled={isStarring || status === "loading"}
-          className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg bg-yellow-600 hover:bg-yellow-700 dark:bg-yellow-500 dark:hover:bg-yellow-600 text-white font-semibold transition-colors shadow-md hover:shadow-lg text-sm sm:text-base whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <Star className={`h-5 w-5 ${isStarred ? "fill-white" : ""}`} />
-          {isStarring
-            ? "Starring..."
-            : isStarred
-            ? "View on GitHub"
-            : session
-            ? "Give Star"
-            : "Sign in & Star"}
-        </button>
+        {isStarred ? (
+          <div className="flex flex-col items-center justify-center px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg bg-yellow-600 dark:bg-yellow-500 text-white shadow-md">
+            <div className="flex items-center gap-2">
+              <Star className="h-5 w-5 fill-white" />
+              <span className="text-2xl sm:text-3xl font-bold">{stars.toLocaleString()}</span>
+            </div>
+            <span className="text-xs sm:text-sm opacity-90 mt-1">stars</span>
+          </div>
+        ) : (
+          <button
+            onClick={handleStarClick}
+            disabled={isStarring || status === "loading"}
+            className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg bg-yellow-600 hover:bg-yellow-700 dark:bg-yellow-500 dark:hover:bg-yellow-600 text-white font-semibold transition-colors shadow-md hover:shadow-lg text-sm sm:text-base whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <Star className="h-5 w-5" />
+            {isStarring
+              ? "Starring..."
+              : session
+              ? "Give Star"
+              : "Sign in & Star"}
+          </button>
+        )}
       </div>
     </div>
   );
