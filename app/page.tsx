@@ -115,10 +115,10 @@ export default function Home() {
                 href="https://www.meetup.com/wbfoss/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 sm:p-2.5 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
+                className="p-1.5 sm:p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
                 aria-label="Meetup Group"
               >
-                <MeetupIcon className="h-5 w-5 sm:h-6 sm:w-6" />
+                <MeetupIcon className="h-7 w-7 sm:h-8 sm:w-8" />
               </Link>
             </div>
           </div>

@@ -7,6 +7,6 @@ interface MeetupIconProps {
   className?: string;
 }
 
-export function MeetupIcon({ className = "h-5 w-5" }: MeetupIconProps) {
+export function MeetupIcon({ className = "h-7 w-7" }: MeetupIconProps) {
   return <FontAwesomeIcon icon={faMeetup} className={className} />;
 }
