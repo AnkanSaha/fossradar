@@ -234,6 +234,7 @@ See **[CONTRIBUTING.md](./CONTRIBUTING.md)** for detailed guidelines and **[docs
 - 📚 **Documentation Links**: Direct access to docs, changelogs, and issues
 - ⭐ **GitHub Star Button**: One-click starring with GitHub OAuth (shows star count when already starred)
 - 🔄 **Social Sharing**: Share projects on Twitter, LinkedIn, Facebook, and via email
+- 🎨 **Dynamic Social Previews**: Beautiful OG images for homepage and projects (1200×630 optimized cards)
 - ⭐ **Featured Projects**: Curated showcase of exceptional projects
 - 🌙 **Dark Mode**: Easy on the eyes, system-aware theme
 - 📱 **Responsive**: Perfect experience on mobile, tablet, and desktop
@@ -262,7 +263,7 @@ See **[CONTRIBUTING.md](./CONTRIBUTING.md)** for detailed guidelines and **[docs
 - **No Runtime DB**: Fast, simple, auditable
 - **Auto-Validation**: CI checks every submission
 - **GitHub Integration**: OAuth, webhooks, API
-- **SEO Optimized**: Sitemaps, structured data, OpenGraph
+- **SEO Optimized**: Sitemaps, structured data, OpenGraph, dynamic social preview images
 
 ---
 
@@ -504,6 +505,7 @@ Found a security vulnerability? Please review our [Security Policy](./SECURITY.m
   - ✅ Similar project recommendations
 - ✅ About page with comprehensive information
 - ✅ Nightly enrichment with contributor data
+- ✅ Dynamic social preview images (OpenGraph/Twitter Cards)
 - 🚧 Growing the project database
 
 ### Future Plans (Phase 2+)
