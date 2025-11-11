@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
-import { getProjectBySlug } from "@/lib/projects";
 
+export const runtime = 'edge';
 export const alt = "FOSSRadar Project";
 export const size = {
   width: 1200,
@@ -8,9 +8,35 @@ export const size = {
 };
 export const contentType = "image/png";
 
+async function getProjectData(slug: string) {
+  try {
+    // Construct base URL for both local and production
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : process.env.NODE_ENV === 'production'
+      ? 'https://fossradar.in'
+      : 'http://localhost:3000';
+
+    const res = await fetch(`${baseUrl}/index.json`, {
+      next: { revalidate: 3600 } // Cache for 1 hour
+    });
+
+    if (!res.ok) {
+      console.error('Failed to fetch index.json:', res.status);
+      return null;
+    }
+
+    const projects = await res.json();
+    return projects.find((p: any) => p.slug === slug);
+  } catch (error) {
+    console.error('Error fetching project:', error);
+    return null;
+  }
+}
+
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProjectData(slug);
 
   if (!project) {
     return new ImageResponse(
