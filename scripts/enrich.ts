@@ -118,10 +118,26 @@ async function enrichProjects() {
         const filePath = path.join(process.cwd(), "data", "projects", `${project.slug}.toml`);
         let content = fs.readFileSync(filePath, "utf-8");
 
-        // Update fields (simple regex replacement)
-        content = content.replace(/^stars = \d+$/m, `stars = ${metadata.stars}`);
-        content = content.replace(/^good_first_issues = \d+$/m, `good_first_issues = ${goodFirstIssues}`);
-        content = content.replace(/^verified = (true|false)$/m, `verified = ${verified}`);
+        // Update or add stars field
+        if (/^stars = \d+$/m.test(content)) {
+          content = content.replace(/^stars = \d+$/m, `stars = ${metadata.stars}`);
+        } else {
+          // Add stars field after looking_for_contributors
+          content = content.replace(
+            /^(looking_for_contributors = .*?)$/m,
+            `$1\n\ngood_first_issues = ${goodFirstIssues}\nstars = ${metadata.stars}\nverified = ${verified}`
+          );
+        }
+
+        // Update good_first_issues if it already exists
+        if (/^good_first_issues = \d+$/m.test(content)) {
+          content = content.replace(/^good_first_issues = \d+$/m, `good_first_issues = ${goodFirstIssues}`);
+        }
+
+        // Update verified if it already exists
+        if (/^verified = (true|false)$/m.test(content)) {
+          content = content.replace(/^verified = (true|false)$/m, `verified = ${verified}`);
+        }
 
         // Update primary_lang if not set
         if (metadata.language && !content.includes("primary_lang")) {

@@ -229,24 +229,42 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           )}
         </div>
 
-        {/* Stars */}
-        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "28px" }}>
+        {/* Stars & Added Date */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "28px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                padding: "12px 20px",
+                backgroundColor: "#fbbf24",
+                borderRadius: "10px",
+              }}
+            >
+              <div style={{ fontSize: 32 }}>⭐</div>
+              <div style={{ fontSize: 36, fontWeight: 700, color: "#000" }}>
+                {project.stars || 0}
+              </div>
+            </div>
+            <div style={{ fontSize: 20, color: "#64748b" }}>stars</div>
+          </div>
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "10px",
-              padding: "12px 20px",
-              backgroundColor: "#fbbf24",
-              borderRadius: "10px",
+              gap: "8px",
+              padding: "8px 16px",
+              backgroundColor: "#1e293b",
+              borderRadius: "8px",
+              border: "1px solid #334155",
             }}
           >
-            <div style={{ fontSize: 32 }}>⭐</div>
-            <div style={{ fontSize: 36, fontWeight: 700, color: "#000" }}>
-              {project.stars || 0}
+            <div style={{ fontSize: 18, color: "#94a3b8" }}>📅</div>
+            <div style={{ fontSize: 18, color: "#cbd5e1", fontWeight: 500 }}>
+              Added {new Date(project.added_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
             </div>
           </div>
-          <div style={{ fontSize: 20, color: "#64748b" }}>stars</div>
         </div>
 
         {/* Footer */}
