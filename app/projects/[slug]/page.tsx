@@ -36,8 +36,8 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     };
   }
 
-  const ogImageUrl = `https://fossradar.in${project.logo}`;
   const pageUrl = `https://fossradar.in/projects/${slug}`;
+  const ogImageUrl = project.logo ? `https://fossradar.in${project.logo}` : "https://fossradar.in/og-image.png";
 
   return {
     title: `${project.name} - FOSSRadar.in`,
@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
           url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: `${project.name} logo`,
+          alt: project.logo ? `${project.name} logo` : "FOSSRadar.in - Open Source Directory",
         },
       ],
     },
@@ -252,7 +252,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             license: `https://spdx.org/licenses/${project.license}.html`,
             programmingLanguage: project.primary_lang,
             keywords: project.tags,
-            url: project.website,
+            ...(project.website && { url: project.website }),
           }),
         }}
       />

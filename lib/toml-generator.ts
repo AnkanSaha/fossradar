@@ -10,7 +10,11 @@ export function generateTOML(data: ProjectSubmission): string {
   lines.push(`slug = "${data.slug}"`);
   lines.push(`name = "${data.name}"`);
   lines.push(`short_desc = "${data.short_desc}"`);
-  lines.push(`website = "${data.website}"`);
+
+  if (data.website) {
+    lines.push(`website = "${data.website}"`);
+  }
+
   lines.push(`repo = "${data.repo}"`);
   lines.push(`license = "${data.license}"`);
 
