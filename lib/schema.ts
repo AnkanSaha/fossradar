@@ -38,8 +38,8 @@ export const ProjectSchema = z.object({
 
   website: z
     .string()
-    .url("Website must be a valid URL")
-    .optional(),
+    .transform((val) => val === "" ? undefined : val)
+    .pipe(z.string().url("Website must be a valid URL").optional()),
 
   repo: z
     .string()
@@ -50,8 +50,13 @@ export const ProjectSchema = z.object({
 
   logo: z
     .string()
-    .regex(/^\/logos\/[^/]+\.(svg|png|jpg|jpeg|webp)$/, "Logo must be under /logos/ and be a valid image format")
-    .optional(),
+    .transform((val) => val === "" ? undefined : val)
+    .pipe(
+      z
+        .string()
+        .regex(/^\/logos\/[^/]+\.(svg|png|jpg|jpeg|webp)$/, "Logo must be under /logos/ and be a valid image format")
+        .optional()
+    ),
 
   added_at: z
     .string()
