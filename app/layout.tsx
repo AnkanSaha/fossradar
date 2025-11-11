@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     description: "Discover and explore open source projects from India. A comprehensive directory celebrating FOSS projects from Indian founders, creators, and contributors.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "FOSSRadar.in - India's Open Source Directory",
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "FOSSRadar.in - India's Open Source Directory",
     description: "Discover and explore open source projects from India",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
     creator: "@wbfoss",
   },
   robots: {
