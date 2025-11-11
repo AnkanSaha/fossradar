@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getProjectBySlug } from "@/lib/projects";
 
+export const runtime = 'nodejs';
 export const alt = "FOSSRadar Project";
 export const size = {
   width: 1200,
