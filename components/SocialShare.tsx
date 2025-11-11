@@ -13,17 +13,39 @@ interface SocialShareProps {
 
 export function SocialShare({ url, title, description }: SocialShareProps) {
   const [copied, setCopied] = useState(false);
+  const [supportsNativeShare] = useState(() =>
+    typeof navigator !== 'undefined' && 'share' in navigator
+  );
+
+  // Format share text with description
+  const twitterText = `${title}\n\n${description}\n\n${url}`;
+  const whatsappText = `*${title}*\n\n${description}\n\n${url}`;
 
   const shareLinks = {
-    twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
+    twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}`,
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-    whatsapp: `https://wa.me/?text=${encodeURIComponent(`${title} - ${url}`)}`,
+    whatsapp: `https://wa.me/?text=${encodeURIComponent(whatsappText)}`,
+  };
+
+  const handleNativeShare = async () => {
+    try {
+      await navigator.share({
+        title: title,
+        text: description,
+        url: url,
+      });
+    } catch (err) {
+      // User cancelled or error occurred
+      console.log("Native share cancelled or failed:", err);
+    }
   };
 
   const handleCopyLink = async () => {
     try {
-      await navigator.clipboard.writeText(url);
+      // Copy formatted text with description and URL
+      const textToCopy = `${title}\n\n${description}\n\n${url}`;
+      await navigator.clipboard.writeText(textToCopy);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -37,6 +59,15 @@ export function SocialShare({ url, title, description }: SocialShareProps) {
         <Share2 className="h-4 w-4" />
         Share:
       </span>
+      {supportsNativeShare && (
+        <button
+          onClick={handleNativeShare}
+          className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-blue-600 hover:bg-blue-700 transition-colors text-xs font-medium text-white"
+          aria-label="Share via system"
+        >
+          Share
+        </button>
+      )}
       <a
         href={shareLinks.twitter}
         target="_blank"
