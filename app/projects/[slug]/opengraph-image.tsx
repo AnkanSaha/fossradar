@@ -36,11 +36,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     );
   }
 
-  const truncatedDesc =
-    project.short_desc.length > 120
-      ? project.short_desc.substring(0, 120) + "..."
-      : project.short_desc;
-
   return new ImageResponse(
     (
       <div
@@ -48,196 +43,154 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           width: "100%",
           height: "100%",
           display: "flex",
-          backgroundColor: "#0f172a",
-          position: "relative",
+          flexDirection: "column",
+          backgroundColor: "#1e293b",
+          padding: "60px 80px",
         }}
       >
-        {/* Background gradient */}
-        <div
-          style={{
-            position: "absolute",
-            width: "100%",
-            height: "100%",
-            background: "linear-gradient(135deg, #1e293b 0%, #0f172a 100%)",
-            opacity: 0.8,
-          }}
-        />
-
-        {/* Content */}
+        {/* Project Name + Badges */}
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            padding: "60px 80px",
-            width: "100%",
-            height: "100%",
-            position: "relative",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+            marginBottom: "24px",
           }}
         >
-          {/* Header with badges */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginBottom: "30px",
-            }}
-          >
-            <div style={{ fontSize: 64, fontWeight: 700, color: "#fff" }}>
-              {project.name}
-            </div>
-            <div style={{ display: "flex", gap: "12px" }}>
-              {project.verified && (
-                <div
-                  style={{
-                    padding: "10px 20px",
-                    backgroundColor: "rgba(59, 130, 246, 0.2)",
-                    border: "2px solid rgba(59, 130, 246, 0.4)",
-                    borderRadius: "12px",
-                    fontSize: 20,
-                    color: "#60a5fa",
-                    fontWeight: 600,
-                    display: "flex",
-                  }}
-                >
-                  ✓ Verified
-                </div>
-              )}
-              {project.looking_for_contributors && (
-                <div
-                  style={{
-                    padding: "10px 20px",
-                    backgroundColor: "rgba(16, 185, 129, 0.2)",
-                    border: "2px solid rgba(16, 185, 129, 0.4)",
-                    borderRadius: "12px",
-                    fontSize: 20,
-                    color: "#34d399",
-                    fontWeight: 600,
-                    display: "flex",
-                  }}
-                >
-                  👥 Contributors
-                </div>
-              )}
-            </div>
+          <div style={{ fontSize: 64, fontWeight: 700, color: "#fff", maxWidth: "700px" }}>
+            {project.name}
           </div>
-
-          {/* Language + Location */}
-          <div style={{ display: "flex", gap: "24px", marginBottom: "30px" }}>
-            <div
-              style={{
-                padding: "8px 16px",
-                backgroundColor: "#1e293b",
-                borderRadius: "8px",
-                fontSize: 18,
-                color: "#94a3b8",
-                fontWeight: 500,
-                display: "flex",
-              }}
-            >
-              {project.primary_lang}
-            </div>
-            <div
-              style={{
-                fontSize: 18,
-                color: "#94a3b8",
-                display: "flex",
-              }}
-            >
-              📍 {project.location_city}
-            </div>
-          </div>
-
-          {/* Description */}
-          <div
-            style={{
-              fontSize: 28,
-              lineHeight: 1.4,
-              color: "#cbd5e1",
-              marginBottom: "30px",
-              maxHeight: "120px",
-              overflow: "hidden",
-              display: "flex",
-            }}
-          >
-            {truncatedDesc}
-          </div>
-
-          {/* Tags */}
-          <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "40px" }}>
-            {project.tags.slice(0, 4).map((tag, index) => (
+          <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
+            {project.verified && (
               <div
-                key={index}
                 style={{
-                  padding: "10px 18px",
-                  backgroundColor: "rgba(59, 130, 246, 0.15)",
-                  border: "1px solid rgba(59, 130, 246, 0.3)",
-                  borderRadius: "10px",
+                  padding: "8px 16px",
+                  backgroundColor: "#3b82f6",
+                  borderRadius: "8px",
                   fontSize: 18,
-                  color: "#60a5fa",
-                  fontWeight: 500,
+                  color: "#fff",
+                  fontWeight: 600,
                   display: "flex",
                 }}
               >
-                {tag}
+                ✓ Verified
               </div>
-            ))}
-            {project.tags.length > 4 && (
+            )}
+            {project.looking_for_contributors && (
               <div
                 style={{
-                  padding: "10px 18px",
-                  backgroundColor: "#1e293b",
-                  borderRadius: "10px",
+                  padding: "8px 16px",
+                  backgroundColor: "#10b981",
+                  borderRadius: "8px",
                   fontSize: 18,
-                  color: "#64748b",
-                  fontWeight: 500,
+                  color: "#fff",
+                  fontWeight: 600,
                   display: "flex",
                 }}
               >
-                +{project.tags.length - 4}
+                👥 Contributors
               </div>
             )}
           </div>
+        </div>
 
-          {/* Stars */}
-          <div style={{ display: "flex", alignItems: "center", gap: "16px", marginTop: "auto" }}>
+        {/* Meta Info */}
+        <div style={{ display: "flex", gap: "20px", marginBottom: "24px", flexWrap: "wrap" }}>
+          <div
+            style={{
+              padding: "6px 12px",
+              backgroundColor: "#334155",
+              borderRadius: "6px",
+              fontSize: 16,
+              color: "#cbd5e1",
+              display: "flex",
+            }}
+          >
+            {project.primary_lang}
+          </div>
+          <div style={{ fontSize: 16, color: "#94a3b8", display: "flex", alignItems: "center" }}>
+            📍 {project.location_city}
+          </div>
+        </div>
+
+        {/* Description - CRITICAL FIX */}
+        <div
+          style={{
+            fontSize: 24,
+            color: "#f1f5f9",
+            marginBottom: "28px",
+            lineHeight: "1.5",
+          }}
+        >
+          {project.short_desc}
+        </div>
+
+        {/* Tags */}
+        <div style={{ display: "flex", gap: "10px", marginBottom: "auto", flexWrap: "wrap" }}>
+          {project.tags.slice(0, 4).map((tag, i) => (
             <div
+              key={i}
               style={{
+                padding: "8px 14px",
+                backgroundColor: "#3b82f6",
+                borderRadius: "8px",
+                fontSize: 16,
+                color: "#fff",
                 display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                padding: "16px 24px",
-                backgroundColor: "rgba(251, 191, 36, 0.15)",
-                border: "2px solid rgba(251, 191, 36, 0.3)",
-                borderRadius: "12px",
               }}
             >
-              <div style={{ fontSize: 36 }}>⭐</div>
-              <div style={{ fontSize: 42, fontWeight: 700, color: "#fff" }}>
-                {project.stars || 0}
-              </div>
+              {tag}
             </div>
-            <div style={{ fontSize: 24, color: "#64748b" }}>stars</div>
-          </div>
+          ))}
+          {project.tags.length > 4 && (
+            <div
+              style={{
+                padding: "8px 14px",
+                backgroundColor: "#334155",
+                borderRadius: "8px",
+                fontSize: 16,
+                color: "#94a3b8",
+                display: "flex",
+              }}
+            >
+              +{project.tags.length - 4}
+            </div>
+          )}
+        </div>
 
-          {/* Footer */}
+        {/* Stars */}
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "28px" }}>
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "space-between",
-              marginTop: "40px",
-              paddingTop: "30px",
-              borderTop: "1px solid #1e293b",
+              gap: "10px",
+              padding: "12px 20px",
+              backgroundColor: "#fbbf24",
+              borderRadius: "10px",
             }}
           >
-            <div style={{ fontSize: 24, color: "#64748b", fontWeight: 600, display: "flex" }}>
-              fossradar.in
-            </div>
-            <div style={{ fontSize: 20, color: "#475569", display: "flex" }}>
-              India's Open Source Directory
+            <div style={{ fontSize: 32 }}>⭐</div>
+            <div style={{ fontSize: 36, fontWeight: 700, color: "#000" }}>
+              {project.stars || 0}
             </div>
           </div>
+          <div style={{ fontSize: 20, color: "#64748b" }}>stars</div>
+        </div>
+
+        {/* Footer */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: "32px",
+            paddingTop: "24px",
+            borderTop: "2px solid #334155",
+          }}
+        >
+          <div style={{ fontSize: 22, color: "#64748b", fontWeight: 600 }}>fossradar.in</div>
+          <div style={{ fontSize: 18, color: "#475569" }}>India's Open Source Directory</div>
         </div>
       </div>
     ),
