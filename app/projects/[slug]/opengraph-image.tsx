@@ -59,21 +59,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             {project.name}
           </div>
           <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
-            {project.verified && (
-              <div
-                style={{
-                  padding: "8px 16px",
-                  backgroundColor: "#3b82f6",
-                  borderRadius: "8px",
-                  fontSize: 18,
-                  color: "#fff",
-                  fontWeight: 600,
-                  display: "flex",
-                }}
-              >
-                ✓ Verified
-              </div>
-            )}
             {project.looking_for_contributors && (
               <div
                 style={{
