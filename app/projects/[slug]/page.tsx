@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
       locale: "en_IN",
       images: [
         {
-          url: `/projects/${slug}/opengraph-image`,
+          url: `https://fossradar.in/projects/${slug}/opengraph-image`,
           width: 1200,
           height: 630,
           alt: `${project.name} - Open Source Project`,
@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
       title: `${project.name} - FOSSRadar.in`,
       description: project.short_desc,
       creator: "@wbfoss",
-      images: [`/projects/${slug}/opengraph-image`],
+      images: [`https://fossradar.in/projects/${slug}/opengraph-image`],
     },
     robots: {
       index: true,
