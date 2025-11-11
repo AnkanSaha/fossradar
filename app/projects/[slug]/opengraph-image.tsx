@@ -220,13 +220,12 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     { width: 1200, height: 630 }
   );
 
+  // Convert to buffer for both upload and return
+  const imageBuffer = await imageResponse.arrayBuffer();
+
   // Upload to Vercel Blob for future requests (only if token is available)
   if (hasBlobToken) {
     try {
-      // Convert ImageResponse to buffer
-      const imageBuffer = await imageResponse.arrayBuffer();
-
-      // Upload to Vercel Blob
       await put(blobKey, imageBuffer, {
         access: "public",
         contentType: "image/png",
@@ -237,6 +236,11 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     }
   }
 
-  // Return the generated image
-  return imageResponse;
+  // Return the generated image as a new Response
+  return new Response(imageBuffer, {
+    headers: {
+      'Content-Type': 'image/png',
+      'Cache-Control': 'public, max-age=3600',
+    },
+  });
 }
