@@ -55,21 +55,12 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
       url: pageUrl,
       siteName: "FOSSRadar.in",
       locale: "en_IN",
-      images: [
-        {
-          url: `https://fossradar.in/projects/${slug}/opengraph-image`,
-          width: 1200,
-          height: 630,
-          alt: `${project.name} - Open Source Project`,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title: `${project.name} - FOSSRadar.in`,
       description: project.short_desc,
       creator: "@wbfoss",
-      images: [`https://fossradar.in/projects/${slug}/opengraph-image`],
     },
     robots: {
       index: true,

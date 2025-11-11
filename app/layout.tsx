@@ -75,20 +75,11 @@ export const metadata: Metadata = {
     siteName: "FOSSRadar.in",
     title: "FOSSRadar.in - India's Open Source Directory",
     description: "Discover and explore open source projects from India. A comprehensive directory celebrating FOSS projects from Indian founders, creators, and contributors.",
-    images: [
-      {
-        url: "https://fossradar.in/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: "FOSSRadar.in - India's Open Source Directory",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "FOSSRadar.in - India's Open Source Directory",
     description: "Discover and explore open source projects from India",
-    images: ["https://fossradar.in/opengraph-image"],
     creator: "@wbfoss",
   },
   robots: {
