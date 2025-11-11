@@ -58,53 +58,14 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         >
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "16px",
+              fontSize: 64,
+              fontWeight: 700,
+              color: "#fff",
               maxWidth: "900px",
+              display: "flex",
             }}
           >
-            <div
-              style={{
-                fontSize: 64,
-                fontWeight: 700,
-                color: "#fff",
-                display: "flex",
-              }}
-            >
-              {project.name}
-            </div>
-            {project.verified && (
-              <div
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  background: "#1D9BF0",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0,
-                  boxShadow: "0 2px 8px rgba(29, 155, 240, 0.4)",
-                }}
-              >
-                <svg
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9 12L11 14L15 10"
-                    stroke="white"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-            )}
+            {project.name}
           </div>
           {project.looking_for_contributors && (
             <div

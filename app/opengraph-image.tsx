@@ -48,51 +48,14 @@ export default async function Image() {
           </div>
           <div
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
+              fontSize: '80px',
+              fontWeight: 'bold',
+              color: '#000080',
+              letterSpacing: '-2px',
+              textShadow: '2px 2px 4px rgba(255, 255, 255, 0.5)',
             }}
           >
-            <div
-              style={{
-                fontSize: '80px',
-                fontWeight: 'bold',
-                color: '#000080',
-                letterSpacing: '-2px',
-                textShadow: '2px 2px 4px rgba(255, 255, 255, 0.5)',
-                display: 'flex',
-              }}
-            >
-              fossradar
-            </div>
-            <div
-              style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '50%',
-                background: '#1D9BF0',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 2px 8px rgba(29, 155, 240, 0.4)',
-              }}
-            >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M9 12L11 14L15 10"
-                  stroke="white"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
+            fossradar
           </div>
         </div>
         <div
