@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { getProjectBySlug } from "@/lib/projects";
+import { put, head } from "@vercel/blob";
 
 export const runtime = 'nodejs';
 export const alt = "FOSSRadar Project";
@@ -35,7 +36,45 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     );
   }
 
-  return new ImageResponse(
+  // Generate cache key based on slug and project data hash
+  const projectHash = Buffer.from(
+    JSON.stringify({
+      name: project.name,
+      desc: project.short_desc,
+      stars: project.stars,
+      tags: project.tags,
+      lang: project.primary_lang,
+      location: project.location_city,
+    })
+  ).toString("base64").replace(/[^a-zA-Z0-9]/g, "").slice(0, 12);
+
+  const blobKey = `og-project-${slug}-${projectHash}.png`;
+  const hasBlobToken = !!process.env.BLOB_READ_WRITE_TOKEN;
+
+  // Only check Blob storage if token is available (runtime only, not build time)
+  if (hasBlobToken) {
+    try {
+      // Check if image exists in Blob storage
+      const existingBlob = await head(blobKey);
+
+      if (existingBlob) {
+        // Fetch and return the cached image
+        const response = await fetch(existingBlob.url);
+        const arrayBuffer = await response.arrayBuffer();
+        return new Response(arrayBuffer, {
+          headers: {
+            'Content-Type': 'image/png',
+            'Cache-Control': 'public, max-age=31536000, immutable',
+          },
+        });
+      }
+    } catch (error) {
+      // Blob doesn't exist or error occurred, we'll generate it
+    }
+  }
+
+  // Generate the image
+  const imageResponse = new ImageResponse(
     (
       <div
         style={{
@@ -180,4 +219,24 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     ),
     { width: 1200, height: 630 }
   );
+
+  // Upload to Vercel Blob for future requests (only if token is available)
+  if (hasBlobToken) {
+    try {
+      // Convert ImageResponse to buffer
+      const imageBuffer = await imageResponse.arrayBuffer();
+
+      // Upload to Vercel Blob
+      await put(blobKey, imageBuffer, {
+        access: "public",
+        contentType: "image/png",
+      });
+    } catch (error) {
+      // Silently fail if Blob upload fails
+      console.error('Failed to upload to Blob:', error);
+    }
+  }
+
+  // Return the generated image
+  return imageResponse;
 }

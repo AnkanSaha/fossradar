@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og';
+import { put, head } from "@vercel/blob";
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 export const alt = "FOSSRadar.in - India's Open Source Directory";
 export const size = {
   width: 1200,
@@ -9,7 +10,33 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image() {
-  return new ImageResponse(
+  const blobKey = 'og-home.png';
+  const hasBlobToken = !!process.env.BLOB_READ_WRITE_TOKEN;
+
+  // Only check Blob storage if token is available (runtime only, not build time)
+  if (hasBlobToken) {
+    try {
+      // Check if image exists in Blob storage
+      const existingBlob = await head(blobKey);
+
+      if (existingBlob) {
+        // Fetch and return the cached image
+        const response = await fetch(existingBlob.url);
+        const arrayBuffer = await response.arrayBuffer();
+        return new Response(arrayBuffer, {
+          headers: {
+            'Content-Type': 'image/png',
+            'Cache-Control': 'public, max-age=31536000, immutable',
+          },
+        });
+      }
+    } catch (error) {
+      // Blob doesn't exist or error occurred, we'll generate it
+    }
+  }
+
+  // Generate the image
+  const imageResponse = new ImageResponse(
     (
       <div
         style={{
@@ -87,4 +114,24 @@ export default async function Image() {
       ...size,
     }
   );
+
+  // Upload to Vercel Blob for future requests (only if token is available)
+  if (hasBlobToken) {
+    try {
+      // Convert ImageResponse to buffer
+      const imageBuffer = await imageResponse.arrayBuffer();
+
+      // Upload to Vercel Blob
+      await put(blobKey, imageBuffer, {
+        access: "public",
+        contentType: "image/png",
+      });
+    } catch (error) {
+      // Silently fail if Blob upload fails
+      console.error('Failed to upload to Blob:', error);
+    }
+  }
+
+  // Return the generated image
+  return imageResponse;
 }
