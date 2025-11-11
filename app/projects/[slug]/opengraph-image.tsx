@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { getProjectBySlug } from "@/lib/projects";
 
 export const alt = "FOSSRadar Project";
 export const size = {
@@ -7,33 +8,9 @@ export const size = {
 };
 export const contentType = "image/png";
 
-// Fetch from the static JSON file instead of file system
-async function getProjectData(slug: string) {
-  try {
-    // Use absolute URL for production
-    const baseUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'http://localhost:3000';
-
-    const res = await fetch(`${baseUrl}/index.json`, {
-      next: { revalidate: 3600 }
-    });
-
-    if (!res.ok) {
-      return null;
-    }
-
-    const projects = await res.json();
-    return projects.find((p: any) => p.slug === slug);
-  } catch (error) {
-    console.error('Error fetching project:', error);
-    return null;
-  }
-}
-
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = await getProjectData(slug);
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     return new ImageResponse(
