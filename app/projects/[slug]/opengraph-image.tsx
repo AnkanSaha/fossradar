@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 import { getProjectBySlug } from "@/lib/projects";
-import { put, head } from "@vercel/blob";
 
 export const runtime = 'nodejs';
 export const alt = "FOSSRadar Project";
@@ -36,45 +35,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     );
   }
 
-  // Generate cache key based on slug and project data hash
-  const projectHash = Buffer.from(
-    JSON.stringify({
-      name: project.name,
-      desc: project.short_desc,
-      stars: project.stars,
-      tags: project.tags,
-      lang: project.primary_lang,
-      location: project.location_city,
-    })
-  ).toString("base64").replace(/[^a-zA-Z0-9]/g, "").slice(0, 12);
-
-  const blobKey = `og-project-${slug}-${projectHash}.png`;
-  const hasBlobToken = !!process.env.BLOB_READ_WRITE_TOKEN;
-
-  // Only check Blob storage if token is available (runtime only, not build time)
-  if (hasBlobToken) {
-    try {
-      // Check if image exists in Blob storage
-      const existingBlob = await head(blobKey);
-
-      if (existingBlob) {
-        // Fetch and return the cached image
-        const response = await fetch(existingBlob.url);
-        const arrayBuffer = await response.arrayBuffer();
-        return new Response(arrayBuffer, {
-          headers: {
-            'Content-Type': 'image/png',
-            'Cache-Control': 'public, max-age=31536000, immutable',
-          },
-        });
-      }
-    } catch (error) {
-      // Blob doesn't exist or error occurred, we'll generate it
-    }
-  }
-
-  // Generate the image
-  const imageResponse = new ImageResponse(
+  return new ImageResponse(
     (
       <div
         style={{
@@ -86,7 +47,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           padding: "60px 80px",
         }}
       >
-        {/* Project Name + Badges */}
+        {/* Project Name */}
         <div
           style={{
             display: "flex",
@@ -95,30 +56,44 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             marginBottom: "24px",
           }}
         >
-          <div style={{ fontSize: 64, fontWeight: 700, color: "#fff", maxWidth: "700px" }}>
+          <div
+            style={{
+              fontSize: 64,
+              fontWeight: 700,
+              color: "#fff",
+              maxWidth: "900px",
+              display: "flex",
+            }}
+          >
             {project.name}
           </div>
-          <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
-            {project.looking_for_contributors && (
-              <div
-                style={{
-                  padding: "8px 16px",
-                  backgroundColor: "#10b981",
-                  borderRadius: "8px",
-                  fontSize: 18,
-                  color: "#fff",
-                  fontWeight: 600,
-                  display: "flex",
-                }}
-              >
-                👥 Contributors
-              </div>
-            )}
-          </div>
+          {project.looking_for_contributors && (
+            <div
+              style={{
+                padding: "8px 16px",
+                backgroundColor: "#10b981",
+                borderRadius: "8px",
+                fontSize: 18,
+                color: "#fff",
+                fontWeight: 600,
+                display: "flex",
+                flexShrink: 0,
+              }}
+            >
+              👥 Contributors
+            </div>
+          )}
         </div>
 
         {/* Meta Info */}
-        <div style={{ display: "flex", gap: "20px", marginBottom: "24px", flexWrap: "wrap" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "20px",
+            marginBottom: "24px",
+            alignItems: "center",
+          }}
+        >
           <div
             style={{
               padding: "6px 12px",
@@ -131,7 +106,14 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           >
             {project.primary_lang}
           </div>
-          <div style={{ fontSize: 16, color: "#94a3b8", display: "flex", alignItems: "center" }}>
+          <div
+            style={{
+              fontSize: 16,
+              color: "#94a3b8",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             📍 {project.location_city}
           </div>
         </div>
@@ -142,14 +124,22 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             fontSize: 24,
             color: "#f1f5f9",
             marginBottom: "28px",
-            lineHeight: "1.5",
+            lineHeight: 1.5,
+            display: "flex",
           }}
         >
           {project.short_desc}
         </div>
 
         {/* Tags */}
-        <div style={{ display: "flex", gap: "10px", marginBottom: "auto", flexWrap: "wrap" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            marginBottom: "auto",
+            flexWrap: "wrap",
+          }}
+        >
           {project.tags.slice(0, 4).map((tag: string, i: number) => (
             <div
               key={i}
@@ -182,7 +172,14 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         </div>
 
         {/* Stars */}
-        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "28px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            marginTop: "28px",
+          }}
+        >
           <div
             style={{
               display: "flex",
@@ -193,12 +190,12 @@ export default async function Image({ params }: { params: Promise<{ slug: string
               borderRadius: "10px",
             }}
           >
-            <div style={{ fontSize: 32 }}>⭐</div>
-            <div style={{ fontSize: 36, fontWeight: 700, color: "#000" }}>
+            <div style={{ fontSize: 32, display: "flex" }}>⭐</div>
+            <div style={{ fontSize: 36, fontWeight: 700, color: "#000", display: "flex" }}>
               {project.stars || 0}
             </div>
           </div>
-          <div style={{ fontSize: 20, color: "#64748b" }}>stars</div>
+          <div style={{ fontSize: 20, color: "#64748b", display: "flex" }}>stars</div>
         </div>
 
         {/* Footer */}
@@ -212,35 +209,15 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             borderTop: "2px solid #334155",
           }}
         >
-          <div style={{ fontSize: 22, color: "#64748b", fontWeight: 600 }}>fossradar.in</div>
-          <div style={{ fontSize: 18, color: "#475569" }}>India's Open Source Directory</div>
+          <div style={{ fontSize: 22, color: "#64748b", fontWeight: 600, display: "flex" }}>
+            fossradar.in
+          </div>
+          <div style={{ fontSize: 18, color: "#475569", display: "flex" }}>
+            India's Open Source Directory
+          </div>
         </div>
       </div>
     ),
     { width: 1200, height: 630 }
   );
-
-  // Convert to buffer for both upload and return
-  const imageBuffer = await imageResponse.arrayBuffer();
-
-  // Upload to Vercel Blob for future requests (only if token is available)
-  if (hasBlobToken) {
-    try {
-      await put(blobKey, imageBuffer, {
-        access: "public",
-        contentType: "image/png",
-      });
-    } catch (error) {
-      // Silently fail if Blob upload fails
-      console.error('Failed to upload to Blob:', error);
-    }
-  }
-
-  // Return the generated image as a new Response
-  return new Response(imageBuffer, {
-    headers: {
-      'Content-Type': 'image/png',
-      'Cache-Control': 'public, max-age=3600',
-    },
-  });
 }
