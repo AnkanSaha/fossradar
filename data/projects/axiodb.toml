@@ -1,0 +1,13 @@
+name = "AxioDB"
+slug = "axiodb"
+short_desc = "A fast, lightweight, and scalable open-source DBMS for modern apps with JSON-based storage, simple APIs, and secure data management."
+repo = "https://github.com/nexoral/axiodb"
+website = "https://axiodb.in"
+logo = ""
+added_at = "2025-11-11"
+primary_lang = "TypeScript"
+license = "MIT"
+tags = ["database", "json", "nosql", "dbms", "open-source", "lightweight", "scalable"]
+location_city = "Kolkata"
+location_indian_state = "West Bengal"
+looking_for_contributors = true
