@@ -11,7 +11,6 @@ export const contentType = "image/png";
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  // Load all projects using the same method as the page
   const projects = loadAllProjects();
   const project = projects.find((p) => p.slug === slug);
 
@@ -23,46 +22,59 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             height: "100%",
             width: "100%",
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             backgroundColor: "#000",
             color: "#fff",
+            fontSize: 60,
           }}
         >
-          <div style={{ fontSize: 60 }}>Project Not Found</div>
+          Project Not Found
         </div>
       ),
-      { ...size }
+      { width: 1200, height: 630 }
     );
   }
+
+  const truncatedDesc =
+    project.short_desc.length > 120
+      ? project.short_desc.substring(0, 120) + "..."
+      : project.short_desc;
 
   return new ImageResponse(
     (
       <div
         style={{
-          height: "100%",
           width: "100%",
+          height: "100%",
           display: "flex",
-          flexDirection: "column",
-          backgroundColor: "#0a0a0a",
-          padding: "60px 80px",
+          backgroundColor: "#0f172a",
+          position: "relative",
         }}
       >
-        {/* Card Container */}
+        {/* Background gradient */}
+        <div
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            background: "linear-gradient(135deg, #1e293b 0%, #0f172a 100%)",
+            opacity: 0.8,
+          }}
+        />
+
+        {/* Content */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            backgroundColor: "#1a1a1a",
-            borderRadius: "24px",
-            border: "2px solid #2a2a2a",
-            padding: "50px",
+            padding: "60px 80px",
             width: "100%",
             height: "100%",
+            position: "relative",
           }}
         >
-          {/* Header: Project Name + Badges */}
+          {/* Header with badges */}
           <div
             style={{
               display: "flex",
@@ -71,101 +83,65 @@ export default async function Image({ params }: { params: Promise<{ slug: string
               marginBottom: "30px",
             }}
           >
-            <div
-              style={{
-                fontSize: 56,
-                fontWeight: 700,
-                color: "#ffffff",
-                letterSpacing: "-0.02em",
-              }}
-            >
+            <div style={{ fontSize: 64, fontWeight: 700, color: "#fff" }}>
               {project.name}
             </div>
             <div style={{ display: "flex", gap: "12px" }}>
               {project.verified && (
                 <div
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    padding: "8px 16px",
-                    backgroundColor: "rgba(59, 130, 246, 0.15)",
-                    border: "1.5px solid rgba(59, 130, 246, 0.3)",
-                    borderRadius: "8px",
-                    fontSize: 18,
+                    padding: "10px 20px",
+                    backgroundColor: "rgba(59, 130, 246, 0.2)",
+                    border: "2px solid rgba(59, 130, 246, 0.4)",
+                    borderRadius: "12px",
+                    fontSize: 20,
                     color: "#60a5fa",
                     fontWeight: 600,
+                    display: "flex",
                   }}
                 >
-                  <div
-                    style={{
-                      width: "8px",
-                      height: "8px",
-                      borderRadius: "50%",
-                      backgroundColor: "#3b82f6",
-                    }}
-                  />
-                  Verified
+                  ✓ Verified
                 </div>
               )}
               {project.looking_for_contributors && (
                 <div
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    padding: "8px 16px",
-                    backgroundColor: "rgba(16, 185, 129, 0.15)",
-                    border: "1.5px solid rgba(16, 185, 129, 0.3)",
-                    borderRadius: "8px",
-                    fontSize: 18,
+                    padding: "10px 20px",
+                    backgroundColor: "rgba(16, 185, 129, 0.2)",
+                    border: "2px solid rgba(16, 185, 129, 0.4)",
+                    borderRadius: "12px",
+                    fontSize: 20,
                     color: "#34d399",
                     fontWeight: 600,
+                    display: "flex",
                   }}
                 >
-                  <div
-                    style={{
-                      width: "8px",
-                      height: "8px",
-                      borderRadius: "50%",
-                      backgroundColor: "#10b981",
-                    }}
-                  />
-                  Contributors
+                  👥 Contributors
                 </div>
               )}
             </div>
           </div>
 
-          {/* Meta: Language + Location */}
-          <div
-            style={{
-              display: "flex",
-              gap: "20px",
-              marginBottom: "30px",
-            }}
-          >
+          {/* Language + Location */}
+          <div style={{ display: "flex", gap: "24px", marginBottom: "30px" }}>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                padding: "6px 14px",
-                backgroundColor: "#2a2a2a",
-                borderRadius: "6px",
-                fontSize: 16,
-                color: "#9ca3af",
+                padding: "8px 16px",
+                backgroundColor: "#1e293b",
+                borderRadius: "8px",
+                fontSize: 18,
+                color: "#94a3b8",
                 fontWeight: 500,
+                display: "flex",
               }}
             >
               {project.primary_lang}
             </div>
             <div
               style={{
+                fontSize: 18,
+                color: "#94a3b8",
                 display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                fontSize: 16,
-                color: "#9ca3af",
               }}
             >
               📍 {project.location_city}
@@ -175,39 +151,32 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           {/* Description */}
           <div
             style={{
-              fontSize: 24,
-              lineHeight: 1.5,
-              color: "#d1d5db",
+              fontSize: 28,
+              lineHeight: 1.4,
+              color: "#cbd5e1",
               marginBottom: "30px",
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
+              maxHeight: "120px",
               overflow: "hidden",
+              display: "flex",
             }}
           >
-            {project.short_desc}
+            {truncatedDesc}
           </div>
 
           {/* Tags */}
-          <div
-            style={{
-              display: "flex",
-              gap: "12px",
-              flexWrap: "wrap",
-              marginBottom: "30px",
-            }}
-          >
-            {project.tags.slice(0, 4).map((tag) => (
+          <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "40px" }}>
+            {project.tags.slice(0, 4).map((tag, index) => (
               <div
-                key={tag}
+                key={index}
                 style={{
-                  padding: "8px 16px",
-                  backgroundColor: "rgba(59, 130, 246, 0.1)",
-                  border: "1px solid rgba(59, 130, 246, 0.2)",
-                  borderRadius: "8px",
-                  fontSize: 16,
+                  padding: "10px 18px",
+                  backgroundColor: "rgba(59, 130, 246, 0.15)",
+                  border: "1px solid rgba(59, 130, 246, 0.3)",
+                  borderRadius: "10px",
+                  fontSize: 18,
                   color: "#60a5fa",
                   fontWeight: 500,
+                  display: "flex",
                 }}
               >
                 {tag}
@@ -216,12 +185,13 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             {project.tags.length > 4 && (
               <div
                 style={{
-                  padding: "8px 16px",
-                  backgroundColor: "#2a2a2a",
-                  borderRadius: "8px",
-                  fontSize: 16,
-                  color: "#6b7280",
+                  padding: "10px 18px",
+                  backgroundColor: "#1e293b",
+                  borderRadius: "10px",
+                  fontSize: 18,
+                  color: "#64748b",
                   fontWeight: 500,
+                  display: "flex",
                 }}
               >
                 +{project.tags.length - 4}
@@ -230,62 +200,47 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           </div>
 
           {/* Stars */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "12px",
-              marginTop: "auto",
-            }}
-          >
+          <div style={{ display: "flex", alignItems: "center", gap: "16px", marginTop: "auto" }}>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "8px",
-                padding: "12px 20px",
-                backgroundColor: "rgba(251, 191, 36, 0.1)",
-                border: "1px solid rgba(251, 191, 36, 0.2)",
-                borderRadius: "10px",
+                gap: "12px",
+                padding: "16px 24px",
+                backgroundColor: "rgba(251, 191, 36, 0.15)",
+                border: "2px solid rgba(251, 191, 36, 0.3)",
+                borderRadius: "12px",
               }}
             >
-              <div style={{ fontSize: 28 }}>⭐</div>
-              <div
-                style={{
-                  fontSize: 32,
-                  fontWeight: 700,
-                  color: "#ffffff",
-                }}
-              >
+              <div style={{ fontSize: 36 }}>⭐</div>
+              <div style={{ fontSize: 42, fontWeight: 700, color: "#fff" }}>
                 {project.stars || 0}
               </div>
             </div>
-            <div style={{ fontSize: 18, color: "#6b7280" }}>stars</div>
+            <div style={{ fontSize: 24, color: "#64748b" }}>stars</div>
           </div>
 
-          {/* Footer: FOSSRadar branding */}
+          {/* Footer */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              marginTop: "30px",
+              marginTop: "40px",
               paddingTop: "30px",
-              borderTop: "1px solid #2a2a2a",
+              borderTop: "1px solid #1e293b",
             }}
           >
-            <div style={{ fontSize: 20, color: "#6b7280", fontWeight: 600 }}>
+            <div style={{ fontSize: 24, color: "#64748b", fontWeight: 600, display: "flex" }}>
               fossradar.in
             </div>
-            <div style={{ fontSize: 16, color: "#4b5563" }}>
+            <div style={{ fontSize: 20, color: "#475569", display: "flex" }}>
               India's Open Source Directory
             </div>
           </div>
         </div>
       </div>
     ),
-    {
-      ...size,
-    }
+    { width: 1200, height: 630 }
   );
 }
