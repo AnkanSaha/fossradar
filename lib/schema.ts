@@ -37,8 +37,8 @@ export const ProjectSchema = z.object({
     .max(160, "Description must be at most 160 characters"),
 
   website: z
-    .string()
-    .transform((val) => val === "" ? undefined : val)
+    .union([z.string(), z.undefined()])
+    .transform((val) => !val || val === "" ? undefined : val)
     .pipe(z.string().url("Website must be a valid URL").optional()),
 
   repo: z
@@ -49,8 +49,8 @@ export const ProjectSchema = z.object({
   license: z.string().min(1, "License is required"),
 
   logo: z
-    .string()
-    .transform((val) => val === "" ? undefined : val)
+    .union([z.string(), z.undefined()])
+    .transform((val) => !val || val === "" ? undefined : val)
     .pipe(
       z
         .string()
