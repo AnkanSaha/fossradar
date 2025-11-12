@@ -1,10 +1,10 @@
 "use client";
 
 import { UseFormReturn } from "react-hook-form";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { generateTOML } from "@/lib/toml-generator";
-import { Loader2, CheckCircle, FileText, Github } from "lucide-react";
+import { Loader2, CheckCircle, FileText, Github, AlertCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface Step5Props {
@@ -17,8 +17,25 @@ export function Step5ReviewSubmit({ form, onBack }: Step5Props) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [justAuthenticated, setJustAuthenticated] = useState(false);
 
   const formData = form.watch();
+
+  // Auto-submit after OAuth if user just authenticated
+  useEffect(() => {
+    if (typeof window !== "undefined" && session && !isSubmitting) {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("authenticated") === "true") {
+        setJustAuthenticated(true);
+        // Clean URL
+        window.history.replaceState({}, "", window.location.pathname);
+        // Auto-submit after a short delay
+        setTimeout(() => {
+          handleSubmit();
+        }, 500);
+      }
+    }
+  }, [session]);
 
   // Generate TOML preview
   const tomlPreview = useMemo(() => {
@@ -34,9 +51,11 @@ export function Step5ReviewSubmit({ form, onBack }: Step5Props) {
 
   const handleSubmit = async () => {
     if (!session) {
-      // Redirect to sign in
+      // Redirect to sign in with authenticated parameter
+      const callbackUrl = new URL(window.location.href);
+      callbackUrl.searchParams.set("authenticated", "true");
       await signIn("github", {
-        callbackUrl: window.location.href,
+        callbackUrl: callbackUrl.toString(),
       });
       return;
     }
@@ -64,13 +83,29 @@ export function Step5ReviewSubmit({ form, onBack }: Step5Props) {
 
       if (!response.ok) {
         if (data.requiresAuth) {
+          const callbackUrl = new URL(window.location.href);
+          callbackUrl.searchParams.set("authenticated", "true");
           await signIn("github", {
-            callbackUrl: window.location.href,
+            callbackUrl: callbackUrl.toString(),
           });
           return;
         }
+
+        // Show detailed validation errors
+        if (data.details) {
+          const errorMessages = data.details.map((issue: any) =>
+            `${issue.path.join(".")}: ${issue.message}`
+          ).join("\n");
+          throw new Error(`Validation failed:\n${errorMessages}`);
+        }
+
         throw new Error(data.error || "Failed to submit project");
       }
+
+      // Clear draft from localStorage on success
+      try {
+        localStorage.removeItem("fossradar_submission_draft");
+      } catch {}
 
       // Redirect to success page with PR URL
       router.push(`/submit/success?pr=${encodeURIComponent(data.prUrl)}`);
@@ -147,7 +182,16 @@ export function Step5ReviewSubmit({ form, onBack }: Step5Props) {
       </div>
 
       {/* Auth Status */}
-      {status === "loading" ? (
+      {justAuthenticated && session ? (
+        <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
+          <div className="flex items-center gap-2">
+            <Loader2 className="h-5 w-5 text-blue-600 dark:text-blue-400 animate-spin" />
+            <p className="text-sm text-blue-800 dark:text-blue-200">
+              Authentication successful! Submitting your project...
+            </p>
+          </div>
+        </div>
+      ) : status === "loading" ? (
         <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
           <p className="text-sm text-blue-800 dark:text-blue-200">
             Checking authentication status...
@@ -160,7 +204,11 @@ export function Step5ReviewSubmit({ form, onBack }: Step5Props) {
           </p>
           <button
             type="button"
-            onClick={() => signIn("github", { callbackUrl: window.location.href })}
+            onClick={() => {
+              const callbackUrl = new URL(window.location.href);
+              callbackUrl.searchParams.set("authenticated", "true");
+              signIn("github", { callbackUrl: callbackUrl.toString() });
+            }}
             className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200 text-sm font-medium transition-colors min-h-[48px]"
           >
             <Github className="h-4 w-4" />
@@ -181,7 +229,23 @@ export function Step5ReviewSubmit({ form, onBack }: Step5Props) {
       {/* Error Message */}
       {error && (
         <div className="p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
-          <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
+          <div className="flex items-start gap-2">
+            <AlertCircle className="h-5 w-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+            <div className="flex-1">
+              <p className="text-sm font-medium text-red-800 dark:text-red-200 mb-1">
+                {error.includes("\n") ? "Submission failed with errors:" : "Error"}
+              </p>
+              {error.includes("\n") ? (
+                <ul className="text-sm text-red-700 dark:text-red-300 list-disc list-inside space-y-1">
+                  {error.split("\n").filter(line => line.trim()).map((line, i) => (
+                    <li key={i} className="font-mono text-xs">{line}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
+              )}
+            </div>
+          </div>
         </div>
       )}
 
