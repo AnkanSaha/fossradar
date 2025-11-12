@@ -387,7 +387,35 @@ export async function createProjectPR(params: {
     : octokit;
 
   try {
-    // Get default branch ref
+    // Get authenticated user (for fork)
+    let userLogin: string | undefined;
+    let forkOwner = owner;
+
+    if (params.userToken) {
+      try {
+        const { data: user } = await userOctokit.rest.users.getAuthenticated();
+        userLogin = user.login;
+
+        // Check if user has a fork, if not create one
+        try {
+          await userOctokit.rest.repos.get({ owner: userLogin, repo });
+          forkOwner = userLogin;
+        } catch {
+          // Fork doesn't exist, create it
+          console.log(`Creating fork for user ${userLogin}`);
+          await userOctokit.rest.repos.createFork({ owner, repo });
+          forkOwner = userLogin;
+
+          // Wait a bit for fork to be created
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+      } catch (err) {
+        console.error("Error getting user or creating fork:", err);
+        // Fall back to main repo if fork creation fails
+      }
+    }
+
+    // Get default branch ref from upstream (main repo)
     const { data: defaultBranch } = await octokit.rest.repos.get({ owner, repo });
     const { data: ref } = await octokit.rest.git.getRef({
       owner,
@@ -395,17 +423,17 @@ export async function createProjectPR(params: {
       ref: `heads/${defaultBranch.default_branch}`,
     });
 
-    // Create new branch
+    // Create new branch in fork (or main repo if no user token)
     await userOctokit.rest.git.createRef({
-      owner,
+      owner: forkOwner,
       repo,
       ref: `refs/heads/${branch}`,
       sha: ref.object.sha,
     });
 
-    // Create TOML file
+    // Create TOML file in fork
     await userOctokit.rest.repos.createOrUpdateFileContents({
-      owner,
+      owner: forkOwner,
       repo,
       path: filePath,
       message: `Add project: ${params.slug}`,
@@ -417,7 +445,7 @@ export async function createProjectPR(params: {
     if (params.logo) {
       const logoPath = `public/logos/${params.slug}/${params.logo.filename}`;
       await userOctokit.rest.repos.createOrUpdateFileContents({
-        owner,
+        owner: forkOwner,
         repo,
         path: logoPath,
         message: `Add logo for project: ${params.slug}`,
@@ -426,7 +454,7 @@ export async function createProjectPR(params: {
       });
     }
 
-    // Create PR
+    // Create PR from fork to upstream
     const prBody = `## New Project Submission
 
 **Slug:** ${params.slug}
@@ -443,11 +471,13 @@ ${params.logo ? "- [ ] Logo file is valid and optimized" : ""}
 ---
 *This PR was automatically generated via the FOSSRadar.in submission form.*`;
 
+    // Create PR from fork branch to upstream main branch
+    const headRef = forkOwner === owner ? branch : `${forkOwner}:${branch}`;
     const { data: pr } = await userOctokit.rest.pulls.create({
-      owner,
+      owner, // upstream owner
       repo,
       title: `Add project: ${params.slug}`,
-      head: branch,
+      head: headRef, // fork:branch format
       base: defaultBranch.default_branch,
       body: prBody,
     });
@@ -455,10 +485,21 @@ ${params.logo ? "- [ ] Logo file is valid and optimized" : ""}
     return { url: pr.html_url, number: pr.number };
   } catch (error: any) {
     console.error("Error creating PR:", error);
+
     // Provide more specific error messages
+    if (error.status === 404) {
+      throw new Error("Repository not found. Please ensure you have access to create PRs.");
+    }
+    if (error.status === 403) {
+      throw new Error("Permission denied. Please ensure your GitHub account has the necessary permissions.");
+    }
     if (error.status === 422) {
+      if (error.message?.includes("fork")) {
+        throw new Error("Unable to create fork. Please try again or fork the repository manually.");
+      }
       throw new Error("A branch with this name already exists. Please try again.");
     }
-    throw error;
+
+    throw new Error(error.message || "Failed to create pull request. Please try again.");
   }
 }
