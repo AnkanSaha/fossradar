@@ -50,6 +50,7 @@ logo = "/logos/example-reference.svg"
 # Examples: "TypeScript", "Python", "JavaScript", "Go", "Rust", "Java", "C++", "Ruby", "PHP"
 # Tip: Use the language's official capitalization
 primary_lang = "Python"
+category = "content-media"
 
 # Project tags/categories (1-10 tags required)
 # Rules: Must be from the allowed tags list in data/tags.toml

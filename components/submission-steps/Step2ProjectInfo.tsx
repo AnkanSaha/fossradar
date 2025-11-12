@@ -3,6 +3,7 @@
 import { UseFormReturn } from "react-hook-form";
 import { generateSlug } from "@/lib/slug-generator";
 import { useEffect, useState } from "react";
+import categoriesData from "@/data/categories.json";
 
 interface Step2Props {
   form: UseFormReturn<any>;
@@ -22,6 +23,12 @@ const COMMON_LICENSES = [
   "MIT", "Apache-2.0", "GPL-3.0", "BSD-3-Clause", "ISC", "MPL-2.0",
   "AGPL-3.0", "LGPL-3.0", "GPL-2.0", "BSD-2-Clause", "Unlicense"
 ];
+
+const CATEGORIES = Object.entries(categoriesData.categories).map(([key, value]) => ({
+  key,
+  label: value.label,
+  description: value.description
+}));
 
 export function Step2ProjectInfo({ form, onNext, onBack }: Step2Props) {
   const [tagInput, setTagInput] = useState("");
@@ -80,7 +87,7 @@ export function Step2ProjectInfo({ form, onNext, onBack }: Step2Props) {
 
   const handleNext = () => {
     const errors = form.formState.errors;
-    if (errors.name || errors.slug || errors.short_desc || errors.tags || errors.primary_lang || errors.license) {
+    if (errors.name || errors.slug || errors.short_desc || errors.category || errors.tags || errors.primary_lang || errors.license) {
       alert("Please fill in all required fields correctly");
       return;
     }
@@ -193,6 +200,30 @@ export function Step2ProjectInfo({ form, onNext, onBack }: Step2Props) {
         {form.formState.errors.license && (
           <p className="text-sm text-red-600 dark:text-red-400 mt-1">
             {form.formState.errors.license.message as string}
+          </p>
+        )}
+      </div>
+
+      {/* Category */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Category <span className="text-red-500">*</span>
+          <span className="text-xs text-gray-500 ml-2">(Select one)</span>
+        </label>
+        <select
+          {...form.register("category")}
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[48px]"
+        >
+          <option value="">Select a category</option>
+          {CATEGORIES.map(cat => (
+            <option key={cat.key} value={cat.key}>
+              {cat.label} - {cat.description}
+            </option>
+          ))}
+        </select>
+        {form.formState.errors.category && (
+          <p className="text-sm text-red-600 dark:text-red-400 mt-1">
+            {form.formState.errors.category.message as string}
           </p>
         )}
       </div>

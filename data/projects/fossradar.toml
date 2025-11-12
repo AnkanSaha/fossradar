@@ -8,6 +8,7 @@ logo = "/logos/fossradar.svg"
 added_at = "2025-11-09"
 
 primary_lang = "TypeScript"
+category = "web-applications"
 tags = ["web", "nextjs", "typescript", "cms", "frontend"]
 looking_for_contributors = true
 location_city = "Kolkata"

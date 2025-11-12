@@ -3,7 +3,7 @@
 import fs from "fs";
 import path from "path";
 import { loadAllProjects, getProjectFiles } from "../lib/projects";
-import { validateTags, validateLicense } from "../lib/allowlists";
+import { validateTags, validateLicense, validateCategory } from "../lib/allowlists";
 import { hasFossradarTopic, isRepoAccessible } from "../lib/github";
 
 interface ValidationError {
@@ -52,6 +52,14 @@ async function validateProjects() {
   for (const project of projects) {
     const filename = project.filename;
     console.log(`Checking ${filename}...`);
+
+    // Validate category
+    if (!validateCategory(project.category)) {
+      addError(
+        filename,
+        `Invalid category: ${project.category}. Must be from categories.json allowlist.`
+      );
+    }
 
     // Validate tags
     const tagValidation = validateTags(project.tags);

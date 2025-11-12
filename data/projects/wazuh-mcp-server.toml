@@ -8,6 +8,7 @@ added_at = "2025-11-09"
 website = "https://github.com/gensecaihq/Wazuh-MCP-Server"
 logo = "/logos/wazuh-mcp-server.svg"
 primary_lang = "Python"
+category = "security-privacy"
 tags = ["security", "python", "devops", "monitoring", "ai"]
 looking_for_contributors = true
 location_city = "Kolkata"

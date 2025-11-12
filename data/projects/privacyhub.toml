@@ -6,6 +6,7 @@ license = "Apache-2.0"
 added_at = "2025-11-09"
 
 website = "https://github.com/privacypriority/privacyhub"
+category = "security-privacy"
 logo = "/logos/privacyhub.svg"
 primary_lang = "TypeScript"
 tags = ["web", "security", "ai", "typescript", "nextjs"]

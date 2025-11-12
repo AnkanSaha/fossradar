@@ -64,6 +64,8 @@ export const ProjectSchema = z.object({
 
   primary_lang: z.string().min(1, "Primary language is required"),
 
+  category: z.string().min(1, "Category is required"),
+
   tags: z
     .array(z.string())
     .min(1, "At least one tag is required")
@@ -106,6 +108,7 @@ export const SearchIndexItemSchema = z.object({
   slug: z.string(),
   name: z.string(),
   short_desc: z.string(),
+  category: z.string(),
   tags: z.array(z.string()),
   stars: z.number().default(0),
   primary_lang: z.string(),

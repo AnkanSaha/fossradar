@@ -8,6 +8,7 @@ added_at = "2025-11-09"
 website = "https://github.com/gensecaihq/Ubuntu-Security-Hardening-Script"
 logo = "/logos/ubuntu-security-hardening.svg"
 primary_lang = "Shell"
+category = "system-utilities"
 tags = ["security", "devops", "automation", "cli"]
 looking_for_contributors = true
 location_city = "Kolkata"

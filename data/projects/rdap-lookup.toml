@@ -8,6 +8,7 @@ added_at = "2025-11-09"
 website = "https://github.com/wbfoss/rdap-lookup"
 logo = "/logos/rdap-lookup.svg"
 primary_lang = "JavaScript"
+category = "developer-tools"
 tags = ["web", "security", "devtools", "nextjs", "api"]
 looking_for_contributors = true
 location_city = "Kolkata"

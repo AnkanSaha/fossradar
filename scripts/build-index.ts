@@ -17,6 +17,7 @@ async function buildIndex() {
       slug: project.slug,
       name: project.name,
       short_desc: project.short_desc,
+      category: project.category,
       tags: project.tags,
       stars: project.stars || 0,
       primary_lang: project.primary_lang,
