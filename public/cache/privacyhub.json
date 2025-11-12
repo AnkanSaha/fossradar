@@ -1,0 +1,58 @@
+{
+  "slug": "privacyhub",
+  "contributors": [
+    {
+      "login": "alokemajumder",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26596583?v=4",
+      "html_url": "https://github.com/alokemajumder",
+      "contributions": 168
+    },
+    {
+      "login": "gensecai-dev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/216218359?v=4",
+      "html_url": "https://github.com/gensecai-dev",
+      "contributions": 54
+    },
+    {
+      "login": "AnkanSaha2025",
+      "avatar_url": "https://avatars.githubusercontent.com/u/220142936?v=4",
+      "html_url": "https://github.com/AnkanSaha2025",
+      "contributions": 9
+    },
+    {
+      "login": "AnkanSaha",
+      "avatar_url": "https://avatars.githubusercontent.com/u/93839804?v=4",
+      "html_url": "https://github.com/AnkanSaha",
+      "contributions": 1
+    },
+    {
+      "login": "opticSquid",
+      "avatar_url": "https://avatars.githubusercontent.com/u/59192460?v=4",
+      "html_url": "https://github.com/opticSquid",
+      "contributions": 1
+    }
+  ],
+  "installation": {
+    "type": "npm",
+    "command": "npm install privacyhub"
+  },
+  "documentation": {},
+  "stats": {
+    "forks": 4,
+    "watchers": 1,
+    "open_issues": 2,
+    "size": 1120,
+    "created_at": "2025-03-01T05:57:12Z",
+    "updated_at": "2025-11-04T06:25:37Z",
+    "pushed_at": "2025-11-01T21:22:00Z",
+    "has_wiki": true,
+    "has_pages": false,
+    "has_discussions": false
+  },
+  "languages": {
+    "TypeScript": 589942,
+    "CSS": 5975,
+    "JavaScript": 605
+  },
+  "updated_at": "2025-11-12T03:17:07.572Z"
+}

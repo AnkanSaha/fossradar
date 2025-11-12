@@ -78,7 +78,7 @@ location_indian_state = "West Bengal"
 
 # GitHub star count (auto-updated nightly by enrichment script)
 # Note: You can provide an initial value, but it will be overwritten
-stars = 5
+stars = 6
 
 # Count of issues labeled "good first issue" (auto-updated nightly)
 # Note: Automatically detected from GitHub

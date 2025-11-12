@@ -1,0 +1,54 @@
+{
+  "slug": "fossradar",
+  "contributors": [
+    {
+      "login": "wbfossadmin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204844381?v=4",
+      "html_url": "https://github.com/wbfossadmin",
+      "contributions": 103
+    },
+    {
+      "login": "dependabot[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/29110?v=4",
+      "html_url": "https://github.com/apps/dependabot",
+      "contributions": 9
+    },
+    {
+      "login": "AnkanSaha",
+      "avatar_url": "https://avatars.githubusercontent.com/u/93839804?v=4",
+      "html_url": "https://github.com/AnkanSaha",
+      "contributions": 1
+    },
+    {
+      "login": "hoichoidev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87117724?v=4",
+      "html_url": "https://github.com/hoichoidev",
+      "contributions": 1
+    }
+  ],
+  "installation": {
+    "type": "npm",
+    "command": "npm install fossradar"
+  },
+  "documentation": {
+    "docs_url": "https://github.com/wbfoss/fossradar/tree/main/docs"
+  },
+  "stats": {
+    "forks": 2,
+    "watchers": 0,
+    "open_issues": 1,
+    "size": 536,
+    "created_at": "2025-11-09T05:40:32Z",
+    "updated_at": "2025-11-11T17:22:44Z",
+    "pushed_at": "2025-11-11T14:29:53Z",
+    "has_wiki": false,
+    "has_pages": false,
+    "has_discussions": true
+  },
+  "languages": {
+    "TypeScript": 297789,
+    "JavaScript": 561,
+    "CSS": 242
+  },
+  "updated_at": "2025-11-12T03:17:05.180Z"
+}
