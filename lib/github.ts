@@ -393,25 +393,37 @@ export async function createProjectPR(params: {
 
     if (params.userToken) {
       try {
+        console.log("Getting authenticated user...");
         const { data: user } = await userOctokit.rest.users.getAuthenticated();
         userLogin = user.login;
+        console.log(`Authenticated as: ${userLogin}`);
 
         // Check if user has a fork, if not create one
         try {
+          console.log(`Checking for existing fork: ${userLogin}/${repo}`);
           await userOctokit.rest.repos.get({ owner: userLogin, repo });
           forkOwner = userLogin;
-        } catch {
+          console.log("Fork already exists");
+        } catch (forkCheckError: any) {
           // Fork doesn't exist, create it
-          console.log(`Creating fork for user ${userLogin}`);
-          await userOctokit.rest.repos.createFork({ owner, repo });
-          forkOwner = userLogin;
+          console.log(`Fork not found. Creating fork for user ${userLogin}...`);
+          console.log(`Forking from: ${owner}/${repo}`);
 
-          // Wait a bit for fork to be created
-          await new Promise(resolve => setTimeout(resolve, 2000));
+          try {
+            await userOctokit.rest.repos.createFork({ owner, repo });
+            forkOwner = userLogin;
+            console.log("Fork created successfully");
+
+            // Wait a bit for fork to be created
+            await new Promise(resolve => setTimeout(resolve, 3000));
+          } catch (forkError: any) {
+            console.error("Error creating fork:", forkError.status, forkError.message);
+            throw new Error(`Failed to create fork: ${forkError.message}`);
+          }
         }
-      } catch (err) {
-        console.error("Error getting user or creating fork:", err);
-        // Fall back to main repo if fork creation fails
+      } catch (err: any) {
+        console.error("Error in fork workflow:", err.status, err.message, err);
+        throw err;
       }
     }
 
