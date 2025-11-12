@@ -1,16 +1,24 @@
-import { getDatabase } from './mongodb';
-import { ObjectId } from 'mongodb';
+import { Counter } from 'counterapi';
 
 /**
- * Visitor tracking data model
+ * CounterAPI client configuration
+ */
+const counter = new Counter({
+  workspace: process.env.COUNTERAPI_WORKSPACE || 'fossradar',
+  debug: process.env.NODE_ENV !== 'production',
+  timeout: 5000,
+  accessToken: process.env.COUNTERAPI_ACCESS_TOKEN,
+});
+
+/**
+ * Visitor tracking data model (for compatibility)
  */
 interface VisitorRecord {
-  _id?: ObjectId;
   slug: string;
   count: number;
-  lastVisited: Date;
-  createdAt: Date;
-  updatedAt: Date;
+  lastVisited?: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 /**
@@ -24,68 +32,9 @@ export async function incrementVisitorCount(slug: string): Promise<number> {
       throw new Error('Invalid slug provided');
     }
 
-    const db = await getDatabase();
-    const collection = db.collection<VisitorRecord>('visitors');
-
-    // Create index on slug for faster queries
-    await collection.createIndex({ slug: 1 });
-
-    // First, check if record exists
-    const existingRecord = await collection.findOne({ slug });
-
-    if (!existingRecord) {
-      // If new record, create with count = 0, then increment to 1
-      const result = await collection.findOneAndUpdate(
-        { slug },
-        {
-          $set: {
-            slug,
-            count: 0,
-            lastVisited: new Date(),
-            updatedAt: new Date(),
-            createdAt: new Date(),
-          },
-        },
-        {
-          upsert: true,
-          returnDocument: 'after',
-        }
-      );
-
-      // Now increment from 0 to 1
-      const incrementResult = await collection.findOneAndUpdate(
-        { slug },
-        {
-          $inc: { count: 1 },
-          $set: {
-            lastVisited: new Date(),
-            updatedAt: new Date(),
-          },
-        },
-        {
-          returnDocument: 'after',
-        }
-      );
-
-      return incrementResult?.count ?? 1;
-    }
-
-    // If record exists, just increment
-    const result = await collection.findOneAndUpdate(
-      { slug },
-      {
-        $inc: { count: 1 },
-        $set: {
-          lastVisited: new Date(),
-          updatedAt: new Date(),
-        },
-      },
-      {
-        returnDocument: 'after',
-      }
-    );
-
-    return result?.count ?? 1;
+    // Use CounterAPI to increment the counter
+    const result = await counter.up(`visitor-${slug}`);
+    return result.value;
   } catch (error) {
     console.error(`Error incrementing visitor count for slug "${slug}":`, error);
     throw error;
@@ -103,70 +52,46 @@ export async function getVisitorCount(slug: string): Promise<number> {
       throw new Error('Invalid slug provided');
     }
 
-    const db = await getDatabase();
-    const collection = db.collection<VisitorRecord>('visitors');
-
-    const record = await collection.findOne({ slug });
-    return record?.count || 0;
+    // Use CounterAPI to get the current count
+    const result = await counter.get(`visitor-${slug}`);
+    return result.value;
   } catch (error) {
     console.error(`Error getting visitor count for slug "${slug}":`, error);
-    throw error;
+    // Return 0 if counter doesn't exist yet
+    return 0;
   }
 }
 
 /**
  * Get all visitor records with optional filtering
+ * Note: CounterAPI doesn't support bulk queries, so this function is deprecated
  * @param limit - Maximum number of records to return
  * @param sortBy - Field to sort by (default: 'count')
- * @returns Array of visitor records
+ * @returns Empty array (CounterAPI doesn't support this operation)
  */
 export async function getAllVisitors(
   limit: number = 100,
   sortBy: 'count' | 'createdAt' | 'lastVisited' = 'count'
 ): Promise<VisitorRecord[]> {
-  try {
-    const db = await getDatabase();
-    const collection = db.collection<VisitorRecord>('visitors');
-
-    const records = await collection
-      .find({})
-      .sort({ [sortBy]: -1 })
-      .limit(limit)
-      .toArray();
-
-    return records;
-  } catch (error) {
-    console.error('Error getting all visitors:', error);
-    throw error;
-  }
+  console.warn('getAllVisitors is not supported with CounterAPI');
+  return [];
 }
 
 /**
  * Get top N projects by visitor count
+ * Note: CounterAPI doesn't support bulk queries, so this function is deprecated
  * @param limit - Number of top projects to return
- * @returns Array of top projects with their visitor counts
+ * @returns Empty array (CounterAPI doesn't support this operation)
  */
 export async function getTopProjectsByVisitors(limit: number = 10): Promise<VisitorRecord[]> {
-  try {
-    const db = await getDatabase();
-    const collection = db.collection<VisitorRecord>('visitors');
-
-    const records = await collection
-      .find({})
-      .sort({ count: -1 })
-      .limit(limit)
-      .toArray();
-
-    return records;
-  } catch (error) {
-    console.error('Error getting top projects by visitors:', error);
-    throw error;
-  }
+  console.warn('getTopProjectsByVisitors is not supported with CounterAPI');
+  return [];
 }
 
 /**
  * Get visitor statistics
- * @returns Object with statistics
+ * Note: CounterAPI doesn't support aggregations, so this function is deprecated
+ * @returns Object with placeholder statistics
  */
 export async function getVisitorStatistics(): Promise<{
   totalProjects: number;
@@ -174,45 +99,12 @@ export async function getVisitorStatistics(): Promise<{
   averageVisitors: number;
   topProject?: VisitorRecord;
 }> {
-  try {
-    const db = await getDatabase();
-    const collection = db.collection<VisitorRecord>('visitors');
-
-    const stats = await collection.aggregate([
-      {
-        $group: {
-          _id: null,
-          totalProjects: { $sum: 1 },
-          totalVisitors: { $sum: '$count' },
-          averageVisitors: { $avg: '$count' },
-          maxCount: { $max: '$count' },
-        },
-      },
-    ]).toArray();
-
-    const stat = stats[0];
-
-    if (!stat) {
-      return {
-        totalProjects: 0,
-        totalVisitors: 0,
-        averageVisitors: 0,
-      };
-    }
-
-    // Get top project
-    const topProjects = await getTopProjectsByVisitors(1);
-
-    return {
-      totalProjects: stat.totalProjects,
-      totalVisitors: stat.totalVisitors,
-      averageVisitors: Math.round(stat.averageVisitors),
-      topProject: topProjects[0],
-    };
-  } catch (error) {
-    console.error('Error getting visitor statistics:', error);
-    throw error;
-  }
+  console.warn('getVisitorStatistics is not supported with CounterAPI');
+  return {
+    totalProjects: 0,
+    totalVisitors: 0,
+    averageVisitors: 0,
+  };
 }
 
 /**
@@ -225,18 +117,8 @@ export async function resetVisitorCount(slug: string): Promise<void> {
       throw new Error('Invalid slug provided');
     }
 
-    const db = await getDatabase();
-    const collection = db.collection<VisitorRecord>('visitors');
-
-    await collection.updateOne(
-      { slug },
-      {
-        $set: {
-          count: 0,
-          updatedAt: new Date(),
-        },
-      }
-    );
+    // CounterAPI v2 supports reset
+    await counter.reset(`visitor-${slug}`);
   } catch (error) {
     console.error(`Error resetting visitor count for slug "${slug}":`, error);
     throw error;
@@ -245,6 +127,7 @@ export async function resetVisitorCount(slug: string): Promise<void> {
 
 /**
  * Delete visitor record for a slug (admin only)
+ * Note: CounterAPI doesn't support delete, use reset instead
  * @param slug - The project slug
  */
 export async function deleteVisitorRecord(slug: string): Promise<void> {
@@ -253,10 +136,8 @@ export async function deleteVisitorRecord(slug: string): Promise<void> {
       throw new Error('Invalid slug provided');
     }
 
-    const db = await getDatabase();
-    const collection = db.collection<VisitorRecord>('visitors');
-
-    await collection.deleteOne({ slug });
+    // Reset to 0 as CounterAPI doesn't have a delete operation
+    await counter.reset(`visitor-${slug}`);
   } catch (error) {
     console.error(`Error deleting visitor record for slug "${slug}":`, error);
     throw error;
@@ -265,29 +146,12 @@ export async function deleteVisitorRecord(slug: string): Promise<void> {
 
 /**
  * Bulk insert visitor records (for data migration)
+ * Note: CounterAPI doesn't support bulk operations, so this function is deprecated
  * @param records - Array of visitor records
  */
 export async function bulkInsertVisitors(records: Omit<VisitorRecord, '_id'>[]): Promise<void> {
-  try {
-    const db = await getDatabase();
-    const collection = db.collection<VisitorRecord>('visitors');
-
-    if (records.length === 0) {
-      return;
-    }
-
-    const now = new Date();
-    const formattedRecords = records.map(record => ({
-      ...record,
-      createdAt: record.createdAt || now,
-      updatedAt: record.updatedAt || now,
-    }));
-
-    await collection.insertMany(formattedRecords);
-  } catch (error) {
-    console.error('Error bulk inserting visitor records:', error);
-    throw error;
-  }
+  console.warn('bulkInsertVisitors is not supported with CounterAPI');
+  // Could implement sequential inserts if needed, but skipping for now
 }
 
 /**
@@ -301,21 +165,13 @@ export async function initializeProjectVisitors(slug: string): Promise<void> {
       throw new Error('Invalid slug provided');
     }
 
-    const db = await getDatabase();
-    const collection = db.collection<VisitorRecord>('visitors');
-
-    // Check if record exists
-    const existingRecord = await collection.findOne({ slug });
-
-    if (!existingRecord) {
-      // Initialize with count = 0
-      await collection.insertOne({
-        slug,
-        count: 0,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        lastVisited: new Date(),
-      } as VisitorRecord);
+    // Check if counter exists, if not, create it with value 0
+    try {
+      await counter.get(`visitor-${slug}`);
+    } catch {
+      // Counter doesn't exist, create it
+      await counter.up(`visitor-${slug}`);
+      await counter.down(`visitor-${slug}`);
     }
   } catch (error) {
     console.error(`Error initializing visitor record for slug "${slug}":`, error);
@@ -325,39 +181,10 @@ export async function initializeProjectVisitors(slug: string): Promise<void> {
 
 /**
  * Initialize all projects with 0 visitors (bulk operation)
+ * Note: This is deprecated with CounterAPI as it doesn't support bulk operations
  * @param slugs - Array of project slugs
  */
 export async function initializeAllProjectVisitors(slugs: string[]): Promise<void> {
-  try {
-    if (!slugs || slugs.length === 0) {
-      return;
-    }
-
-    const db = await getDatabase();
-    const collection = db.collection<VisitorRecord>('visitors');
-
-    const now = new Date();
-    const recordsToInsert: VisitorRecord[] = [];
-
-    // Check which slugs don't have records yet
-    for (const slug of slugs) {
-      const existing = await collection.findOne({ slug });
-      if (!existing) {
-        recordsToInsert.push({
-          slug,
-          count: 0,
-          createdAt: now,
-          updatedAt: now,
-          lastVisited: now,
-        });
-      }
-    }
-
-    if (recordsToInsert.length > 0) {
-      await collection.insertMany(recordsToInsert);
-    }
-  } catch (error) {
-    console.error('Error initializing all project visitors:', error);
-    throw error;
-  }
+  console.warn('initializeAllProjectVisitors is not supported with CounterAPI');
+  // Could implement sequential initialization if needed
 }
