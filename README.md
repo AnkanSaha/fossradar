@@ -201,6 +201,7 @@ added_at = "2025-11-12"
 website = "https://yourproject.com"
 logo = "/logos/your-project.svg"
 primary_lang = "TypeScript"
+category = "web-applications"  # Required: Choose from data/categories.json
 tags = ["web", "tools", "typescript"]
 looking_for_contributors = true
 
@@ -242,12 +243,29 @@ export const metadata: Metadata = {
 
 ### Data Schema
 
-**Tags/Categories** (`data/tags.toml`)
-```toml
-[tags.web]
-label = "Web Development"
-description = "Web apps and frameworks"
+**Categories** (`data/categories.json`) - **Main classification**
+```json
+{
+  "categories": {
+    "web-applications": {
+      "label": "Web Applications",
+      "description": "Full-stack web apps, SaaS platforms",
+      "icon": "globe"
+    }
+  }
+}
 ```
+Each entry must select exactly **one** category. Customize for your directory theme:
+- **Open Source Projects**: developer-tools, libraries-frameworks, ai-ml, etc.
+- **Privacy Tools**: security-privacy, networking (VPN), system-utilities
+- **Startup Directory**: web-applications, mobile-applications, automation-productivity
+- **Dev Tools Catalog**: developer-tools, infrastructure-devops, content-media
+
+**Tags** (`data/tags.toml`) - **Secondary attributes**
+```toml
+tags = ["web", "nextjs", "typescript", "cms"]
+```
+Tags provide fine-grained filtering within categories (1-10 tags per entry).
 
 **Entry Schema** (`lib/schema.ts`)
 - Customize required/optional fields
