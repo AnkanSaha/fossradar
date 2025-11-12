@@ -10,8 +10,22 @@ export interface LicensesConfig {
   licenses: string[];
 }
 
+export interface CategoriesConfig {
+  categories: Record<string, {
+    label: string;
+    description: string;
+    icon: string;
+  }>;
+  _meta?: {
+    version: string;
+    description: string;
+    usage: string;
+  };
+}
+
 let tagsCache: Set<string> | null = null;
 let licensesCache: Set<string> | null = null;
+let categoriesCache: Map<string, { label: string; description: string; icon: string }> | null = null;
 
 export function loadTags(): Set<string> {
   if (tagsCache) return tagsCache;
@@ -48,4 +62,25 @@ export function validateTags(tags: string[]): { valid: boolean; invalid: string[
 export function validateLicense(license: string): boolean {
   const allowedLicenses = loadLicenses();
   return allowedLicenses.has(license);
+}
+
+export function loadCategories(): Map<string, { label: string; description: string; icon: string }> {
+  if (categoriesCache) return categoriesCache;
+
+  const categoriesPath = path.join(process.cwd(), "data", "categories.json");
+  const content = fs.readFileSync(categoriesPath, "utf-8");
+  const parsed = JSON.parse(content) as CategoriesConfig;
+
+  categoriesCache = new Map(Object.entries(parsed.categories));
+  return categoriesCache;
+}
+
+export function validateCategory(category: string): boolean {
+  const allowedCategories = loadCategories();
+  return allowedCategories.has(category);
+}
+
+export function getCategoryKeys(): string[] {
+  const categories = loadCategories();
+  return Array.from(categories.keys());
 }

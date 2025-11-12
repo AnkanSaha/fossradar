@@ -37,8 +37,8 @@ export const ProjectSchema = z.object({
     .max(160, "Description must be at most 160 characters"),
 
   website: z
-    .string()
-    .transform((val) => val === "" ? undefined : val)
+    .union([z.string(), z.undefined()])
+    .transform((val) => !val || val === "" ? undefined : val)
     .pipe(z.string().url("Website must be a valid URL").optional()),
 
   repo: z
@@ -49,8 +49,8 @@ export const ProjectSchema = z.object({
   license: z.string().min(1, "License is required"),
 
   logo: z
-    .string()
-    .transform((val) => val === "" ? undefined : val)
+    .union([z.string(), z.undefined()])
+    .transform((val) => !val || val === "" ? undefined : val)
     .pipe(
       z
         .string()
@@ -63,6 +63,8 @@ export const ProjectSchema = z.object({
     .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format"),
 
   primary_lang: z.string().min(1, "Primary language is required"),
+
+  category: z.string().min(1, "Category is required"),
 
   tags: z
     .array(z.string())
@@ -106,6 +108,7 @@ export const SearchIndexItemSchema = z.object({
   slug: z.string(),
   name: z.string(),
   short_desc: z.string(),
+  category: z.string(),
   tags: z.array(z.string()),
   stars: z.number().default(0),
   primary_lang: z.string(),

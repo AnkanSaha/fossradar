@@ -50,6 +50,7 @@ logo = "/logos/example-reference.svg"
 # Examples: "TypeScript", "Python", "JavaScript", "Go", "Rust", "Java", "C++", "Ruby", "PHP"
 # Tip: Use the language's official capitalization
 primary_lang = "Python"
+category = "content-media"
 
 # Project tags/categories (1-10 tags required)
 # Rules: Must be from the allowed tags list in data/tags.toml
@@ -78,7 +79,7 @@ location_indian_state = "West Bengal"
 
 # GitHub star count (auto-updated nightly by enrichment script)
 # Note: You can provide an initial value, but it will be overwritten
-stars = 5
+stars = 6
 
 # Count of issues labeled "good first issue" (auto-updated nightly)
 # Note: Automatically detected from GitHub

@@ -1,0 +1,94 @@
+{
+  "categories": {
+    "developer-tools": {
+      "label": "Developer Tools",
+      "description": "Tools for developers - IDEs, editors, CLI tools, debugging, testing",
+      "icon": "code"
+    },
+    "web-applications": {
+      "label": "Web Applications",
+      "description": "Full-stack web apps, SaaS platforms, web services",
+      "icon": "globe"
+    },
+    "mobile-applications": {
+      "label": "Mobile Applications",
+      "description": "Android and iOS applications, cross-platform mobile apps",
+      "icon": "smartphone"
+    },
+    "libraries-frameworks": {
+      "label": "Libraries & Frameworks",
+      "description": "Software libraries, frameworks, SDKs, and packages",
+      "icon": "package"
+    },
+    "infrastructure-devops": {
+      "label": "Infrastructure & DevOps",
+      "description": "Cloud tools, containers, orchestration, CI/CD, monitoring",
+      "icon": "server"
+    },
+    "data-analytics": {
+      "label": "Data & Analytics",
+      "description": "Data processing, analytics, visualization, databases, ETL",
+      "icon": "database"
+    },
+    "ai-ml": {
+      "label": "AI & Machine Learning",
+      "description": "Machine learning models, AI tools, NLP, computer vision",
+      "icon": "brain"
+    },
+    "security-privacy": {
+      "label": "Security & Privacy",
+      "description": "Security tools, privacy software, encryption, authentication",
+      "icon": "shield"
+    },
+    "content-media": {
+      "label": "Content & Media",
+      "description": "CMS, blogging, video/audio processing, graphics tools",
+      "icon": "image"
+    },
+    "education-documentation": {
+      "label": "Education & Documentation",
+      "description": "Learning platforms, courses, documentation tools, tutorials",
+      "icon": "book"
+    },
+    "automation-productivity": {
+      "label": "Automation & Productivity",
+      "description": "Workflow automation, productivity tools, task management",
+      "icon": "zap"
+    },
+    "iot-embedded": {
+      "label": "IoT & Embedded",
+      "description": "Internet of Things, embedded systems, hardware projects",
+      "icon": "cpu"
+    },
+    "blockchain-crypto": {
+      "label": "Blockchain & Crypto",
+      "description": "Blockchain, cryptocurrency, Web3, smart contracts",
+      "icon": "link"
+    },
+    "gaming": {
+      "label": "Gaming",
+      "description": "Game engines, gaming tools, game development",
+      "icon": "gamepad"
+    },
+    "networking": {
+      "label": "Networking",
+      "description": "Network tools, protocols, VPN, proxies, DNS",
+      "icon": "network"
+    },
+    "system-utilities": {
+      "label": "System Utilities",
+      "description": "Operating system utilities, system tools, file management",
+      "icon": "settings"
+    },
+    "other": {
+      "label": "Other",
+      "description": "Projects that don't fit into other categories",
+      "icon": "folder"
+    }
+  },
+  "_meta": {
+    "version": "1.0.0",
+    "description": "Category definitions for Radar directory platform. Customize these categories based on your directory theme.",
+    "usage": "Each project must select exactly one category from this list."
+  }
+}

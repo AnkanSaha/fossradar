@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ProjectSubmissionSchema } from "@/lib/schema";
 import { FormStepIndicator } from "./FormStepIndicator";
+import { Step0Auth } from "./submission-steps/Step0Auth";
+import { Step1SelectRepo } from "./submission-steps/Step1SelectRepo";
 import { Step1RepositoryDetails } from "./submission-steps/Step1RepositoryDetails";
 import { Step2ProjectInfo } from "./submission-steps/Step2ProjectInfo";
 import { Step3LocationConnection } from "./submission-steps/Step3LocationConnection";
@@ -12,7 +14,9 @@ import { Step4OptionalDetails } from "./submission-steps/Step4OptionalDetails";
 import { Step5ReviewSubmit } from "./submission-steps/Step5ReviewSubmit";
 
 const STEPS = [
-  { title: "Repository", description: "GitHub URL & validation" },
+  { title: "Sign In", description: "GitHub authentication" },
+  { title: "Select Repo", description: "Choose your repository" },
+  { title: "Validate", description: "Fetch repository details" },
   { title: "Project Info", description: "Name, description, tags" },
   { title: "Location", description: "City, state, connection" },
   { title: "Optional", description: "Logo, website, notes" },
@@ -22,7 +26,7 @@ const STEPS = [
 const STORAGE_KEY = "fossradar_submission_draft";
 
 export function ProjectSubmissionForm() {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
 
   const form = useForm({
     resolver: zodResolver(ProjectSubmissionSchema),
@@ -90,7 +94,7 @@ export function ProjectSubmissionForm() {
   };
 
   const prevStep = () => {
-    if (currentStep > 1) {
+    if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -99,26 +103,32 @@ export function ProjectSubmissionForm() {
   return (
     <div className="max-w-3xl mx-auto">
       <FormStepIndicator
-        currentStep={currentStep}
+        currentStep={currentStep + 1}
         totalSteps={STEPS.length}
         steps={STEPS}
       />
 
       <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 p-6 sm:p-8">
         <form>
+          {currentStep === 0 && (
+            <Step0Auth onNext={nextStep} />
+          )}
           {currentStep === 1 && (
-            <Step1RepositoryDetails form={form} onNext={nextStep} />
+            <Step1SelectRepo form={form} onNext={nextStep} onBack={prevStep} />
           )}
           {currentStep === 2 && (
-            <Step2ProjectInfo form={form} onNext={nextStep} onBack={prevStep} />
+            <Step1RepositoryDetails form={form} onNext={nextStep} onBack={prevStep} />
           )}
           {currentStep === 3 && (
-            <Step3LocationConnection form={form} onNext={nextStep} onBack={prevStep} />
+            <Step2ProjectInfo form={form} onNext={nextStep} onBack={prevStep} />
           )}
           {currentStep === 4 && (
-            <Step4OptionalDetails form={form} onNext={nextStep} onBack={prevStep} />
+            <Step3LocationConnection form={form} onNext={nextStep} onBack={prevStep} />
           )}
           {currentStep === 5 && (
+            <Step4OptionalDetails form={form} onNext={nextStep} onBack={prevStep} />
+          )}
+          {currentStep === 6 && (
             <Step5ReviewSubmit form={form} onBack={prevStep} />
           )}
         </form>

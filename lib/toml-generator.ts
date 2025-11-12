@@ -25,8 +25,9 @@ export function generateTOML(data: ProjectSubmission): string {
   lines.push(`added_at = "${data.added_at}"`);
   lines.push("");
 
-  // Language and tags
+  // Language, category, and tags
   lines.push(`primary_lang = "${data.primary_lang}"`);
+  lines.push(`category = "${data.category}"`);
   lines.push(`tags = [${data.tags.map(tag => `"${tag}"`).join(", ")}]`);
   lines.push(`looking_for_contributors = ${data.looking_for_contributors}`);
   lines.push(`location_city = "${data.location_city}"`);

@@ -1,0 +1,43 @@
+{
+  "slug": "video-subtitle-generator",
+  "contributors": [
+    {
+      "login": "alokemajumder",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26596583?v=4",
+      "html_url": "https://github.com/alokemajumder",
+      "contributions": 29
+    },
+    {
+      "login": "hoichoidev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87117724?v=4",
+      "html_url": "https://github.com/hoichoidev",
+      "contributions": 1
+    }
+  ],
+  "installation": {
+    "type": "git",
+    "command": "git clone https://github.com/hoichoi-opensource/video-subtitle-generator"
+  },
+  "documentation": {
+    "changelog_url": "https://github.com/hoichoi-opensource/video-subtitle-generator/blob/main/CHANGELOG.md"
+  },
+  "stats": {
+    "forks": 1,
+    "watchers": 0,
+    "open_issues": 0,
+    "size": 338,
+    "created_at": "2025-06-19T12:55:10Z",
+    "updated_at": "2025-11-10T18:12:54Z",
+    "pushed_at": "2025-11-10T06:50:43Z",
+    "has_wiki": false,
+    "has_pages": false,
+    "has_discussions": false
+  },
+  "languages": {
+    "Python": 436825,
+    "Shell": 11337,
+    "Dockerfile": 3198,
+    "Batchfile": 3132
+  },
+  "updated_at": "2025-11-12T08:13:11.688Z"
+}

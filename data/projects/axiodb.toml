@@ -6,6 +6,7 @@ website = "https://axiodb.in"
 logo = ""
 added_at = "2025-11-11"
 primary_lang = "TypeScript"
+category = "data-analytics"
 license = "MIT"
 tags = ["database", "json", "nosql", "dbms", "open-source", "lightweight", "scalable"]
 location_city = "Kolkata"
@@ -13,7 +14,7 @@ location_indian_state = "West Bengal"
 looking_for_contributors = true
 
 good_first_issues = 0
-stars = 11
+stars = 13
 verified = false
 
 # India Connection

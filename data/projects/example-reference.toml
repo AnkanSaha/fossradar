@@ -63,6 +63,29 @@ logo = "/logos/example-reference.svg"
 # Tip: Use the language's official capitalization
 primary_lang = "TypeScript"
 
+# Category (required - exactly one category)
+# Rules: Must be from the allowed categories list in data/categories.json
+# Available categories:
+#   - "developer-tools": IDEs, editors, CLI tools, debugging, testing
+#   - "web-applications": Full-stack web apps, SaaS platforms, web services
+#   - "mobile-applications": Android and iOS apps, cross-platform mobile apps
+#   - "libraries-frameworks": Software libraries, frameworks, SDKs, packages
+#   - "infrastructure-devops": Cloud tools, containers, orchestration, CI/CD, monitoring
+#   - "data-analytics": Data processing, analytics, visualization, databases
+#   - "ai-ml": Machine learning models, AI tools, NLP, computer vision
+#   - "security-privacy": Security tools, privacy software, encryption, auth
+#   - "content-media": CMS, blogging, video/audio processing, graphics
+#   - "education-documentation": Learning platforms, courses, documentation tools
+#   - "automation-productivity": Workflow automation, productivity, task management
+#   - "iot-embedded": Internet of Things, embedded systems, hardware projects
+#   - "blockchain-crypto": Blockchain, cryptocurrency, Web3, smart contracts
+#   - "gaming": Game engines, gaming tools, game development
+#   - "networking": Network tools, protocols, VPN, proxies, DNS
+#   - "system-utilities": OS utilities, system tools, file management
+#   - "other": Projects that don't fit into other categories
+# Example: "web-applications"
+category = "web-applications"
+
 # Project tags/categories (1-10 tags required)
 # Rules: Must be from the allowed tags list in data/tags.toml
 # Common categories: "web", "cli", "mobile", "ai", "security", "devtools", "database", etc.
