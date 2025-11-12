@@ -7,9 +7,10 @@ import { Loader2, CheckCircle, AlertCircle, ExternalLink } from "lucide-react";
 interface Step1Props {
   form: UseFormReturn<any>;
   onNext: () => void;
+  onBack: () => void;
 }
 
-export function Step1RepositoryDetails({ form, onNext }: Step1Props) {
+export function Step1RepositoryDetails({ form, onNext, onBack }: Step1Props) {
   const [isValidating, setIsValidating] = useState(false);
   const [validationResult, setValidationResult] = useState<any>(null);
 
@@ -216,7 +217,14 @@ export function Step1RepositoryDetails({ form, onNext }: Step1Props) {
         </div>
       )}
 
-      <div className="flex justify-end gap-3 pt-4">
+      <div className="flex justify-between gap-3 pt-4">
+        <button
+          type="button"
+          onClick={onBack}
+          className="px-6 py-3 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 min-h-[48px]"
+        >
+          Back
+        </button>
         <button
           type="button"
           onClick={handleNext}
